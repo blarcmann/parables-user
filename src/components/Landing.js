@@ -1,7 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { fetchParables } from '../actions/parables';
 
 export class Landing extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            rice: 'beans'
+        }
+    }
+
+    componentDidMount() {
+        console.log(this.props);
+    }
+
     render() {
         return (
             <div>
@@ -16,4 +28,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, {})(Landing)
+export default connect(mapStateToProps, {fetchParables})(Landing)
