@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Header from './layouts/Header';
+// import Header from './layouts/Header';
 import Footer from './layouts/Footer';
 
 export class Login extends Component {
@@ -9,10 +9,10 @@ export class Login extends Component {
     render() {
         return (
             <>
-                <Header />
+                {/* <Header /> */}
                 <div className="coverr">
-                    <div className="container-fluid mt-4 height-80 auth-bg">
-                        <div className="row">
+                    <div className="container-fluid height-100 auth-bg">
+                        {/* <div className="row"> */}
                             <div className="col-lg-4 col-md-7 mx-auto">
                                 <h2 className="text-center auth-title">Login</h2>
                                 <p className="mb-5 auth-subtitle">Welcome back, sign in with your existing account details.</p>
@@ -34,7 +34,7 @@ export class Login extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                {/* </div> */}
                 <Footer />
             </>
         )

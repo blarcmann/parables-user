@@ -89,13 +89,13 @@ export class Landing extends Component {
                             </div>
                         </div>
                     </section> */}
-                    <section className="cover height-60 imagebg switchable siwtchable--switch" data-overlay="8">
+                    <section className="height-60 imagebg switchable siwtchable--switch">
                         <div className="background-image-holder">
                             <img alt="background" src="../../assets/images/side-cover.jpg" />
                         </div>
                         <div className="container pos-vertical-center">
                             <div className="row justify-content-around">
-                                <div className="col-lg-4 col-md-4 col-12">
+                                <div className="col-lg-3">
                                     <div className="video-cover border--round box-shadow-wide">
                                         <div className="background-image-holder">
                                             <img alt="tiel" src="img/landing-1.jpg" />
@@ -104,8 +104,8 @@ export class Landing extends Component {
                                         <iframe data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" title="Sample" allowFullScreen="allowfullscreen"></iframe>
                                     </div>
                                 </div>
-                                <div className="col-lg-8 col-md-7">
-                                    <div className="switchable__text">
+                                <div className="col-lg-9">
+                                    <div className="switchable__text dark">
                                         <h3>Translation</h3>
                                         <p className="mt-4">No one rides a horse without moving his head, voluntarily or involuntarily.</p>
                                     </div>

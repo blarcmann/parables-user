@@ -3133,6 +3133,9 @@ form[action*='list-manage.com'] .small-meta {
   max-height: 99% !important;
   overflow-y: scroll !important;
 }
+.switchable__text.dark h3, .switchable__text.dark p {
+  color: #333;
+}
 .switchable .switchable__text .flex {
   display: flex;
   justify-content: center;
