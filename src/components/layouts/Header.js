@@ -19,6 +19,14 @@ export class Header extends Component {
             })
             this.props.fetchUserDetails(userId);
         }
+        console.log(this.props);
+    }
+
+
+    logout = () => {
+        localStorage.setItem('userToken', '');
+        localStorage.setItem('userId', '');
+        window.location.reload();
     }
 
     render() {
@@ -44,8 +52,8 @@ export class Header extends Component {
                                             </div>
                                         </li>
                                         <li>
-                                            <div className={this.state.user ? "modal-instance" : 'hide'}>
-                                                <Link to="/login" className="modal-trigger"><b>Logout</b></Link>
+                                            <div className={this.state.user ? "modal-instance" : 'hide'} onClick={this.logout}>
+                                                <b>Logout</b>
                                             </div>
                                         </li>
                                         <li>
@@ -100,7 +108,9 @@ export class Header extends Component {
                                     <div className="bar__module">
                                         <ul className="menu-horizontal text-left">
                                             <li className="dropdown">About</li>
-                                            <li className="dropdown primary">Start Quiz</li>
+                                            <li className="dropdown primary" onClick={this.startQuiz}>
+                                                <Link to="/quiz">Start Quiz</Link>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

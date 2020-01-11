@@ -5,6 +5,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import ForgotPasswordInit from './components/ForgotPasswordInit'
 import ForgotPasswordComplete from './components/ForgotPasswordComplete';
+import  Quiz from './components/Quiz';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path='/' exact component={Landing}/>
       <Route path='/login' exact component={Login}/>
       <Route path='/register' exact component={Register}/>
+      <Route path='/quiz' exact component={Quiz}/>
       <Route path='/forgot-password-init' exact component={ForgotPasswordInit}/>
       <Route path='/forgot-password-complete' exact component={ForgotPasswordComplete}/>
       <Route path='**' component={Landing}/>

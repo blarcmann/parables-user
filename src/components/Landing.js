@@ -107,7 +107,6 @@ export class Landing extends Component {
                                 <div className="col-lg-3">
                                     {this.props.advert ?
                                         <a href={this.props.advert.link} target="_blank" rel="noopener noreferrer">
-                                            <div className="tag">ADS</div>
                                             <div className="banner-img">
                                                 <figure className={this.adImgUrl ? "img-cover" : 'hide'}>
                                                     <img alt="alter" src={this.adImgUrl} />
@@ -119,7 +118,6 @@ export class Landing extends Component {
                                     }
 
                                 </div>
-
                             </div>
                         </div>
                     </section>
@@ -127,10 +125,9 @@ export class Landing extends Component {
                         <div className="container">
                             <div className="row justify-content-around">
                                 <div className="col-md-10 col-lg-8">
-                                    <h2>Build perfect pages, easy as pie.</h2>
+                                    <h2>What we're about</h2>
                                     <p className="lead">
-                                        Whether you’re building a welcome mat for your SaaS or a clean, corporate portfolio, Stack
-                                        has your design needs covered.</p>
+                                    Insightful proverbs, idioms and word-play from the indigenous yoruba ethnic group native to the present-day western part of Nigeria.</p>
                                 </div>
                             </div>
                         </div>
@@ -146,13 +143,13 @@ export class Landing extends Component {
                                         </div>
                                         <div className="col-lg-4 col-md-5">
                                             <p className="lead">
-                                                Start building pages in your browser
+                                                Create an account and try a quiz
                                 </p>
                                         </div>
                                         <div className="col-lg-4 col-md-3 text-center">
                                             <a className="btn btn--primary type--uppercase" href="http://google.com">
                                                 <span className="btn__text">
-                                                    Try Builder
+                                                    Get started
                                     </span>
                                             </a>
                                         </div>
