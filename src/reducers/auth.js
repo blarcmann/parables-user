@@ -1,7 +1,8 @@
-import { LOGIN } from '../constants';
+import { LOGIN, FETCH_USER } from '../constants';
 
 const initialState = {
-    user: {}
+    user: {},
+    userDetails: {}
 }
 
 export default function articles(state = initialState, action) {
@@ -11,6 +12,12 @@ export default function articles(state = initialState, action) {
             return {
                 ...state,
                 user
+            }
+            case FETCH_USER:
+            let userDetails = Object.assign({}, action.payload);
+            return {
+                ...state,
+                userDetails
             }
         default:
             return state;

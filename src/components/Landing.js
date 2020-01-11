@@ -19,7 +19,7 @@ export class Landing extends Component {
     render() {
         return (
             <>
-                <Header />
+                <Header userDetails={this.props.userDetails}/>
                 <div className="main-container">
                     <section className="switchable switchable--switch feature-large pb-5">
                         <div className="container">
@@ -66,12 +66,18 @@ export class Landing extends Component {
                             </div>
                         </div>
                     </section>
-                    <section className="height-60 imagebg switchable siwtchable--switch">
+                    <section className="height-60 imagebg">
                         <div className="background-image-holder">
                             <img alt="background" src="../../assets/images/side-cover.jpg" />
                         </div>
                         <div className="container pos-vertical-center">
                             <div className="row justify-content-around">
+                                <div className="col-lg-9">
+                                    <div className="switchable__text dark">
+                                        <h3>Translation</h3>
+                                        <p className="mt-4"><q>No one rides a horse without moving his head, voluntarily or involuntarily.</q></p>
+                                    </div>
+                                </div>
                                 <div className="col-lg-3">
                                     <div className="video-cover border--round box-shadow-wide">
                                         <div className="background-image-holder">
@@ -81,12 +87,7 @@ export class Landing extends Component {
                                         <iframe data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" title="Sample" allowFullScreen="allowfullscreen"></iframe>
                                     </div>
                                 </div>
-                                <div className="col-lg-9">
-                                    <div className="switchable__text dark">
-                                        <h3>Translation</h3>
-                                        <p className="mt-4">No one rides a horse without moving his head, voluntarily or involuntarily.</p>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </section>
@@ -97,8 +98,7 @@ export class Landing extends Component {
                                     <h2>Build perfect pages, easy as pie.</h2>
                                     <p className="lead">
                                         Whether you’re building a welcome mat for your SaaS or a clean, corporate portfolio, Stack
-                                        has your design needs covered.
-                        </p>
+                                        has your design needs covered.</p>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +137,8 @@ export class Landing extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
+    userDetails: state.auth.userDetails,
+    user: state.auth.user
 })
 
 

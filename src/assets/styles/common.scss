@@ -1,13 +1,13 @@
 .menu-horizontal  {
     li {
         color: #777;
-        font-weight: 500;
+        font-weight: 600;
         &:hover {
             cursor: pointer;
         }
         &.primary {
-            background-color: rgb(64, 128, 212);
-            padding: 0.25rem 1.125rem;
+            background-color: rgb(19, 121, 255);
+            padding: 0.25rem 1.25rem;
             border-radius: 0.25rem;
             color: #ececec;
         }
@@ -78,4 +78,8 @@ img.logo-header {
             text-decoration: none;
         }
     }
+}
+
+.hide {
+    display: none;
 }

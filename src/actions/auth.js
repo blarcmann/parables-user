@@ -1,13 +1,12 @@
-import { SIGN_UP, LOGIN } from '../constants';
+import { SIGN_UP, LOGIN, FETCH_USER } from '../constants';
 import axios from 'axios';
 import globals from '../globals';
 // const userToken = localStorage.getItem('userToken');
 // const local = true;
-const url = `http://159.89.85.116/v1`;
 
 export function register(props, payload) {
     return (dispatch) => {
-        axios.post(`${url}/user/register`, payload)
+        axios.post(`${globals.base_url}/user/register`, payload)
             .then((response) => {
                 if (response.data.success === false) {
                     const msg = response.data.msg || 'Registration failed!';
@@ -33,7 +32,7 @@ export function register(props, payload) {
 
 export function login(props, payload) {
     return dispatch => {
-        axios.post(`${url}/user/login`, payload)
+        axios.post(`${globals.base_url}/user/login`, payload)
             .then(response => {
                 if (response.success === false) {
                     const msg = response.data.msg || 'Failed, please retry.';
@@ -54,6 +53,29 @@ export function login(props, payload) {
     }
 }
 
+export function fetchUserDetails(id) {
+    const userToken = localStorage.getItem('userToken');
+    return dispatch => {
+        axios.get(`${globals.base_url}/user/${id}`, {
+            headers: {
+                'Authorization': 'Bearer ' + userToken
+            }
+        })
+            .then(response => {
+                if (response.success === false) {
+                    return console.log(response, 'fetch user detsild not successful');
+                }
+                let res = response.data;
+                localStorage.setItem('userdetails', res.data);
+                dispatch(fetchUser(res.data));
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
 function loginUser(data) {
     return {
         type: LOGIN,
@@ -64,6 +86,13 @@ function loginUser(data) {
 function accountCreated(user) {
     return {
         type: SIGN_UP,
+        payload: user
+    }
+}
+
+function fetchUser(user) {
+    return {
+        type: FETCH_USER,
         payload: user
     }
 }

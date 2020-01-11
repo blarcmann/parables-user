@@ -1,8 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
+import { fetchUserDetails } from '../../actions/auth';
 
 export class Header extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            user: false
+        }
+    }
+    componentDidMount() {
+        const userId = localStorage.getItem('userId');
+        if (userId) {
+            this.setState({
+                user: true
+            })
+            this.props.fetchUserDetails(userId);
+        }
+    }
 
     render() {
         return (
@@ -18,13 +34,26 @@ export class Header extends Component {
                             <div className="col-lg-6 text-right text-left-xs text-left-sm">
                                 <div className="bar__module">
                                     <ul className="menu-horizontal">
+                                        <li className={this.state.user ? "user-img" : 'hide'}>
+                                            <img src={require('../../assets/images/user.svg')} alt="" />
+                                        </li>
                                         <li>
-                                            <div className="modal-instance">
+                                            <div className={this.state.user ? "modal-instance" : 'hide'}>
+                                                <Link to="/login" className="modal-trigger">Hi, {this.props.userDetails.name}</Link>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div className={this.state.user ? "modal-instance" : 'hide'}>
+                                                <Link to="/login" className="modal-trigger"><b>Logout</b></Link>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div className={this.state.user ? "hide" : 'modal-instance'}>
                                                 <Link to="/login" className="modal-trigger">Login</Link>
                                             </div>
                                         </li>
                                         <li>
-                                            <div className="modal-instance">
+                                            <div className={this.state.user ? "hide" : 'modal-instance'}>
                                                 <Link to="/register" className="modal-trigger">Create account</Link>
                                             </div>
                                         </li>
@@ -84,7 +113,8 @@ export class Header extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
+    userDetails: state.auth.userDetails,
+    user: state.auth.user
 })
 
-export default connect(mapStateToProps, {})(Header)
+export default connect(mapStateToProps, { fetchUserDetails })(Header)
