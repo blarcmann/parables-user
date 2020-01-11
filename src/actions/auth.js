@@ -1,8 +1,6 @@
 import { SIGN_UP, LOGIN, FETCH_USER } from '../constants';
 import axios from 'axios';
 import globals from '../globals';
-// const userToken = localStorage.getItem('userToken');
-// const local = true;
 
 export function register(props, payload) {
     return (dispatch) => {
@@ -17,7 +15,6 @@ export function register(props, payload) {
                 console.log(user);
                 const msg = 'Account successfully created!';
                 globals.createToast(msg, 2500, 'bottom-right');
-                localStorage.setItem('userToken', user.data.user_token);
                 dispatch(accountCreated(user));
                 props.history.push("/login");
             })
@@ -43,6 +40,7 @@ export function login(props, payload) {
                 globals.createToast(msg, 2500, 'bottom-right');
                 let res = response.data;
                 localStorage.setItem('userId', res.data.user_id);
+                localStorage.setItem('userToken', res.data.user_token);
                 dispatch(loginUser(res.data));
                 props.history.push("/");
             })

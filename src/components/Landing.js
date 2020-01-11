@@ -29,7 +29,7 @@ export class Landing extends Component {
                 showAudio: true
             })
         } else {
-            globals.createToast('Audio explanation is not available for this parable', 3000, 'top');
+            globals.createToast('Sorry, audio explanation is not available for this parable', 3000, 'top');
         }
     }
 

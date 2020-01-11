@@ -2,11 +2,33 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './layouts/Header';
 import Footer from './layouts/Footer';
+import { fetchQuizData, fetchQuizOptions } from '../actions/quiz';
 
 export class Quiz extends Component {
+    quizz = {};
+    constructor(props) {
+        super(props)
+        this.state = {
+            quizes: {}
+        }
+    }
 
+    fetchQuizOptions = (title) => {
+        // let payload = {title};
+        // this.props.fetchQuizOptions(payload);
+    }
 
+    componentDidMount() {
+        let userId = localStorage.getItem('userId');
+        this.props.fetchQuizData(userId);
+    }
     render() {
+        // if(this.props.quizData) {
+        //     this.quizz = Object.values(this.props.quizData);
+        //     this.quizz.forEach(quiz => {
+        //         this.fetchQuizOptions(quiz.title);
+        //     })
+        // }
         return (
             <>
                 <Header />
@@ -66,8 +88,9 @@ export class Quiz extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
+    quizData: state.quiz.quizData,
+    quizOptions: state.quiz.quizOptions,
 })
 
 
-export default connect(mapStateToProps, {})(Quiz)
+export default connect(mapStateToProps, { fetchQuizData, fetchQuizOptions })(Quiz)

@@ -4,3 +4,5 @@ export const SIGN_UP = 'SIGN_UP';
 export const LOGIN = 'LOGIN';
 export const FETCH_USER = 'FETCH_USER';
 export const FETCH_ADVERT = 'FETCH_ADVERT';
+export const FETCH_QUIZ_DATA = 'FETCH_QUIZ_DATA';
+export const FETCH_QUIZ_OPTIONS = 'FETCH_QUIZ_OPTIONS';
