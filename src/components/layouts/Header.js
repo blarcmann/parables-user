@@ -44,10 +44,9 @@ export class Header extends Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-3 col-md-2">
-                                    <a href="index.html">
-                                        <img className="logo logo-dark" alt="logo" src="img/logo-dark.png" />
-                                        <img className="logo logo-light" alt="logo" src="img/logo-light.png" />
-                                    </a>
+                                    <Link to="/">
+                                        <img className="logo logo-dark" alt="logo" src={require('../../assets/images/logo.png')} />
+                                    </Link>
                                 </div>
                                 <div className="col-9 col-md-10 text-right">
                                     <a href="." className="hamburger-toggle">
@@ -62,16 +61,16 @@ export class Header extends Component {
                             <div className="row">
                                 <div className="col-lg-1 col-md-2 hidden-xs">
                                     <div className="bar__module">
-                                        <a href="index.html">
-                                            <img className="logo logo-dark" alt="logo" src={require('../../assets/images/logo.png')} />
-                                        </a>
+                                        <Link to="/">
+                                            <img className="logo logo-dark logo-header" alt="logo" src={require('../../assets/images/logo.png')} />
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className="col-lg-11 col-md-12 text-right text-left-xs text-left-sm">
                                     <div className="bar__module">
                                         <ul className="menu-horizontal text-left">
-                                            <li className="dropdown">Start Quiz</li>
                                             <li className="dropdown">About</li>
+                                            <li className="dropdown primary">Start Quiz</li>
                                         </ul>
                                     </div>
                                 </div>

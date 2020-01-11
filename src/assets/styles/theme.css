@@ -3129,7 +3129,15 @@ form[action*='list-manage.com'] .small-meta {
   right: auto;
 }
 .switchable .switchable__text {
-  margin-top: 3.71428571em;
+  margin-top: 3.5rem;
+  max-height: 99% !important;
+  overflow-y: scroll !important;
+}
+.switchable .switchable__text .flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95%;
 }
 .switchable > div[class*='col-'] {
   padding: 0;

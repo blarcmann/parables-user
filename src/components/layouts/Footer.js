@@ -7,7 +7,7 @@ export class Footer extends Component {
         return (
             <>
 
-                <footer className="space--sm footer-1 text-center-xs ">
+                <footer className="space--xs footer-1 text-center-xs ">
                     <div className="container">
                         <div className="row">
                             <div className="col-md-6">
@@ -57,16 +57,13 @@ export class Footer extends Component {
                                         </a>
                                     </li>
                                 </ul>
-                                <a href="http://google.com" className="btn type--uppercase">
-                                    <span className="btn__text">
-                                        About us
-                                    </span>
+                                <a>
                                 </a>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-md-12">
-                                <img className="logo logo-dark" alt="logo" src={require('../../assets/images/logo.png')} />
+                                {/* <img className="logo logo-dark" alt="logo" src={require('../../assets/images/logo.png')} /> */}
                                 <span className="type--fine-print">&copy;
                             <span className="update-year"></span> Parablues Inc.</span>
                             </div>

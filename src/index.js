@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import './assets/styles/stack-interface.css';
 import './assets/styles/theme.css';
 import './assets/styles/bootstrap.css';
+import './assets/styles/common.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';

@@ -19,77 +19,95 @@ export class Landing extends Component {
     render() {
         return (
             <>
-               <Header />
+                <Header />
                 <div className="main-container">
-                    <section class="switchable switchable--switch feature-large pb-5">
-                        <div class="container">
-                            <div class="row justify-content-around">
-                                <div class="col-md-6 col-12">
-                                    <div class="video-cover border--round box-shadow-wide">
-                                        <div class="background-image-holder">
+                    <section className="switchable switchable--switch feature-large pb-5">
+                        <div className="container">
+                            <div className="row justify-content-around">
+                                <div className="col-md-6 col-12">
+                                    <div className="video-cover border--round box-shadow-wide">
+                                        <div className="background-image-holder">
                                             <img alt="alter" src="img/landing-22.jpg" />
                                         </div>
-                                        <div class="video-play-icon"></div>
-                                        <iframe title="figgur" data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" allowfullscreen="allowfullscreen"></iframe>
+                                        <div className="video-play-icon"></div>
+                                        <iframe title="figgur" data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" allowFullScreen="allowfullscreen"></iframe>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-lg-5">
-                                    <div class="switchable__text">
-                                        <h2>Perfect components for modern startups</h2>
-                                        <p class="lead">
+                                <div className="col-md-6 col-lg-5">
+                                    <div className="switchable__text">
+                                        <h3>
+                                            <q>Kò sí ęni tí ó ma gùn ęşin tí kò ní ju ìpàkó. Bí kò fę ju ìpàkó, ęşin tí ó ngùn á ję kojū.</q>
+                                        </h3>
+                                        {/* <p className="lead">
                                             Launching an attractive and scalable website quickly and affordably is important for modern startups &mdash; Stack offers massive value without looking 'bargain-bin'.
-                                </p>
+                                </p> */}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
-                    <section class="border--bottom space--xxs pb-5">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <div class="modal-instance">
-                                        <a class="btn type--uppercase modal-trigger" href=".">
-                                            <span class="btn__text">
-                                                &#9654; Watch Overview
-                                    </span>
+                    <section className="border--bottom space--xxs pb-5">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-md-12 text-center">
+                                    <div className="modal-instance">
+                                        <a className="btn type--uppercase modal-trigger" href=".">
+                                            <span className="btn__text">
+                                                &#9654; Listen now</span>
                                         </a>
-                                        <div class="modal-container">
-                                            <div class="modal-content bg-dark" data-width="60%" data-height="60%">
+                                        <div className="modal-container">
+                                            <div className="modal-content bg-dark" data-width="60%" data-height="60%">
                                                 <iframe data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" title="Sample" allowFullScreen="allowfullscreen"></iframe>
                                             </div>
                                         </div>
                                     </div>
-                                    <span class="block--xs">and see how Stack makes building your site fun</span>
+                                    <span className="block--xs">Audio explanation of the parable</span>
                                 </div>
                             </div>
                         </div>
                     </section>
-                    <section class="cover height-60 imagebg switchable siwtchable--switch" data-overlay="8">
-                        <div class="background-image-holder">
-                            <img alt="background" src="img/landing-1.jpg" />
+                    {/* <section className="switchable switchable--switch feature-large">
+                        <div className="container">
+                            <div className="row justify-content-around">
+                                <div className="col-lg-8">
+                                    <div className="switchable__text">
+                                        <h3>Translation</h3>
+                                        <p className="lead">
+                                            No one rides a horse without moving his head, voluntarily or involuntarily.
+                                </p>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4">
+                                    <div className="video-cover border--round box-shadow-wide">
+                                        <div className="background-image-holder">
+                                            <img alt="alter" src="img/landing-22.jpg" />
+                                        </div>
+                                        <div className="video-play-icon"></div>
+                                        <iframe title="figgur" data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" allowFullScreen="allowfullscreen"></iframe>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="container pos-vertical-center">
-                            <div class="row justify-content-around">
-                                <div class="col-lg-6 col-md-4 col-12">
-                                    <div class="video-cover border--round box-shadow-wide">
-                                        <div class="background-image-holder">
+                    </section> */}
+                    <section className="cover height-60 imagebg switchable siwtchable--switch" data-overlay="8">
+                        <div className="background-image-holder">
+                            <img alt="background" src="../../assets/images/side-cover.jpg" />
+                        </div>
+                        <div className="container pos-vertical-center">
+                            <div className="row justify-content-around">
+                                <div className="col-lg-4 col-md-4 col-12">
+                                    <div className="video-cover border--round box-shadow-wide">
+                                        <div className="background-image-holder">
                                             <img alt="tiel" src="img/landing-1.jpg" />
                                         </div>
-                                        <div class="video-play-icon"></div>
+                                        <div className="video-play-icon"></div>
                                         <iframe data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" title="Sample" allowFullScreen="allowfullscreen"></iframe>
                                     </div>
                                 </div>
-                                <div class="col-lg-5 col-md-7">
-                                    <div class="switchable__text">
-                                        <h1>
-                                            Streamline your workflow with Stack
-                                </h1>
-                                        <a class="btn btn--primary type--uppercase" href="index.html">
-                                            <span class="btn__text">
-                                                lets go
-                                    </span>
-                                        </a>
+                                <div className="col-lg-8 col-md-7">
+                                    <div className="switchable__text">
+                                        <h3>Translation</h3>
+                                        <p className="mt-4">No one rides a horse without moving his head, voluntarily or involuntarily.</p>
                                     </div>
                                 </div>
                             </div>
