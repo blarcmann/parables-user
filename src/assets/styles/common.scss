@@ -19,18 +19,33 @@ img.logo-header {
 }
 
 .auth-bg {
-    background-image: url('../images/drone-1.jpg');
+    background-image: url('../images/bg-a.jpeg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     color: #fff !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    .flex-itemss {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    .auth-logo {
+        width: 110px;
+        position: relative;
+        bottom: 2rem;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    input {
+        font-size: 0.8rem !important;
+        height: 3rem;
+    }
 }
 
 .coverr:before {
-    background-color: rgba(83, 83, 83, 0.333);
+    background-color: rgba(83, 83, 83, 0.5);
     content: '';
     display: block;
     height: 100%;

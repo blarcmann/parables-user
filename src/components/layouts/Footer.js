@@ -57,8 +57,6 @@ export class Footer extends Component {
                                         </a>
                                     </li>
                                 </ul>
-                                <a>
-                                </a>
                             </div>
                         </div>
                         <div className="row">

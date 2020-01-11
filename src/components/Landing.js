@@ -66,29 +66,6 @@ export class Landing extends Component {
                             </div>
                         </div>
                     </section>
-                    {/* <section className="switchable switchable--switch feature-large">
-                        <div className="container">
-                            <div className="row justify-content-around">
-                                <div className="col-lg-8">
-                                    <div className="switchable__text">
-                                        <h3>Translation</h3>
-                                        <p className="lead">
-                                            No one rides a horse without moving his head, voluntarily or involuntarily.
-                                </p>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4">
-                                    <div className="video-cover border--round box-shadow-wide">
-                                        <div className="background-image-holder">
-                                            <img alt="alter" src="img/landing-22.jpg" />
-                                        </div>
-                                        <div className="video-play-icon"></div>
-                                        <iframe title="figgur" data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" allowFullScreen="allowfullscreen"></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section> */}
                     <section className="height-60 imagebg switchable siwtchable--switch">
                         <div className="background-image-holder">
                             <img alt="background" src="../../assets/images/side-cover.jpg" />
