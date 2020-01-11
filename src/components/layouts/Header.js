@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { fetchUserDetails } from '../../actions/auth';
+import globals from '../../globals';
 
 export class Header extends Component {
     constructor(props) {
@@ -39,7 +40,7 @@ export class Header extends Component {
                                         </li>
                                         <li>
                                             <div className={this.state.user ? "modal-instance" : 'hide'}>
-                                                <Link to="/login" className="modal-trigger">Hi, {this.props.userDetails.name}</Link>
+                                                <Link to="/login" className="modal-trigger">Hi, {globals.capitalize(this.props.userDetails.name)}</Link>
                                             </div>
                                         </li>
                                         <li>

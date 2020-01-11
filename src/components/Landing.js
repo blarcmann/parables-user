@@ -1,46 +1,66 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import globals from '../globals';
 import Header from './layouts/Header';
 import Footer from './layouts/Footer';
-import { fetchParables } from '../actions/parables';
+import { fetchRandomParable } from '../actions/parables';
+import { fetchRandomAdvert } from '../actions/adverts';
 
 export class Landing extends Component {
+    imgUrl = '';
+    adImgUrl = '';
+    showAudio = false;
     constructor(props) {
         super(props);
         this.state = {
-            rice: 'beans'
+            imgUrl: '',
+            showAudio: false
         }
     }
 
     componentDidMount() {
-        console.log(this.props);
+        this.props.fetchRandomParable();
+        this.props.fetchRandomAdvert()
+    }
+
+    listenToAudio = () => {
+        if (this.showAudio) {
+            this.setState({
+                showAudio: true
+            })
+        } else {
+            globals.createToast('Audio explanation is not available for this parable', 3000, 'top');
+        }
     }
 
     render() {
+        if (this.props.randomPara && this.props.randomPara.file && this.props.randomPara.file.Location) {
+            this.imgUrl = this.props.randomPara.file.Location
+        }
+        if (this.props.advert && this.props.advert.image && this.props.advert.image.Location) {
+            this.adImgUrl = this.props.advert.image.Location
+        }
+        if (this.props.randomPara && this.props.randomPara.sound && this.props.randomPara.sound.Location) {
+            this.showAudio = true;
+        }
+
         return (
             <>
-                <Header userDetails={this.props.userDetails}/>
+                <Header />
                 <div className="main-container">
                     <section className="switchable switchable--switch feature-large pb-5">
                         <div className="container">
                             <div className="row justify-content-around">
                                 <div className="col-md-6 col-12">
-                                    <div className="video-cover border--round box-shadow-wide">
-                                        <div className="background-image-holder">
-                                            <img alt="alter" src="img/landing-22.jpg" />
+                                    <div className="banner-img">
+                                        <div className={this.imgUrl ? "img-cover" : 'hide'}>
+                                            <img alt="alter" src={this.imgUrl} />
                                         </div>
-                                        <div className="video-play-icon"></div>
-                                        <iframe title="figgur" data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" allowFullScreen="allowfullscreen"></iframe>
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-lg-5">
                                     <div className="switchable__text">
-                                        <h3>
-                                            <q>Kò sí ęni tí ó ma gùn ęşin tí kò ní ju ìpàkó. Bí kò fę ju ìpàkó, ęşin tí ó ngùn á ję kojū.</q>
-                                        </h3>
-                                        {/* <p className="lead">
-                                            Launching an attractive and scalable website quickly and affordably is important for modern startups &mdash; Stack offers massive value without looking 'bargain-bin'.
-                                </p> */}
+                                        <q className={this.props.randomPara ? 'parable' : 'hide'}>{this.props.randomPara.title}</q>
                                     </div>
                                 </div>
                             </div>
@@ -50,18 +70,24 @@ export class Landing extends Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-12 text-center">
-                                    <div className="modal-instance">
-                                        <a className="btn type--uppercase modal-trigger" href=".">
-                                            <span className="btn__text">
-                                                &#9654; Listen now</span>
-                                        </a>
-                                        <div className="modal-container">
-                                            <div className="modal-content bg-dark" data-width="60%" data-height="60%">
-                                                <iframe data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" title="Sample" allowFullScreen="allowfullscreen"></iframe>
-                                            </div>
+                                    <div className="audio-option">
+                                        <div className="modal-instance">
+                                            <button className="btn type--uppercase modal-trigger" onClick={this.listenToAudio}>
+                                                &#9654; Listen now
+                                            </button>
                                         </div>
+                                        <span className="block--xs">Audio explanation of the parable</span>
                                     </div>
-                                    <span className="block--xs">Audio explanation of the parable</span>
+                                    {this.props.randomPara.sound ?
+                                        <div className={this.state.showAudio ? 'slide-in' : 'hide'}>
+                                            <audio controls>
+                                                <source src={this.props.randomPara.sound.Location} type="audio/ogg" />
+                                                <source src={this.props.randomPara.sound.Location} type="audio/mpeg" />
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div> :
+                                        <div></div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -75,17 +101,23 @@ export class Landing extends Component {
                                 <div className="col-lg-9">
                                     <div className="switchable__text dark">
                                         <h3>Translation</h3>
-                                        <p className="mt-4"><q>No one rides a horse without moving his head, voluntarily or involuntarily.</q></p>
+                                        <p className="translation"><q>{this.props.randomPara.translation}</q></p>
                                     </div>
                                 </div>
                                 <div className="col-lg-3">
-                                    <div className="video-cover border--round box-shadow-wide">
-                                        <div className="background-image-holder">
-                                            <img alt="tiel" src="img/landing-1.jpg" />
-                                        </div>
-                                        <div className="video-play-icon"></div>
-                                        <iframe data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" title="Sample" allowFullScreen="allowfullscreen"></iframe>
-                                    </div>
+                                    {this.props.advert ?
+                                        <a href={this.props.advert.link} target="_blank" rel="noopener noreferrer">
+                                            <div className="tag">ADS</div>
+                                            <div className="banner-img">
+                                                <figure className={this.adImgUrl ? "img-cover" : 'hide'}>
+                                                    <img alt="alter" src={this.adImgUrl} />
+                                                    <figcaption>{this.props.advert.title}</figcaption>
+                                                </figure>
+                                            </div>
+                                        </a> :
+                                        <div></div>
+                                    }
+
                                 </div>
 
                             </div>
@@ -137,9 +169,9 @@ export class Landing extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    userDetails: state.auth.userDetails,
-    user: state.auth.user
+    randomPara: state.parables.randomParable,
+    advert: state.adverts.advert
 })
 
 
-export default connect(mapStateToProps, { fetchParables })(Landing)
+export default connect(mapStateToProps, { fetchRandomParable, fetchRandomAdvert })(Landing)

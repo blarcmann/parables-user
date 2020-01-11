@@ -1,16 +1,17 @@
-import { FETCH_PARABLES, FETCH_PARABLE } from '../constants';
+import { RANDOM_PARABLE, FETCH_PARABLE } from '../constants';
 
 const initialState = {
-    parables: [],
+    randomParable: {},
     parable: {}
 }
 
 export default function parables(state = initialState, action) {
     switch (action.type) {
-        case FETCH_PARABLES:
+        case RANDOM_PARABLE:
+            const randPara = Object.assign({}, action.payload);
             return {
                 ...state,
-                parables: action.payload.parables
+                randomParable: randPara
             }
         case FETCH_PARABLE:
             return {

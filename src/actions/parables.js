@@ -1,25 +1,36 @@
-import { FETCH_PARABLES, FETCH_PARABLE } from '../constants';
+import { RANDOM_PARABLE, FETCH_PARABLE } from '../constants';
 import axios from 'axios';
+import globals from '../globals';
 
-const url = `http://localhost:5000/api`;
 
-export function fetchParables() {
-    return (dispatch) => {
-        axios.get(`${url}/parables/all`)
+export function fetchRandomParable() {
+    const userToken = localStorage.getItem('userToken');
+    return dispatch => {
+        axios.get(`${globals.base_url}/parable/rand`, {
+            headers: {
+                'Authorization': 'Bearer ' + userToken
+            }
+        })
             .then(response => {
-                if (response.data.success === false) {
-                    alert(response.status);
-                    return console.log(response, 'not successful');
+                if (response.success === false) {
+                    const msg = response.data.msg || 'Please reload page.';
+                    globals.createToast(msg, 3000, 'bottom-right');
+                    return console.log(response, 'fetch random parables not successful');
                 }
-                const payload = response.data;
-                dispatch(allParables(payload))
+                let res = response.data;
+                console.log('response random', res);
+                dispatch(randomParable(res.data));
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
             })
     }
 }
 
 export function fetchParable(id) {
     return (dispatch) => {
-        axios.get(`${url}/parables/parable/${id}`)
+        axios.get(`${globals.base_url}/parables/parable/${id}`)
             .then(response => {
                 if (response.data.success === false) {
                     alert(response.status);
@@ -39,9 +50,9 @@ function singleParable(parable) {
     }
 }
 
-function allParables(payload) {
+function randomParable(payload) {
     return {
-        type: FETCH_PARABLES,
+        type: RANDOM_PARABLE,
         payload
     }
 }
