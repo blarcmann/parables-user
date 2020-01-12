@@ -112,7 +112,7 @@ export class Landing extends Component {
                                 <div className="col-lg-3" onClick={this.clickAdvert}>
                                     {this.props.advert ?
                                         <a href={this.props.advert.link} target="_blank" rel="noopener noreferrer">
-                                            <div className="banner-img">
+                                            <div className="ads-img">
                                                 <figure className={this.adImgUrl ? "img-cover" : 'hide'}>
                                                     <img alt="alter" src={this.adImgUrl} />
                                                     <figcaption>{this.props.advert.title}</figcaption>

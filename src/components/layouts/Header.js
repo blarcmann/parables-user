@@ -8,7 +8,8 @@ export class Header extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            user: false
+            user: false,
+            showSearch: true
         }
     }
     componentDidMount() {
@@ -20,6 +21,12 @@ export class Header extends Component {
             this.props.fetchUserDetails(userId);
         }
         console.log(this.props);
+    }
+
+    toggleSearch = () => {
+        this.setState({
+            showSearch: !this.state.showSearch
+        })
     }
 
 
@@ -34,6 +41,15 @@ export class Header extends Component {
         return (
             <>
                 <section className="bar bar-3 bar--sm bg--secondary">
+                    <div className={this.state.showSearch ? "search-cover slide-in" : 'hide'}>
+                        <form onSubmit={this.search}>
+                            <input type="text" name="search" placeholder="Enter search query and hit enter"
+                                onChange={e => this.handleChange("code", e.target.value)} />
+                        </form>
+                        <div className="close" onClick={this.toggleSearch}>
+                            <img src={require('../../assets/images/delete-close.svg')} alt="X"/>
+                        </div>
+                    </div>
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-6">
@@ -68,9 +84,9 @@ export class Header extends Component {
                                             </div>
                                         </li>
                                         <li>
-                                            <a href="http://google.com" data-notification-link="search-box">
+                                            <div data-notification-link="search-box" onClick={this.toggleSearch}>
                                                 <i className="stack-search"></i>
-                                            </a>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -109,7 +125,7 @@ export class Header extends Component {
                                     <div className="bar__module">
                                         <ul className="menu-horizontal text-left">
                                             <li className="dropdown">
-                                            <Link to="/">About</Link>
+                                                <Link to="/">About</Link>
                                             </li>
                                             <li className="dropdown primary" onClick={this.startQuiz}>
                                                 <Link to="/quiz">Start Quiz</Link>
