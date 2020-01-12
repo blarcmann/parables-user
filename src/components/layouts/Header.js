@@ -26,6 +26,7 @@ export class Header extends Component {
     logout = () => {
         localStorage.setItem('userToken', '');
         localStorage.setItem('userId', '');
+        localStorage.setItem('userDetails', '');
         window.location.reload();
     }
 
@@ -107,7 +108,9 @@ export class Header extends Component {
                                 <div className="col-lg-11 col-md-12 text-right text-left-xs text-left-sm">
                                     <div className="bar__module">
                                         <ul className="menu-horizontal text-left">
-                                            <li className="dropdown">About</li>
+                                            <li className="dropdown">
+                                            <Link to="/">About</Link>
+                                            </li>
                                             <li className="dropdown primary" onClick={this.startQuiz}>
                                                 <Link to="/quiz">Start Quiz</Link>
                                             </li>

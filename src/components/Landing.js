@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import globals from '../globals';
 import Header from './layouts/Header';
 import Footer from './layouts/Footer';
@@ -147,11 +148,9 @@ export class Landing extends Component {
                                 </p>
                                         </div>
                                         <div className="col-lg-4 col-md-3 text-center">
-                                            <a className="btn btn--primary type--uppercase" href="http://google.com">
-                                                <span className="btn__text">
-                                                    Get started
-                                    </span>
-                                            </a>
+                                            <Link to="/quiz" className="btn btn--primary type--uppercase">
+                                                <span className="btn__text">Start quiz </span>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
