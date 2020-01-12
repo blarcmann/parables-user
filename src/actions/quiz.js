@@ -20,12 +20,16 @@ export function fetchQuizData(userId) {
                 let res = response.data;
                 dispatch(quizData(res.data));
                 let quizz = Object.values(res.data);
-                quizz.forEach(quiz => {
-                    console.log(quiz.title);
+                localStorage.setItem('q0', JSON.stringify(quizz[0]));
+                localStorage.setItem('q1', JSON.stringify(quizz[1]));
+                localStorage.setItem('q2', JSON.stringify(quizz[2]));
+                localStorage.setItem('q3', JSON.stringify(quizz[3]));
+                localStorage.setItem('q4', JSON.stringify(quizz[4]));
+                quizz.forEach((quiz, index) => {
                     let payload = {
                         title: quiz.title
                     }
-                    this.fetchQuizOptions(payload);
+                    this.fetchQuizOptions(index, payload);
                 })
             })
             .catch(error => {
@@ -35,7 +39,7 @@ export function fetchQuizData(userId) {
     }
 }
 
-export function fetchQuizOptions(payload) {
+export function fetchQuizOptions(index, payload) {
     const userToken = localStorage.getItem('userToken');
     return dispatch => {
         axios.post(`${globals.base_url}/quiz/options`, payload, {
@@ -50,7 +54,11 @@ export function fetchQuizOptions(payload) {
                     return console.log(response, 'fetch quiz not successful');
                 }
                 let res = response.data;
-                console.log('response random', res);
+                if(index === 0) {localStorage.setItem('option0', JSON.stringify(res.data))};
+                if(index === 1) {localStorage.setItem('option1', JSON.stringify(res.data))};
+                if(index === 2) {localStorage.setItem('option2', JSON.stringify(res.data))};
+                if(index === 3) {localStorage.setItem('option3', JSON.stringify(res.data))};
+                if(index === 4) {localStorage.setItem('option4', JSON.stringify(res.data))};
                 dispatch(quizOptions(res.data));
             })
             .catch(error => {

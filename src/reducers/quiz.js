@@ -14,6 +14,8 @@ export default function quiz(state = initialState, action) {
                 quizData: quizData
             }
         case FETCH_QUIZ_OPTIONS:
+            let option = [];
+            option.push(action.payload);
             return {
                 ...state,
                 quizOptions: [...state.quizOptions, action.payload]

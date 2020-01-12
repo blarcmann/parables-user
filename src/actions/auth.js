@@ -64,7 +64,7 @@ export function fetchUserDetails(id) {
                     return console.log(response, 'fetch user detsild not successful');
                 }
                 let res = response.data;
-                localStorage.setItem('userdetails', res.data);
+                localStorage.setItem('userDetails', JSON.stringify(res.data));
                 dispatch(fetchUser(res.data));
             })
             .catch(error => {
