@@ -113,26 +113,10 @@ export class Header extends Component {
                     </div>
                 </section>
                 <div className="nav-container">
-                    <div className="bar bar--sm visible-xs">
+                    <nav id="menu1" className="bar bar--sm bar-1">
                         <div className="container">
                             <div className="row">
-                                <div className="col-3 col-md-2">
-                                    <Link to="/">
-                                        <img className="logo logo-dark" alt="logo" src={require('../../assets/images/logo.png')} />
-                                    </Link>
-                                </div>
-                                <div className="col-9 col-md-10 text-right">
-                                    <a href="." className="hamburger-toggle">
-                                        <i className="icon icon--sm stack-interface stack-menu"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <nav id="menu1" className="bar bar--sm bar-1 hidden-xs ">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-lg-1 col-md-2 hidden-xs">
+                                <div className="col-lg-1 col-md-2">
                                     <div className="bar__module">
                                         <Link to="/">
                                             <img className="logo logo-dark logo-header" alt="logo" src={require('../../assets/images/logo.png')} />

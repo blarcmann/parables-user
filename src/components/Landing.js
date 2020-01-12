@@ -97,19 +97,16 @@ export class Landing extends Component {
                             </div>
                         </div>
                     </section>
-                    <section className="height-60 imagebg">
-                        <div className="background-image-holder">
-                            <img alt="background" src="../../assets/images/side-cover.jpg" />
-                        </div>
+                    <section className="height-80">
                         <div className="container pos-vertical-center">
                             <div className="row justify-content-around">
-                                <div className="col-lg-9">
+                                <div className="col-lg-9 col-sm-12 mb-5">
                                     <div className="switchable__text dark">
                                         <h3>Translation</h3>
                                         <p className="translation"><q>{this.props.randomPara.translation}</q></p>
                                     </div>
                                 </div>
-                                <div className="col-lg-3" onClick={this.clickAdvert}>
+                                <div className="col-lg-3 col-sm-12 pt-5" onClick={this.clickAdvert}>
                                     {this.props.advert ?
                                         <a href={this.props.advert.link} target="_blank" rel="noopener noreferrer">
                                             <div className="ads-img">

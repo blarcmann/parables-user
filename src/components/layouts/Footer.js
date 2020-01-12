@@ -12,7 +12,7 @@ export class Footer extends Component {
                         <div className="row">
                             <div className="col-md-6">
                                 <ul className="list-inline list--hover">
-                                    <li>
+                                    {/* <li>
                                         <a href="http://google.com">
                                             <span>Our Company</span>
                                         </a>
@@ -31,7 +31,7 @@ export class Footer extends Component {
                                         <a href="http://google.com">
                                             <span>Work With Us</span>
                                         </a>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
                             <div className="col-md-6 text-right text-center-xs">
