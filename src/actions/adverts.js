@@ -12,7 +12,7 @@ export function fetchRandomAdvert() {
             }
         })
             .then(response => {
-                if (response.success === false) {
+                if (response.data.status === false) {
                     const msg = response.data.msg || 'Please reload page.';
                     globals.createToast(msg, 3000, 'bottom-right');
                     return console.log(response, 'fetch random advert not successful');
@@ -37,7 +37,7 @@ export function clickAdvert(id) {
             }
         })
             .then(response => {
-                if (response.success === false) {
+                if (response.data.status === false) {
                     return console.log(response, 'fetch random advert not successful');
                 }
                 let res = response.data;

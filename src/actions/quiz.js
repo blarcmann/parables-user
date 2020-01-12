@@ -12,7 +12,7 @@ export function fetchQuizData(userId) {
             }
         })
             .then(response => {
-                if (response.success === false) {
+                if (response.data.status === false) {
                     const msg = response.data.msg || 'Please reload page.';
                     globals.createToast(msg, 3000, 'bottom-right');
                     return console.log(response, 'fetch quiz not successful');
@@ -49,7 +49,7 @@ export function fetchQuizOptions(index, payload) {
             }
         })
             .then(response => {
-                if (response.success === false) {
+                if (response.data.status === false) {
                     const msg = response.data.msg || 'Please reload page.';
                     globals.createToast(msg, 3000, 'bottom-right');
                     return console.log(response, 'fetch quiz not successful');
@@ -78,7 +78,7 @@ export function finishQuiz(payload) {
             }
         })
             .then(response => {
-                if (response.success === false) {
+                if (response.data.status === false) {
                     const msg = response.data.msg || 'Please reload page.';
                     globals.createToast(msg, 3000, 'bottom-right');
                     return console.log(response, 'fetch quiz not successful');

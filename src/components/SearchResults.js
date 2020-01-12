@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchRandomAdvert, clickAdvert } from '../actions/adverts';
 import Header from './layouts/Header';
 import Footer from './layouts/Footer';
@@ -12,86 +13,46 @@ export class SearchResults extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.fetchRandomAdvert();
+    }
+
     clickAdvert = () => {
         this.props.clickAdvert(this.props.advert._id);
     }
 
     render() {
+        console.log(this.props.qResult);
         if (this.props.advert && this.props.advert.image && this.props.advert.image.Location) {
             this.adImgUrl = this.props.advert.image.Location
+        }
+        let results = [];
+        if (this.props.qResult[0]) {
+            this.props.qResult[0].forEach((q, i) => {
+                results.push(
+                    <Link className="each-result" key={i} to={`parableDetails/${q._id}`}>
+                        <div className="image">
+                            <img src={q.file && q.file.Location ? q.file.Location : require('../assets/images/placeholder.svg')} alt="A" />
+                        </div>
+                        <div className="content">{q.title}</div>
+                    </Link>
+                )
+            })
         }
         return (
             <>
                 <Header />
                 <div className="search-component">
                     <div className="row">
-                        <div className="col-lg-9">
-                            <div className="each-result">
-                                <div className="image">
-                                    <img src={require('../assets/images/bg-a.jpeg')} alt="A" />
-                                </div>
-                                <div className="content">
-                                    Vendor Prefixing To get the best cross-browser support, it is a common practice to apply vendor prefixes to CSS properties and values that require them to work. For instance -webkit- or -moz
-                            </div>
-                            </div>
-                            <div className="each-result">
-                                <div className="image">
-                                    <img src={require('../assets/images/bg-a.jpeg')} alt="A" />
-                                </div>
-                                <div className="content">
-                                    Vendor Prefixing To get the best cross-browser support, it is a common practice to apply vendor prefixes to CSS properties and values that require them to work. For instance -webkit- or -moz
-                            </div>
-                            </div>
-                            <div className="each-result">
-                                <div className="image">
-                                    <img src={require('../assets/images/bg-a.jpeg')} alt="A" />
-                                </div>
-                                <div className="content">
-                                    Vendor Prefixing To get the best cross-browser support, it is a common practice to apply vendor prefixes to CSS properties and values that require them to work. For instance -webkit- or -moz
-                            </div>
-                            </div>
-                            <div className="each-result">
-                                <div className="image">
-                                    <img src={require('../assets/images/bg-a.jpeg')} alt="A" />
-                                </div>
-                                <div className="content">
-                                    Vendor Prefixing To get the best cross-browser support, it is a common practice to apply vendor prefixes to CSS properties and values that require them to work. For instance -webkit- or -moz
-                            </div>
-                            </div>
-                            <div className="each-result">
-                                <div className="image">
-                                    <img src={require('../assets/images/bg-a.jpeg')} alt="A" />
-                                </div>
-                                <div className="content">
-                                    Vendor Prefixing To get the best cross-browser support, it is a common practice to apply vendor prefixes to CSS properties and values that require them to work. For instance -webkit- or -moz
-                            </div>
-                            </div>
-                            <div className="each-result">
-                                <div className="image">
-                                    <img src={require('../assets/images/bg-a.jpeg')} alt="A" />
-                                </div>
-                                <div className="content">
-                                    Vendor Prefixing To get the best cross-browser support, it is a common practice to apply vendor prefixes to CSS properties and values that require them to work. For instance -webkit- or -moz
-                            </div>
-                            </div>
-                            <div className="each-result">
-                                <div className="image">
-                                    <img src={require('../assets/images/bg-a.jpeg')} alt="A" />
-                                </div>
-                                <div className="content">
-                                    Vendor Prefixing To get the best cross-browser support, it is a common practice to apply vendor prefixes to CSS properties and values that require them to work. For instance -webkit- or -moz
-                            </div>
-                            </div>
-                            <div className="each-result">
-                                <div className="image">
-                                    <img src={require('../assets/images/bg-a.jpeg')} alt="A" />
-                                </div>
-                                <div className="content">
-                                    Vendor Prefixing To get the best cross-browser support, it is a common practice to apply vendor prefixes to CSS properties and values that require them to work. For instance -webkit- or -moz
-                            </div>
-                            </div>
+                        <div className="col-lg-10">
+                            <div className={this.props.qResult[0] ? "component-title" : 'hide'}>Search results</div>
+                            {this.props.qResult[0] ?
+                                results
+                                :
+                                <div className="search-null">No search result...</div>
+                            }
                         </div>
-                        <div className="col-lg-3" onClick={this.clickAdvert}>
+                        <div className="col-lg-2 search-ads" onClick={this.clickAdvert}>
                             {this.props.advert ?
                                 <a href={this.props.advert.link} target="_blank" rel="noopener noreferrer">
                                     <div className="ads-img">
@@ -114,7 +75,7 @@ export class SearchResults extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    // results: state.search.results,
+    qResult: state.parables.qResult,
     advert: state.adverts.advert
 })
 

@@ -6,7 +6,7 @@ export function register(props, payload) {
     return (dispatch) => {
         axios.post(`${globals.base_url}/user/register`, payload)
             .then((response) => {
-                if (response.data.success === false) {
+                if (response.data.status === false) {
                     const msg = response.data.msg || 'Registration failed!';
                     globals.createToast(msg, 2500, 'top');
                     return console.log(response, 'not successful');
@@ -31,7 +31,7 @@ export function login(props, payload) {
     return dispatch => {
         axios.post(`${globals.base_url}/user/login`, payload)
             .then(response => {
-                if (response.success === false) {
+                if (response.data.status === false) {
                     const msg = response.data.msg || 'Failed, please retry.';
                     globals.createToast(msg, 2500, 'top');
                     return console.log(response, 'not successful');
@@ -60,7 +60,7 @@ export function fetchUserDetails(id) {
             }
         })
             .then(response => {
-                if (response.success === false) {
+                if (response.data.status === false) {
                     return console.log(response, 'fetch user detsild not successful');
                 }
                 let res = response.data;
@@ -78,7 +78,7 @@ export function forgotPasswordInit(props, payload) {
     return (dispatch) => {
         axios.post(`${globals.base_url}/user/forgot`, payload)
             .then((response) => {
-                if (response.data.success === false) {
+                if (response.data.status === false) {
                     console.log(response, 'not successful');
                     const msg = response.data.msg || 'Recovery failed!, please retry';
                     globals.createToast(msg, 2500, 'top');
@@ -103,7 +103,7 @@ export function forgotPasswordFinish(props, payload) {
     return (dispatch) => {
         axios.put(`${globals.base_url}/user/change_password/token`, payload)
             .then((response) => {
-                if (response.data.success === false) {
+                if (response.data.status === false) {
                     const msg = response.data.msg || 'Account recovery failed, please retry';
                     globals.createToast(msg, 2500, 'top');
                     return console.log(response, 'not successful');

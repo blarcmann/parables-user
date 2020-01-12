@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { fetchUserDetails } from '../../actions/auth';
+import { parableSearch } from '../../actions/parables';
 import globals from '../../globals';
 
 export class Header extends Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
             user: false,
-            showSearch: true
+            showSearch: false,
+            q: ''
         }
     }
     componentDidMount() {
@@ -20,8 +22,13 @@ export class Header extends Component {
             })
             this.props.fetchUserDetails(userId);
         }
-        console.log(this.props);
     }
+
+    handleChange = (key, value) => {
+        this.setState({
+            [key]: value
+        })
+    };
 
     toggleSearch = () => {
         this.setState({
@@ -29,6 +36,17 @@ export class Header extends Component {
         })
     }
 
+    search = (e) => {
+        e.preventDefault();
+        globals.createToast('Please wait', 3000, 'bottom-right');
+        this.props.parableSearch(this.state.q);
+        setTimeout(() => {
+            this.setState({
+                showSearch: false
+            })
+            this.props.history.push('/search');
+        }, 2000);
+    }
 
     logout = () => {
         localStorage.setItem('userToken', '');
@@ -44,7 +62,7 @@ export class Header extends Component {
                     <div className={this.state.showSearch ? "search-cover slide-in" : 'hide'}>
                         <form onSubmit={this.search}>
                             <input type="text" name="search" placeholder="Enter search query and hit enter"
-                                onChange={e => this.handleChange("code", e.target.value)} />
+                                onChange={e => this.handleChange("q", e.target.value)} />
                         </form>
                         <div className="close" onClick={this.toggleSearch}>
                             <img src={require('../../assets/images/delete-close.svg')} alt="X"/>
@@ -147,4 +165,4 @@ const mapStateToProps = (state) => ({
     user: state.auth.user
 })
 
-export default connect(mapStateToProps, { fetchUserDetails })(Header)
+export default connect(mapStateToProps, { fetchUserDetails, parableSearch })(withRouter(Header))
