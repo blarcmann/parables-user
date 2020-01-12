@@ -6,6 +6,7 @@ import { fetchQuizData, fetchQuizOptions } from '../actions/quiz';
 
 export class Quiz extends Component {
     quizz = {};
+    score = 0;
     constructor(props) {
         super(props)
         this.state = {
@@ -22,12 +23,14 @@ export class Quiz extends Component {
             activeIndex: 0,
             activeQuestion: '',
             activeOptions: '',
+            showSubmit: false,
             answers: [false, false, false, false, false],
             answer0: '',
             answer1: '',
             answer2: '',
             answer3: '',
             answer4: '',
+            score: 0
         }
     }
 
@@ -72,6 +75,18 @@ export class Quiz extends Component {
         }
     }
 
+    checkAll = (present) => {
+        if (present[0] === false || present[1] === false || present[2] === false || present[3] === false || present[4] === false) {
+            this.setState({
+                showSubmit: false
+            })
+        } else {
+            this.setState({
+                showSubmit: true
+            })
+        }
+    }
+
     setAnswer = (answer) => {
         console.log('activeIndex', this.state.activeIndex)
         if (this.state.activeIndex === 0) {
@@ -81,16 +96,16 @@ export class Quiz extends Component {
                 answer0: answer,
                 answers: answers
             })
-            console.log(this.state.answers);
+            this.checkAll(this.state.answers);
         }
         if (this.state.activeIndex === 1) {
-            console.log('index1');
             let answers = this.state.answers;
             answers[1] = true;
             this.setState({
                 answer1: answer,
                 answers: answers
             })
+            this.checkAll(this.state.answers);
         }
         if (this.state.activeIndex === 2) {
             let answers = this.state.answers;
@@ -99,6 +114,7 @@ export class Quiz extends Component {
                 answer2: answer,
                 answers: answers
             })
+            this.checkAll(this.state.answers);
         }
         if (this.state.activeIndex === 3) {
             let answers = this.state.answers;
@@ -107,6 +123,7 @@ export class Quiz extends Component {
                 answer3: answer,
                 answers: answers
             })
+            this.checkAll(this.state.answers);
         }
         if (this.state.activeIndex === 4) {
             let answers = this.state.answers;
@@ -115,7 +132,27 @@ export class Quiz extends Component {
                 answer4: answer,
                 answers: answers
             })
+            this.checkAll(this.state.answers);
         }
+    }
+
+    completeQuiz = () => {
+        if(this.state.q0.title.toString() === this.state.answer0.toString()) {
+            this.score = this.score + 1;
+        }
+        if(this.state.q1.title.toString() === this.state.answer1.toString()) {
+            this.score = this.score + 1;
+        }
+        if(this.state.q2.title.toString() === this.state.answer2.toString()) {
+            this.score = this.score + 1;
+        }
+        if(this.state.q2.title.toString() === this.state.answer3.toString()) {
+            this.score = this.score + 1;
+        }
+        if(this.state.q4.title.toString() === this.state.answer4.toString()) {
+            this.score = this.score + 1;
+        }
+        console.log(this.score);
     }
 
     componentDidMount() {
@@ -131,7 +168,7 @@ export class Quiz extends Component {
                     <div className="container pos-vertical-center">
                         <div className="row justify-content-around">
                             <div className="col-lg-4">
-                                <div className={this.state.activeIndex === 0 ? "quiz-options" : 'hide'}>
+                                <div className={this.state.activeIndex === 0 ? "quiz-options slide-in" : 'hide'}>
                                     <div className={this.state.answer0 === this.state.option0[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option0[0])}>
                                         <div className="tag">A</div>
                                         <div className="detail">{this.state.activeOptions[0]}</div>
@@ -149,7 +186,7 @@ export class Quiz extends Component {
                                         <div className="detail">{this.state.activeOptions[3]}</div>
                                     </div>
                                 </div>
-                                <div className={this.state.activeIndex === 1 ? "quiz-options" : 'hide'}>
+                                <div className={this.state.activeIndex === 1 ? "quiz-options slide-in" : 'hide'}>
                                     <div className={this.state.answer1 === this.state.option1[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option1[0])}>
                                         <div className="tag">A</div>
                                         <div className="detail">{this.state.activeOptions[0]}</div>
@@ -167,7 +204,7 @@ export class Quiz extends Component {
                                         <div className="detail">{this.state.activeOptions[3]}</div>
                                     </div>
                                 </div>
-                                <div className={this.state.activeIndex === 2 ? "quiz-options" : 'hide'}>
+                                <div className={this.state.activeIndex === 2 ? "quiz-options slide-in" : 'hide'}>
                                     <div className={this.state.answer2 === this.state.option2[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option2[0])}>
                                         <div className="tag">A</div>
                                         <div className="detail">{this.state.activeOptions[0]}</div>
@@ -185,7 +222,7 @@ export class Quiz extends Component {
                                         <div className="detail">{this.state.activeOptions[3]}</div>
                                     </div>
                                 </div>
-                                <div className={this.state.activeIndex === 3 ? "quiz-options" : 'hide'}>
+                                <div className={this.state.activeIndex === 3 ? "quiz-options slide-in" : 'hide'}>
                                     <div className={this.state.answer3 === this.state.option3[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option3[0])}>
                                         <div className="tag">A</div>
                                         <div className="detail">{this.state.activeOptions[0]}</div>
@@ -203,7 +240,7 @@ export class Quiz extends Component {
                                         <div className="detail">{this.state.activeOptions[3]}</div>
                                     </div>
                                 </div>
-                                <div className={this.state.activeIndex === 4 ? "quiz-options" : 'hide'}>
+                                <div className={this.state.activeIndex === 4 ? "quiz-options slide-in" : 'hide'}>
                                     <div className={this.state.answer4 === this.state.option4[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option4[0])}>
                                         <div className="tag">A</div>
                                         <div className="detail">{this.state.activeOptions[0]}</div>
@@ -222,13 +259,16 @@ export class Quiz extends Component {
                                     </div>
                                 </div>
                                 <div className="quest-cover">
-                                    <h4>Quiz questions</h4>
+                                    <h4 className="text-center">Quiz questions</h4>
                                     <div className="question-tags">
                                         <span className={this.state.answers[0] === true ? "tag dirty" : "tag"} onClick={() => this.activateIndex(0)}>1</span>
                                         <span className={this.state.answers[1] === true ? "tag dirty" : "tag"} onClick={() => this.activateIndex(1)}>2</span>
                                         <span className={this.state.answers[2] === true ? "tag dirty" : "tag"} onClick={() => this.activateIndex(2)}>3</span>
                                         <span className={this.state.answers[3] === true ? "tag dirty" : "tag"} onClick={() => this.activateIndex(3)}>4</span>
                                         <span className={this.state.answers[4] === true ? "tag dirty" : "tag"} onClick={() => this.activateIndex(4)}>5</span>
+                                    </div>
+                                    <div className={this.state.showSubmit ? "submit text-center slide-in" : 'hide'}>
+                                        <button className="submit-quiz" onClick={this.completeQuiz}>Finish quiz</button>
                                     </div>
                                 </div>
                             </div>

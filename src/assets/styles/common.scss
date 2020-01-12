@@ -227,3 +227,18 @@ input, button, button:active, button:focus {
         display: block;
     }
 }
+
+button.submit-quiz {
+    color: #FFFFFF;
+    background-color: rgb(19, 121, 255);
+    font-weight: 600;
+    height: 40px;
+    width: 100px;
+    border: none;
+    border-radius: 0.25rem;
+    margin-top: 1rem;
+    &:hover {
+        background-color: rgb(31, 128, 255);
+        cursor: pointer;
+    }
+}
