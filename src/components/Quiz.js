@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './layouts/Header';
 import Footer from './layouts/Footer';
-import { fetchQuizData, fetchQuizOptions } from '../actions/quiz';
+import { fetchQuizData, fetchQuizOptions, finishQuiz } from '../actions/quiz';
 import globals from '../globals';
 
 export class Quiz extends Component {
@@ -16,6 +16,8 @@ export class Quiz extends Component {
             q2: JSON.parse(localStorage.getItem('q2')),
             q3: JSON.parse(localStorage.getItem('q3')),
             q4: JSON.parse(localStorage.getItem('q4')),
+            userDetails: JSON.parse(localStorage.getItem('userDetails')),
+            quizId: localStorage.getItem('quizId'),
             option0: JSON.parse(localStorage.getItem('option0')),
             option1: JSON.parse(localStorage.getItem('option1')),
             option2: JSON.parse(localStorage.getItem('option2')),
@@ -40,6 +42,10 @@ export class Quiz extends Component {
         this.setState({
             showScore: false
         })
+    }
+
+    playAgain = () => {
+        this.props.history.push(1);
     }
 
     activateIndex = (index) => {
@@ -168,6 +174,7 @@ export class Quiz extends Component {
             if (this.state.q4.title.toString() === this.state.answer4.toString()) {
                 this.score = this.score + 1;
             }
+            this.finishQuiz();
             this.setState({
                 showScore: true
             })
@@ -180,6 +187,16 @@ export class Quiz extends Component {
                 answers: [false, false, false, false, false],
             })
         }, 2500);
+    }
+
+    finishQuiz = () => {
+        console.log(this.state.quizId);
+        let payload = {
+            score: this.score,
+            username: this.state.userDetails.name,
+            _id: this.state.quizId
+        }
+        this.props.finishQuiz(payload)
     }
 
     componentDidMount() {
@@ -323,7 +340,7 @@ export class Quiz extends Component {
                             <button className="bttn secondary" onClick={this.updateLister}>
                                 Home
                             </button>
-                            <button className="bttn primary" onClick={this.restartQuiz}>
+                            <button className="bttn primary" onClick={this.playAgain}>
                                 Play again
                             </button>
                         </div>
@@ -340,4 +357,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, { fetchQuizData, fetchQuizOptions })(Quiz)
+export default connect(mapStateToProps, { fetchQuizData, fetchQuizOptions, finishQuiz })(Quiz)

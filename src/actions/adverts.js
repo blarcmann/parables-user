@@ -28,6 +28,28 @@ export function fetchRandomAdvert() {
     }
 }
 
+export function clickAdvert(id) {
+    const userToken = localStorage.getItem('userToken');
+    return dispatch => {
+        axios.get(`${globals.base_url}/showcase/click/${id}`, {
+            headers: {
+                'Authorization': 'Bearer ' + userToken
+            }
+        })
+            .then(response => {
+                if (response.success === false) {
+                    return console.log(response, 'fetch random advert not successful');
+                }
+                let res = response.data;
+                console.log('response random', res);
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
 function randomAdvert(payload) {
     return {
         type: FETCH_ADVERT,

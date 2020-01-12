@@ -5,7 +5,7 @@ import globals from '../globals';
 import Header from './layouts/Header';
 import Footer from './layouts/Footer';
 import { fetchRandomParable } from '../actions/parables';
-import { fetchRandomAdvert } from '../actions/adverts';
+import { fetchRandomAdvert, clickAdvert } from '../actions/adverts';
 
 export class Landing extends Component {
     imgUrl = '';
@@ -22,6 +22,10 @@ export class Landing extends Component {
     componentDidMount() {
         this.props.fetchRandomParable();
         this.props.fetchRandomAdvert()
+    }
+
+    clickAdvert = () => {
+        this.props.clickAdvert(this.props.advert._id);
     }
 
     listenToAudio = () => {
@@ -105,7 +109,7 @@ export class Landing extends Component {
                                         <p className="translation"><q>{this.props.randomPara.translation}</q></p>
                                     </div>
                                 </div>
-                                <div className="col-lg-3">
+                                <div className="col-lg-3" onClick={this.clickAdvert}>
                                     {this.props.advert ?
                                         <a href={this.props.advert.link} target="_blank" rel="noopener noreferrer">
                                             <div className="banner-img">
@@ -170,4 +174,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, { fetchRandomParable, fetchRandomAdvert })(Landing)
+export default connect(mapStateToProps, { fetchRandomParable, fetchRandomAdvert, clickAdvert })(Landing)

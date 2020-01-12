@@ -20,6 +20,7 @@ export function fetchQuizData(userId) {
                 let res = response.data;
                 dispatch(quizData(res.data));
                 let quizz = Object.values(res.data);
+                localStorage.setItem('quizId', res._id);
                 localStorage.setItem('q0', JSON.stringify(quizz[0]));
                 localStorage.setItem('q1', JSON.stringify(quizz[1]));
                 localStorage.setItem('q2', JSON.stringify(quizz[2]));
