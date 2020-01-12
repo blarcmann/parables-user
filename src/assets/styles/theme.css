@@ -5469,6 +5469,9 @@ body.dropdowns--hover .nav-sidebar-column .dropdown:hover > .dropdown__container
 }
 
 @media(max-width: 991px) {
+  .bar__module .menu-horizontal {
+    float: right;
+  }
   .bar__module .menu-horizontal.text-left {
     display: flex;
     justify-content: flex-end;

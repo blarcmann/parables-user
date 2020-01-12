@@ -16,7 +16,7 @@ export class Quiz extends Component {
             q2: JSON.parse(localStorage.getItem('q2')),
             q3: JSON.parse(localStorage.getItem('q3')),
             q4: JSON.parse(localStorage.getItem('q4')),
-            userDetails: JSON.parse(localStorage.getItem('userDetails')),
+            userDetails: '',
             quizId: localStorage.getItem('quizId'),
             option0: JSON.parse(localStorage.getItem('option0')),
             option1: JSON.parse(localStorage.getItem('option1')),
@@ -202,6 +202,10 @@ export class Quiz extends Component {
     componentDidMount() {
         if(!localStorage.getItem('userDetails')) {
             this.props.history.push('/login');
+        } else {
+            this.setState({
+                userDetails: JSON.parse(localStorage.getItem('userDetails'))
+            })
         }
         let userId = localStorage.getItem('userId');
         this.props.fetchQuizData(userId);
