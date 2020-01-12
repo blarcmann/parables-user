@@ -2,6 +2,7 @@ import { RANDOM_PARABLE, FETCH_PARABLE, Q_PARABLE } from '../constants';
 
 const initialState = {
     randomParable: {},
+    parable: {},
     qResult: []
 }
 

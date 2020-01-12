@@ -66,10 +66,10 @@ export function parableSearch(q) {
 }
 
 
-function singleParable(parable) {
+function singleParable(payload) {
     return {
         type: FETCH_PARABLE,
-        parable
+        payload
     }
 }
 

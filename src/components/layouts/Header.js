@@ -38,7 +38,7 @@ export class Header extends Component {
 
     search = (e) => {
         e.preventDefault();
-        globals.createToast('Please wait', 3000, 'bottom-right');
+        globals.createToast('Please wait', 2500, 'top');
         this.props.parableSearch(this.state.q);
         setTimeout(() => {
             this.setState({
