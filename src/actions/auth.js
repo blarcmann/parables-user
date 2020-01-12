@@ -74,6 +74,55 @@ export function fetchUserDetails(id) {
     }
 }
 
+export function forgotPasswordInit(props, payload) {
+    return (dispatch) => {
+        axios.post(`${globals.base_url}/user/forgot`, payload)
+            .then((response) => {
+                if (response.data.success === false) {
+                    console.log(response, 'not successful');
+                    const msg = response.data.msg || 'Recovery failed!, please retry';
+                    globals.createToast(msg, 2500, 'top');
+                    return console.log(response, 'not successful');
+                }
+                const user = response.data;
+                console.log(user);
+                const msg = 'Your recovery token has been sent to your email address!';
+                globals.createToast(msg, 3500, 'top');
+                props.history.push("/forgot-password-complete");
+            })
+            .catch(error => {
+                console.log(error.data, 'not successful');
+                const msg = error.msg || 'Account not found, please retry';
+                globals.createToast(msg, 3500, 'top');
+                throw (error);
+            })
+    }
+}
+
+export function forgotPasswordFinish(props, payload) {
+    return (dispatch) => {
+        axios.put(`${globals.base_url}/user/change_password/token`, payload)
+            .then((response) => {
+                if (response.data.success === false) {
+                    const msg = response.data.msg || 'Account recovery failed, please retry';
+                    globals.createToast(msg, 2500, 'top');
+                    return console.log(response, 'not successful');
+                }
+                const user = response.data;
+                console.log(user);
+                const msg = 'Success';
+                globals.createToast(msg, 3500, 'bottom-right');
+                props.history.push("/");
+            })
+            .catch(error => {
+                const msg = error.msg || 'Some error occured, please try later!';
+                globals.createToast(msg, 3500, 'top');
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
 function loginUser(data) {
     return {
         type: LOGIN,

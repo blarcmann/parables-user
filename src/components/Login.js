@@ -61,7 +61,7 @@ export class Login extends Component {
                                     </div>
                                 </form>
                                 <div className="auth-meta mt-4">Don't have an account yet? <Link to="/register">Create an account</Link></div>
-                                <div className="auth-meta">Forgotten your password? <Link to="/forgot-password-init">Recover password</Link></div>
+                                <div className="auth-meta">Forgotten your password? <Link to="/forgot-password-init">Recover account</Link></div>
                             </div>
                         </div>
                     </div>

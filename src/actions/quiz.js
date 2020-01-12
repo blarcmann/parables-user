@@ -68,6 +68,30 @@ export function fetchQuizOptions(index, payload) {
     }
 }
 
+export function finishQuiz(payload) {
+    const userToken = localStorage.getItem('userToken');
+    return dispatch => {
+        axios.put(`${globals.base_url}/quiz/finish/${payload._id}`, payload, {
+            headers: {
+                'Authorization': 'Bearer ' + userToken
+            }
+        })
+            .then(response => {
+                if (response.success === false) {
+                    const msg = response.data.msg || 'Please reload page.';
+                    globals.createToast(msg, 3000, 'bottom-right');
+                    return console.log(response, 'fetch quiz not successful');
+                }
+                let res = response.data;
+                dispatch(quizOptions(res.data));
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
 function quizData(payload) {
     return {
         type: FETCH_QUIZ_DATA,

@@ -73,7 +73,7 @@ export class Register extends Component {
                                     </div>
                                 </form>
                                 <div className="auth-meta mt-4">Already have an account? <Link to="/login">Sign in</Link></div>
-                                <div className="auth-meta">Forgotten your password? <Link to="/recover-password">Recover password</Link></div>
+                                <div className="auth-meta">Forgotten your password? <Link to="/forgot-password-init">Recover account</Link></div>
                             </div>
                         </div>
                     </div>
