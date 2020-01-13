@@ -53,6 +53,11 @@ export class Quiz extends Component {
         })
     }
 
+    runnit = () => {
+        this.activateIndex(0);
+        window.location.reload();
+    }
+
     activateIndex = (index) => {
         setTimeout(() => {
             if (index === 0) {
@@ -334,7 +339,7 @@ export class Quiz extends Component {
                                     }
                                     {
                                         this.props.q0 && !this.state.activeQuestion.title ?
-                                            <button className="visibility-none" onClick={this.activateIndex(0)}></button> :
+                                            <button className="visibility-none" onClick={this.runnit}></button> :
                                             ''
                                     }
                                     <div className="quest-cover">
