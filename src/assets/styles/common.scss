@@ -415,8 +415,19 @@ button.submit-quiz {
     }
   }
 
+  .bttn a  {
+    color: #FFF;
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 
-  button.bttn, a.bttn {
+  .bttn.secondary a{
+      color: #30313c;
+  }
+
+  button.bttn, a.bttn{
   display: block;
   height: 3rem;
   border-radius: 0.2rem;
@@ -424,7 +435,7 @@ button.submit-quiz {
   font-size: 0.935rem;
   width: 8rem;
   font-weight: bold;
-
+  color: #FFF;
   &:hover {
     cursor: pointer;
   }
@@ -550,4 +561,8 @@ button.submit-quiz {
 .component-heading1 {
   font-size: 1.25rem;
   font-weight: bold;
+}
+
+.visibility-none {
+  visibility: hidden;
 }
