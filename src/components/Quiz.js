@@ -231,8 +231,9 @@ export class Quiz extends Component {
             <>
                 <Header />
                 {this.state.startQuiz ? '' :
-                    <> <div className="search-null">You need to log in to start quiz.</div> </>}
-                {this.props.quizData && this.props.quizOptions ?
+                    <div className="search-null">You need to log in to start quiz.</div>
+                }
+                {this.props.quizData && this.props.quizOptions && this.state.startQuiz ?
                     <section className="height-80 mb-max">
                         <div className="container pos-vertical-center">
                             <div className="row justify-content-around">
@@ -360,7 +361,7 @@ export class Quiz extends Component {
                         </div>
                     </section>
                     :
-                    <div className="search-null">Please wait...</div>
+                    <div className="search-null"></div>
                 }
                 <Footer />
                 <div className={this.state.showScore ? "s4me-modal" : "hide"}>
@@ -378,9 +379,9 @@ export class Quiz extends Component {
                                 </Link>
                             </button>
                             <button className="bttn primary" onClick={this.playAgain}>
-                                <Link to='/quiz'>
-                                    Play again
-                                </Link>
+                                {/* <Link to='/quiz'> */}
+                                Play again
+                                {/* </Link> */}
                             </button>
                         </div>
                     </div>

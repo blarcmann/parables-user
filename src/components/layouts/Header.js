@@ -48,6 +48,14 @@ export class Header extends Component {
         }, 2000);
     }
 
+    startQuiz = () => {
+        if(localStorage.getItem('userDetails')) {
+            this.props.history.push('/quiz')
+        } else {
+            this.props.history.push('/login');
+        }
+    }
+
     logout = () => {
         localStorage.setItem('userToken', '');
         localStorage.setItem('userId', '');
@@ -72,7 +80,7 @@ export class Header extends Component {
                         <div className="row">
                             <div className="col-lg-6">
                                 <div className="bar__module">
-                                    <span className="type--fade">Yoruba culture never be gone; parables, quizes...</span>
+                                    <span className="type--fade">Nigeria culture never be gone; parables, quizes...</span>
                                 </div>
                             </div>
                             <div className="col-lg-6 text-right text-left-xs text-left-sm">
@@ -123,14 +131,14 @@ export class Header extends Component {
                                         </Link>
                                     </div>
                                 </div>
-                                <div className="col-lg-11 col-md-12 text-right text-left-xs text-left-sm">
-                                    <div className="bar__module">
+                                <div className="col-lg-11 col-md-12 text-right text-left-xs text-left-sm mobile-menu-up">
+                                    <div className="bar__module smallll">
                                         <ul className="menu-horizontal text-left">
                                             <li className="dropdown">
                                                 <Link to="/">About</Link>
                                             </li>
-                                            <li className="dropdown primary" onClick={this.startQuiz}>
-                                                <Link to="/quiz">Start Quiz</Link>
+                                            <li className="dropdown primary" onClick={this.startQuiz}>Start Quiz
+                                                {/* <Link to="/quiz">Start Quiz</Link> */}
                                             </li>
                                         </ul>
                                     </div>

@@ -38,6 +38,14 @@ export class Landing extends Component {
         }
     }
 
+    startQuiz = () => {
+        if(localStorage.getItem('userDetails')) {
+            this.props.history.push('/quiz')
+        } else {
+            this.props.history.push('/login');
+        }
+    }
+
     render() {
         if (this.props.randomPara && this.props.randomPara.file && this.props.randomPara.file.Location) {
             this.imgUrl = this.props.randomPara.file.Location
@@ -71,32 +79,33 @@ export class Landing extends Component {
                             </div>
                         </div>
                     </section>
-                    <section className="border--bottom space--xxs pb-5">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-md-12 text-center">
-                                    <div className="audio-option">
-                                        <div className="modal-instance">
-                                            <button className="btn type--uppercase modal-trigger" onClick={this.listenToAudio}>
-                                                &#9654; Listen now
+                    {this.props.randomPara.sound ?
+                        <section className="border--bottom space--xxs pb-1">
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col-md-12 text-center">
+                                        <div className="audio-option">
+                                            <div className="modal-instance">
+                                                <button className="btn type--uppercase modal-trigger" onClick={this.listenToAudio}>
+                                                    &#9654; Listen now
                                             </button>
+                                            </div>
+                                            <span className="block--xs">Audio explanation of the parable</span>
                                         </div>
-                                        <span className="block--xs">Audio explanation of the parable</span>
-                                    </div>
-                                    {this.props.randomPara.sound ?
                                         <div className={this.state.showAudio ? 'slide-in' : 'hide'}>
                                             <audio controls>
                                                 <source src={this.props.randomPara.sound.Location} type="audio/ogg" />
                                                 <source src={this.props.randomPara.sound.Location} type="audio/mpeg" />
                                                 Your browser does not support the audio element.
                                             </audio>
-                                        </div> :
+                                        </div>
                                         <div></div>
-                                    }
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section> :
+                        <div></div>
+                    }
                     <section className="height-80">
                         <div className="container pos-vertical-center">
                             <div className="row justify-content-around">
@@ -129,7 +138,7 @@ export class Landing extends Component {
                                 <div className="col-md-10 col-lg-8">
                                     <h2>What we're about</h2>
                                     <p className="lead">
-                                    Insightful proverbs, idioms and word-play from the indigenous yoruba ethnic group native to the present-day western part of Nigeria.</p>
+                                        Insightful proverbs, idioms and word-play from the indigenous yoruba ethnic group native to the present-day western part of Nigeria.</p>
                                 </div>
                             </div>
                         </div>
@@ -149,9 +158,9 @@ export class Landing extends Component {
                                 </p>
                                         </div>
                                         <div className="col-lg-4 col-md-3 text-center">
-                                            <Link to="/quiz" className="btn btn--primary type--uppercase">
+                                            <button className="p-2 btn btn--primary type--uppercase" onClick={this.startQuiz}>
                                                 <span className="btn__text">Start quiz </span>
-                                            </Link>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

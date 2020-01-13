@@ -45,7 +45,7 @@ export class SearchResults extends Component {
                 <div className="search-component">
                     <div className="row">
                         <div className="col-lg-10">
-                            <div className={this.props.qResult[0] ? "component-heading1 mb-4" : 'hide'}>Search results</div>
+                            <div className={this.props.qResult[0] ? "component-heading1 ml-3 mb-4" : 'hide'}>Search results</div>
                             {this.props.qResult[0] ?
                                 results
                                 :

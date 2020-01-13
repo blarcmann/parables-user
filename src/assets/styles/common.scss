@@ -137,6 +137,9 @@ input, button, button:active, button:focus {
   justify-content: center;
   align-items: center;
   border-radius: 6px;
+  &:hover {
+    cursor: pointer;
+  }
   @media(max-width: 991px) {
     margin: 2rem auto;
     max-height: 150px;
@@ -144,6 +147,9 @@ input, button, button:active, button:focus {
   img {
     width: auto;
     max-height: 150px;
+    &:hover {
+      cursor: pointer;
+    }
   }
     &:hover {
         cursor: pointer;
@@ -171,7 +177,7 @@ input, button, button:active, button:focus {
 .audio-option {
     display: flex;
     justify-content: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     .modal-instance {
         margin-right: 0.5rem;
         button {
@@ -500,6 +506,7 @@ button.submit-quiz {
   }
 }
 .search-component {
+  min-height: 70vh;
   @media(min-width: 1200px) {
     width: 77%;
     margin: auto;
@@ -565,4 +572,17 @@ button.submit-quiz {
 
 .visibility-none {
   visibility: hidden;
+}
+@media(max-width: 991px) {
+      .bar__module.smallll {
+        position: relative;
+        bottom: 3rem;
+        .menu-horizontal.text-left{
+        li.dropdown {
+          &.primary{
+            padding: 0.25rem 0.75rem;
+          }
+        }
+      }
+    }  
 }
