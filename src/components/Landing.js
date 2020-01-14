@@ -30,6 +30,12 @@ export class Landing extends Component {
         this.props.clickAdvert(this.props.advert._id);
     }
 
+    dismissAll = () => {
+        this.setState({
+            showVideo: false
+        })
+    }
+
     listenToAudio = () => {
         if (this.showAudio) {
             this.setState({
@@ -101,7 +107,6 @@ export class Landing extends Component {
                                                 <button className={ this.props.randomPara.sound ? "btn type--uppercase modal-trigger" : 'hide'} onClick={this.listenToAudio}>
                                                     &#9654; Listen to audio
                                                 </button>
-
                                                 <button className={this.props.randomPara.youtube ? "ml-3 btn type--uppercase modal-trigger" : 'hide'} onClick={this.watchVideo}>
                                                     &#9654; Watch video
                                                 </button>
@@ -116,12 +121,6 @@ export class Landing extends Component {
                                             </audio>
                                         </div> :
                                         ''}
-                                        <div className={this.state.showVideo ? 'slide-in vid-link' : 'hide'}>
-                                            <iframe src={this.props.randomPara.youtube}
-                                                width="400" title={this.props.randomPara.title} height="315" frameBorder="0" allowFullScreen>
-                                            </iframe>
-                                        </div>
-                                        <div></div>
                                     </div>
                                 </div>
                             </div>
@@ -190,6 +189,18 @@ export class Landing extends Component {
                         </div>
                     </section>
                     <Footer />
+                </div>
+                <div className={this.state.showVideo ? "s4me-modal" : "hide"}>
+                    <div className="s4me-modal-body large p-0">
+                        <div className="close-btn" onClick={this.dismissAll}>
+                            <img src={require('../assets/images/close.svg')} alt="X" />
+                        </div>
+                        <div className="s4me-modal-body-content p-0">
+                            <iframe src={this.state.showVideo ? this.props.randomPara.youtube : ''}
+                                width="400" title={this.props.randomPara.title} height="315" frameBorder="0" allowFullScreen>
+                            </iframe>
+                        </div>
+                    </div>
                 </div>
             </>
         )

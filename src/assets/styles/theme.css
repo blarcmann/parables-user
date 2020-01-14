@@ -5457,12 +5457,15 @@ body.dropdowns--hover .nav-sidebar-column .dropdown:hover > .dropdown__container
   left: 0.5rem;
 }
 
+.menu-horizontal li.user-img {
+  margin-right: 0;
+  position: relative;
+  left: 0.5rem;
+}
+
 .menu-horizontal li img {
   width: 18px;
   display: block;
-  position: relative;
-  top: 0.35rem;
-  left: 0.5rem;
 }
 .menu-horizontal li:hover {
   cursor: pointer;

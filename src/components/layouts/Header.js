@@ -93,7 +93,7 @@ export class Header extends Component {
                                             <img src={require('../../assets/images/female.svg')} alt="" />
                                         </li>
                                         <li className={this.state.user && this.props.userDetails && !this.props.userDetails.gender ? "user-img" : 'hide'}>
-                                            <img className={this.props.userDetails && this.props.userDetails.gender === 'male' ? '' : 'hide'} src={require('../../assets/images/user.svg')} alt="" />
+                                            <img className={this.props.userDetails && this.props.userDetails.gender === 'male' ? '' : 'hide'} src={require('../../assets/images/male.svg')} alt="" />
                                         </li>
                                         <li>
                                             <div className={this.state.user ? "modal-instance" : 'hide'}>

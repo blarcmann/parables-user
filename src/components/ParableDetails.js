@@ -6,6 +6,12 @@ import Footer from './layouts/Footer';
 import { fetchParable } from '../actions/parables';
 
 export class ParableDetails extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showVideo: false
+        }
+    }
     imgUrl = '';
     showAudio = false;
     componentDidMount() {
@@ -13,9 +19,21 @@ export class ParableDetails extends Component {
         this.props.fetchParable(parableId);
     }
 
+    dismissAll = () => {
+        this.setState({
+            showVideo: false
+        })
+    }
+
+    watchVideo = () => {
+        this.setState({
+            showVideo: true
+        })
+    }
+
     listenToAudio = () => {
         if (this.showAudio) {
-           this.showAudio = true
+            this.showAudio = true
         } else {
             globals.createToast('Sorry, audio explanation is not available for this parable', 3000, 'top');
         }
@@ -27,6 +45,9 @@ export class ParableDetails extends Component {
         }
         if (this.props.parable && this.props.parable.sound && this.props.parable.sound.Location) {
             this.showAudio = true;
+        }
+        if (this.props.parable && this.props.parable.youtube) {
+            this.showVideo = true;
         }
         return (
             <>
@@ -57,21 +78,22 @@ export class ParableDetails extends Component {
                                     <div className="col-md-12 text-center">
                                         <div className="audio-option">
                                             <div className="modal-instance">
-                                                <button className="btn type--uppercase modal-trigger" onClick={this.listenToAudio}>
+                                                <button className={this.props.parable.sound ? "btn type--uppercase modal-trigger" : 'hide'} onClick={this.listenToAudio}>
                                                     &#9654; Listen now</button>
+                                                <button className={this.props.parable.youtube ? "ml-3 btn type--uppercase modal-trigger" : 'hide'} onClick={this.watchVideo}>
+                                                    &#9654; Watch video
+                                                </button>
                                             </div>
-                                            <span className="block--xs">Audio explanation of the parable</span>
                                         </div>
-                                        {this.props.parable.sound ?
-                                            <div className={this.showAudio ? 'slide-in' : 'hide'}>
-                                                <audio controls>
-                                                    <source src={this.props.parable.sound.Location} type="audio/ogg" />
-                                                    <source src={this.props.parable.sound.Location} type="audio/mpeg" />
-                                                    Your browser does not support the audio element.
-                                                </audio>
-                                            </div> :
-                                            <div></div>
-                                        }
+                                        {this.props.parable.sound && this.props.parable.sound.Location ? 
+                                        <div className={this.showAudio ? 'slide-in' : 'hide'}>
+                                            <audio controls>
+                                                <source src={this.props.parable.sound.Location} type="audio/ogg" />
+                                                <source src={this.props.parable.sound.Location} type="audio/mpeg" />
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+                                        : '' }
                                     </div>
                                 </div>
                             </div>
