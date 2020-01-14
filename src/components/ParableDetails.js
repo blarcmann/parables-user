@@ -78,7 +78,7 @@ export class ParableDetails extends Component {
                                     <div className="col-md-12 text-center">
                                         <div className="audio-option">
                                             <div className="modal-instance">
-                                                <button className={this.props.parable.sound ? "btn type--uppercase modal-trigger" : 'hide'} onClick={this.listenToAudio}>
+                                                <button className={this.props.parable.sound ? "btn type--uppercase modal-trigger mb-0" : 'hide'} onClick={this.listenToAudio}>
                                                     &#9654; Listen now</button>
                                                 <button className={this.props.parable.youtube ? "ml-3 btn type--uppercase modal-trigger" : 'hide'} onClick={this.watchVideo}>
                                                     &#9654; Watch video

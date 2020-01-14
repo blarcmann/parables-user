@@ -17,7 +17,9 @@ export class Landing extends Component {
         this.state = {
             imgUrl: '',
             showAudio: false,
-            showVideo: false
+            showVideo: false,
+            audioText: 'Listen to audio',
+            videoText: 'Watch video'
         }
     }
 
@@ -39,7 +41,7 @@ export class Landing extends Component {
     listenToAudio = () => {
         if (this.showAudio) {
             this.setState({
-                showAudio: true
+                showAudio: !this.state.showAudio
             })
         } else {
             globals.createToast('Sorry, audio explanation is not available for this parable', 3000, 'top');
@@ -104,11 +106,11 @@ export class Landing extends Component {
                                     <div className="col-md-12 text-center">
                                         <div className="audio-option">
                                             <div className="modal-instance">
-                                                <button className={ this.props.randomPara.sound ? "btn type--uppercase modal-trigger" : 'hide'} onClick={this.listenToAudio}>
-                                                    &#9654; Listen to audio
+                                                <button className={ this.props.randomPara.sound ? "btn type--uppercase modal-trigger mb-0" : 'hide'} onClick={this.listenToAudio}>
+                                                    &#9654; {this.state.audioText}
                                                 </button>
                                                 <button className={this.props.randomPara.youtube ? "ml-3 btn type--uppercase modal-trigger" : 'hide'} onClick={this.watchVideo}>
-                                                    &#9654; Watch video
+                                                    &#9654; {this.state.videoText}
                                                 </button>
                                             </div>
                                         </div>

@@ -5454,7 +5454,7 @@ body.dropdowns--hover .nav-sidebar-column .dropdown:hover > .dropdown__container
   display: block;
   position: relative;
   top: 0.35rem;
-  left: 0.5rem;
+  right: 0.5rem;
 }
 
 .menu-horizontal li.user-img {
