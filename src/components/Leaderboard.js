@@ -27,6 +27,7 @@ export class Leaderboard extends Component {
                     <tr key={i}>
                         <td>{i + 1}</td>
                         <td>{globals.capitalize(leader.username)}</td>
+                        <td>{leader.score}</td>
                         <td className={leader.gender === 'male' ? '' : 'hide'}>
                             <img src={require('../assets/images/male.svg')} alt="" />
                         </td>
@@ -36,7 +37,6 @@ export class Leaderboard extends Component {
                         <td className={!leader.gender ? '' : 'hide'}>
                             <img src={require('../assets/images/user.svg')} alt="" />
                         </td>
-                        <td>{leader.score}</td>
                     </tr>
                 )
             })
@@ -54,8 +54,8 @@ export class Leaderboard extends Component {
                                         <tr>
                                             <th>Position</th>
                                             <th>Username</th>
-                                            <th>Gender</th>
                                             <th>Score</th>
+                                            <th>Gender</th>
                                         </tr>
                                     </thead>
                                 </table>

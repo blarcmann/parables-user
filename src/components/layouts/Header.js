@@ -97,7 +97,7 @@ export class Header extends Component {
                                         </li>
                                         <li>
                                             <div className={this.state.user ? "modal-instance" : 'hide'}>
-                                                <Link to="/login" className="modal-trigger">Hi, {globals.capitalize(this.props.userDetails.name)}</Link>
+                                                <p className="modal-trigger">Hi, {globals.capitalize(this.props.userDetails.name)}</p>
                                             </div>
                                         </li>
                                         <li>
