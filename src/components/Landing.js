@@ -11,11 +11,13 @@ export class Landing extends Component {
     imgUrl = '';
     adImgUrl = '';
     showAudio = false;
+    showVideo = false;
     constructor(props) {
         super(props);
         this.state = {
             imgUrl: '',
-            showAudio: false
+            showAudio: false,
+            showVideo: false
         }
     }
 
@@ -38,8 +40,14 @@ export class Landing extends Component {
         }
     }
 
+    watchVideo = () => {
+        this.setState({
+            showVideo: true
+        })
+    }
+
     startQuiz = () => {
-        if(localStorage.getItem('userDetails')) {
+        if (localStorage.getItem('userDetails')) {
             this.props.history.push('/quiz')
         } else {
             this.props.history.push('/login');
@@ -55,6 +63,10 @@ export class Landing extends Component {
         }
         if (this.props.randomPara && this.props.randomPara.sound && this.props.randomPara.sound.Location) {
             this.showAudio = true;
+        }
+
+        if (this.props.randomPara && this.props.randomPara.youtube) {
+            this.showVideo = true;
         }
 
         return (
@@ -79,25 +91,35 @@ export class Landing extends Component {
                             </div>
                         </div>
                     </section>
-                    {this.props.randomPara.sound ?
+                    {this.props.randomPara.sound || this.props.randomPara.youtube ?
                         <section className="border--bottom space--xxs pb-1">
                             <div className="container">
                                 <div className="row">
                                     <div className="col-md-12 text-center">
                                         <div className="audio-option">
                                             <div className="modal-instance">
-                                                <button className="btn type--uppercase modal-trigger" onClick={this.listenToAudio}>
-                                                    &#9654; Listen now
-                                            </button>
+                                                <button className={ this.props.randomPara.sound ? "btn type--uppercase modal-trigger" : 'hide'} onClick={this.listenToAudio}>
+                                                    &#9654; Listen to audio
+                                                </button>
+
+                                                <button className={this.props.randomPara.youtube ? "ml-3 btn type--uppercase modal-trigger" : 'hide'} onClick={this.watchVideo}>
+                                                    &#9654; Watch video
+                                                </button>
                                             </div>
-                                            <span className="block--xs">Audio explanation of the parable</span>
                                         </div>
+                                        {this.props.randomPara.sound && this.props.randomPara.sound.Location ? 
                                         <div className={this.state.showAudio ? 'slide-in' : 'hide'}>
                                             <audio controls>
                                                 <source src={this.props.randomPara.sound.Location} type="audio/ogg" />
                                                 <source src={this.props.randomPara.sound.Location} type="audio/mpeg" />
                                                 Your browser does not support the audio element.
                                             </audio>
+                                        </div> :
+                                        ''}
+                                        <div className={this.state.showVideo ? 'slide-in vid-link' : 'hide'}>
+                                            <iframe src={this.props.randomPara.youtube}
+                                                width="400" title={this.props.randomPara.title} height="315" frameBorder="0" allowFullScreen>
+                                            </iframe>
                                         </div>
                                         <div></div>
                                     </div>

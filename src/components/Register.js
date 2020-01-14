@@ -12,6 +12,7 @@ export class Register extends Component {
             name: '',
             email: '',
             password: '',
+            gender: '',
             tel: '',
         }
     }
@@ -25,10 +26,14 @@ export class Register extends Component {
     submitForm = (e) => {
         globals.createToast('Please wait', 1200, 'bottom-right');
         e.preventDefault();
+        if(this.state.name === '' || this.state.tel === '' || this.state.gender === '' || this.state.password === '' || this.state.email === '') {
+            global.createToast('All fields are compulsory', 3000, 'top');
+        }
         let payload = {
             name: this.state.name,
             email: this.state.email,
             tel: this.state.tel,
+            gender: this.state.gender,
             password: this.state.password,
         }
         this.props.register(this.props, payload);
@@ -58,6 +63,13 @@ export class Register extends Component {
                                         <div className="col-12 mt-2">
                                             <input type="email" name="email" placeholder="Email address" 
                                             onChange={e => this.handleChange("email", e.target.value)}/>
+                                        </div>
+                                        <div className="col-12 mt-2">
+                                            <select onChange={e => this.handleChange("gender", e.target.value)}>
+                                                <option>Select gender</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                            </select>
                                         </div>
                                         <div className="col-12 mt-2">
                                             <input type="tel" name="tel" placeholder="Phone number" 
