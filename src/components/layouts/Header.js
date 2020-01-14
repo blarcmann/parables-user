@@ -49,7 +49,7 @@ export class Header extends Component {
     }
 
     startQuiz = () => {
-        if(localStorage.getItem('userDetails')) {
+        if (localStorage.getItem('userDetails')) {
             this.props.history.push('/quiz')
         } else {
             this.props.history.push('/login');
@@ -73,7 +73,7 @@ export class Header extends Component {
                                 onChange={e => this.handleChange("q", e.target.value)} />
                         </form>
                         <div className="close" onClick={this.toggleSearch}>
-                            <img src={require('../../assets/images/delete-close.svg')} alt="X"/>
+                            <img src={require('../../assets/images/delete-close.svg')} alt="X" />
                         </div>
                     </div>
                     <div className="container">
@@ -86,8 +86,14 @@ export class Header extends Component {
                             <div className="col-lg-6 text-right text-left-xs text-left-sm">
                                 <div className="bar__module">
                                     <ul className="menu-horizontal">
-                                        <li className={this.state.user ? "user-img" : 'hide'}>
-                                            <img src={require('../../assets/images/user.svg')} alt="" />
+                                        <li className={this.state.user && this.props.userDetails && this.props.userDetails.gender === 'male' ? "user-img" : 'hide'}>
+                                            <img src={require('../../assets/images/male.svg')} alt="" />
+                                        </li>
+                                        <li className={this.state.user && this.props.userDetails && this.props.userDetails.gender === 'female' ? "user-img" : 'hide'}>
+                                            <img src={require('../../assets/images/female.svg')} alt="" />
+                                        </li>
+                                        <li className={this.state.user && this.props.userDetails && !this.props.userDetails.gender ? "user-img" : 'hide'}>
+                                            <img className={this.props.userDetails && this.props.userDetails.gender === 'male' ? '' : 'hide'} src={require('../../assets/images/user.svg')} alt="" />
                                         </li>
                                         <li>
                                             <div className={this.state.user ? "modal-instance" : 'hide'}>

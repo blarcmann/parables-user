@@ -15,6 +15,9 @@ export class Leaderboard extends Component {
 
     componentDidMount() {
         this.props.fetchScores();
+        if(!localStorage.getItem('userDetails')) {
+            this.props.history.push('/');
+        }
     }
     render() {
         let table = [];
@@ -24,6 +27,15 @@ export class Leaderboard extends Component {
                     <tr key={i}>
                         <td>{i + 1}</td>
                         <td>{globals.capitalize(leader.username)}</td>
+                        <td className={leader.gender === 'male' ? '' : 'hide'}>
+                            <img src={require('../assets/images/male.svg')} alt="" />
+                        </td>
+                        <td className={leader.gender === 'female' ? '' : 'hide'}>
+                            <img src={require('../assets/images/female.svg')} alt="" />
+                        </td>
+                        <td className={!leader.gender ? '' : 'hide'}>
+                            <img src={require('../assets/images/user.svg')} alt="" />
+                        </td>
                         <td>{leader.score}</td>
                     </tr>
                 )
@@ -42,6 +54,7 @@ export class Leaderboard extends Component {
                                         <tr>
                                             <th>Position</th>
                                             <th>Username</th>
+                                            <th>Gender</th>
                                             <th>Score</th>
                                         </tr>
                                     </thead>

@@ -138,7 +138,7 @@ export class Landing extends Component {
                                 <div className="col-md-10 col-lg-8">
                                     <h2>What we're about</h2>
                                     <p className="lead">
-                                        Insightful proverbs, idioms and word-play from the indigenous yoruba ethnic group native to the present-day western part of Nigeria.</p>
+                                        Insightful proverbs, idioms and word-play from Nigeria.</p>
                                 </div>
                             </div>
                         </div>

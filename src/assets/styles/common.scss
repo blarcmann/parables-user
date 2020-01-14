@@ -97,6 +97,9 @@ input, button, button:active, button:focus {
     display: none;
     img {
       display: none !important;
+      &.hide {
+        display: none !important;
+      }
     }
 }
 
@@ -632,6 +635,10 @@ button.submit-quiz {
     font-weight: 300;
     font-size: 0.935rem;
     color: #333;
+    img {
+      width: 22px;
+      height: 22px;
+    }
   }
   tr {
     border-bottom: none !important;
