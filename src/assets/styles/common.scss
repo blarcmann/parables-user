@@ -95,6 +95,9 @@ input, button, button:active, button:focus {
 
 .hide {
     display: none;
+    img {
+      display: none !important;
+    }
 }
 
 .banner-img {
@@ -562,7 +565,7 @@ button.submit-quiz {
   text-align: center;
   font-weight: 700;
   margin-top: 10%;
-  height: 50vh;
+  height: 55vh;
 }
 
 .component-heading1 {
@@ -585,4 +588,65 @@ button.submit-quiz {
         }
       }
     }  
+}
+
+.table-toppings {
+  min-height: 65vh;
+  width: 98%;
+  margin: auto;
+  @media(min-width: 992px) {
+    width: 50%;
+  }
+  .table-title {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #333;
+    // text-decoration: underline;
+  }
+  table{
+    width:100%;
+    table-layout: fixed;
+    margin-bottom: 0;
+  }
+  .tbl-header{
+    background-color: rgba(255,255,255,0.3);
+   }
+  .tbl-content{
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  th{
+    padding: 1.25rem 1rem;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.935rem;
+    color: #333;
+    text-transform: capitalize;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  td{
+    padding: 1rem 0.75rem;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 300;
+    font-size: 0.935rem;
+    color: #333;
+  }
+  tr {
+    border-bottom: none !important;
+    &:nth-child(even) {
+      background-color: #fcfcfc;
+    }
+    &:nth-child(odd) {
+      background-color: #ffffff;
+    }
+    &:nth-child(1) {
+      td {
+        color: rgb(252, 193, 0);
+        font-size: 1.125rem;
+        font-weight: 500;
+      }
+    }
+  }
 }

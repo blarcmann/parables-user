@@ -1,4 +1,4 @@
-import { FETCH_QUIZ_DATA, FETCH_QUIZ_OPTIONS } from '../constants';
+import { FETCH_QUIZ_DATA, FETCH_QUIZ_OPTIONS, LEADERBOARD_SCORES } from '../constants';
 import axios from 'axios';
 import globals from '../globals';
 
@@ -69,6 +69,30 @@ export function fetchQuizOptions(index, payload) {
     }
 }
 
+export function fetchScores() {
+    const userToken = localStorage.getItem('userToken');
+    return dispatch => {
+        axios.get(`${globals.base_url}/quiz/leaderboard`, {
+            headers: {
+                'Authorization': 'Bearer ' + userToken
+            }
+        })
+            .then(response => {
+                if (response.data.status === false) {
+                    const msg = response.data.msg || 'Please reload page.';
+                    globals.createToast(msg, 3000, 'bottom-right');
+                    return console.log(response, 'Leaderboard score not found not successful');
+                }
+                let res = response.data;
+                dispatch(scores(res.data));
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
 export function finishQuiz(payload) {
     const userToken = localStorage.getItem('userToken');
     return dispatch => {
@@ -107,3 +131,9 @@ function quizOptions(payload) {
     }
 }
 
+function scores(payload) {
+    return {
+        type: LEADERBOARD_SCORES,
+        payload
+    }
+}

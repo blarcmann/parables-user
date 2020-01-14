@@ -1,4 +1,4 @@
-import { FETCH_QUIZ_DATA, FETCH_QUIZ_OPTIONS } from '../constants';
+import { FETCH_QUIZ_DATA, FETCH_QUIZ_OPTIONS, LEADERBOARD_SCORES } from '../constants';
 
 const initialState = {
     quizData: {},
@@ -12,7 +12,8 @@ const initialState = {
     option2: {},
     option3: {},
     option4: {},
-    quizOptions: []
+    quizOptions: [],
+    scores: []
 }
 
 export default function quiz(state = initialState, action) {
@@ -49,6 +50,11 @@ export default function quiz(state = initialState, action) {
                 option2: option2,
                 option3: option3,
                 option4: option4,
+            }
+        case LEADERBOARD_SCORES:
+            return {
+                ...state,
+                scores: [...state.scores, action.payload]
             }
         default:
             return state;

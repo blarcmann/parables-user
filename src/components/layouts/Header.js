@@ -96,7 +96,12 @@ export class Header extends Component {
                                         </li>
                                         <li>
                                             <div className={this.state.user ? "modal-instance" : 'hide'} onClick={this.logout}>
-                                                <b>Logout</b>
+                                                Logout
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div className={this.state.user ? "modal-instance" : 'hide'}>
+                                                <b><Link to='/leaderboard'>Leaderboard</Link></b>
                                             </div>
                                         </li>
                                         <li>
