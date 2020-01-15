@@ -102,6 +102,18 @@ export class ParableDetails extends Component {
                     <div className="search-null">Please wait...</div>
                 }
                 <Footer />
+                <div className={this.state.showVideo ? "s4me-modal" : "hide"}>
+                    <div className="s4me-modal-body large p-0">
+                        <div className="close-btn" onClick={this.dismissAll}>
+                            <img src={require('../assets/images/close.svg')} alt="X" />
+                        </div>
+                        <div className="s4me-modal-body-content p-0">
+                            <iframe src={this.state.showVideo ? this.props.parable.youtube : ''}
+                                width="400" title={this.props.parable.title} height="315" frameBorder="0" allowFullScreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
             </>
         )
     }
