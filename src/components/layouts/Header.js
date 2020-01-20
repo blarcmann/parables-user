@@ -11,10 +11,16 @@ export class Header extends Component {
         this.state = {
             user: false,
             showSearch: false,
+            showQuizbtn: true,
             q: ''
         }
     }
     componentDidMount() {
+        if(this.props.location.pathname === '/quiz') {
+           this.setState({
+            showQuizbtn: false
+           })
+        }
         const userId = localStorage.getItem('userId');
         console.log(userId, 'userID');
         if (userId) {
@@ -149,7 +155,7 @@ export class Header extends Component {
                                             <li className="dropdown">
                                                 <Link to="/">About</Link>
                                             </li>
-                                            <li className="dropdown primary" onClick={this.startQuiz}>Start Quiz
+                                            <li className={this.state.showQuizbtn ? "dropdown primary" : 'visibility-none'} onClick={this.startQuiz}>Start Quiz
                                                 {/* <Link to="/quiz">Start Quiz</Link> */}
                                             </li>
                                         </ul>
