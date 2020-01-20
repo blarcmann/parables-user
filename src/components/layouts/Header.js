@@ -16,6 +16,7 @@ export class Header extends Component {
     }
     componentDidMount() {
         const userId = localStorage.getItem('userId');
+        console.log(userId, 'userID');
         if (userId) {
             this.setState({
                 user: true
@@ -49,7 +50,7 @@ export class Header extends Component {
     }
 
     startQuiz = () => {
-        if (localStorage.getItem('userDetails')) {
+        if (localStorage.getItem('userDetails') && localStorage.getItem('userId')) {
             this.props.history.push('/quiz')
         } else {
             this.props.history.push('/login');

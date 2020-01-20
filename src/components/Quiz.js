@@ -9,6 +9,7 @@ import globals from '../globals';
 export class Quiz extends Component {
     quizz = {};
     score = 0;
+    randomizeQ = [];
     constructor(props) {
         super(props)
         this.state = {
@@ -36,8 +37,31 @@ export class Quiz extends Component {
             answer3: '',
             answer4: '',
             score: 0,
-            startQuiz: true
+            startQuiz: true,
         }
+    }
+
+
+    componentDidMount() {
+        if (!localStorage.getItem('userDetails')) {
+            this.setState({
+                startQuiz: false
+            })
+        } else {
+            this.setState({
+                userDetails: JSON.parse(localStorage.getItem('userDetails'))
+            })
+        }
+        let userId = localStorage.getItem('userId');
+        this.props.fetchQuizData(userId);
+        this.activateIndex(0);
+        for(let i = 0; i < 5; i++) {
+            this.generateRandom(2);
+        }
+    }
+
+    generateRandom = (max) => {
+        this.randomizeQ.push(Math.floor(Math.random() * Math.floor(max)));
     }
 
     dismissAll = () => {
@@ -212,20 +236,7 @@ export class Quiz extends Component {
         })
     }
 
-    componentDidMount() {
-        if (!localStorage.getItem('userDetails')) {
-            this.setState({
-                startQuiz: false
-            })
-        } else {
-            this.setState({
-                userDetails: JSON.parse(localStorage.getItem('userDetails'))
-            })
-        }
-        let userId = localStorage.getItem('userId');
-        this.props.fetchQuizData(userId);
-        this.activateIndex(0)
-    }
+
     render() {
         return (
             <>
@@ -238,8 +249,11 @@ export class Quiz extends Component {
                         <div className="container pos-vertical-center">
                             <div className="row justify-content-around">
                                 <div className="col-lg-8">
-                                    <div className="quiz-img">
+                                    <div className={this.randomizeQ[this.state.activeIndex] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.activeQuestion.image} alt={this.state.activeQuestion.image} />
+                                    </div>
+                                    <div className={this.randomizeQ[this.state.activeIndex] === 0 ? "quiz-text slide-in" : 'hide'}>
+                                        {this.state.activeQuestion.translation}
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
