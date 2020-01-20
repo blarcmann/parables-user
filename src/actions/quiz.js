@@ -26,12 +26,23 @@ export function fetchQuizData(userId) {
                 localStorage.setItem('q2', JSON.stringify(quizz[2]));
                 localStorage.setItem('q3', JSON.stringify(quizz[3]));
                 localStorage.setItem('q4', JSON.stringify(quizz[4]));
-                quizz.forEach((quiz, index) => {
-                    let payload = {
-                        title: quiz.title
-                    }
-                    this.fetchQuizOptions(index, payload);
-                })
+                // quizz.forEach((quiz, index) => {
+                //     let payload = {
+                //         title: quiz.title
+                //     }
+                //     this.fetchQuizOptions(index, payload);
+                // })
+                
+                let q0 = {title: quizz[0].title};
+                let q1 = {title: quizz[1].title};
+                let q2 = {title: quizz[2].title};
+                let q3 = {title: quizz[3].title};
+                let q4 = {title: quizz[4].title};
+                this.fetchQuizOptions('q0', q0);
+                this.fetchQuizOptions('q1', q1);
+                this.fetchQuizOptions('q2', q2);
+                this.fetchQuizOptions('q3', q3);
+                this.fetchQuizOptions('q4', q4);
             })
             .catch(error => {
                 console.log('catch error register', error);

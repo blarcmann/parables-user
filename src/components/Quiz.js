@@ -101,7 +101,7 @@ export class Quiz extends Component {
             if (index === 2) {
                 this.setState({
                     activeIndex: 2,
-                    activeQuestion: this.props.q1,
+                    activeQuestion: this.props.q2,
                     activeOptions: this.props.option2
                 })
             }
@@ -274,6 +274,10 @@ export class Quiz extends Component {
                                             <div className="tag">D</div>
                                             <div className="detail">{this.state.activeOptions[3]}</div>
                                         </div>
+                                        <div className={this.state.answer0 === this.props.option0[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option0[4])}>
+                                            <div className="tag">E</div>
+                                            <div className="detail">{this.state.activeOptions[4]}</div>
+                                        </div>
                                     </div>
                                     <div className={this.state.activeIndex === 1 ? "quiz-options slide-in" : 'hide'}>
                                         <div className={this.state.answer1 === this.props.option1[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option1[0])}>
@@ -291,6 +295,10 @@ export class Quiz extends Component {
                                         <div className={this.state.answer1 === this.props.option1[3] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option1[3])}>
                                             <div className="tag">D</div>
                                             <div className="detail">{this.state.activeOptions[3]}</div>
+                                        </div>
+                                        <div className={this.state.answer1 === this.props.option1[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option1[4])}>
+                                            <div className="tag">E</div>
+                                            <div className="detail">{this.state.activeOptions[4]}</div>
                                         </div>
                                     </div>
                                     <div className={this.state.activeIndex === 2 ? "quiz-options slide-in" : 'hide'}>
@@ -310,6 +318,10 @@ export class Quiz extends Component {
                                             <div className="tag">D</div>
                                             <div className="detail">{this.state.activeOptions[3]}</div>
                                         </div>
+                                        <div className={this.state.answer2 === this.props.option2[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option2[4])}>
+                                            <div className="tag">E</div>
+                                            <div className="detail">{this.state.activeOptions[4]}</div>
+                                        </div>
                                     </div>
                                     <div className={this.state.activeIndex === 3 ? "quiz-options slide-in" : 'hide'}>
                                         <div className={this.state.answer3 === this.props.option3[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option3[0])}>
@@ -328,6 +340,10 @@ export class Quiz extends Component {
                                             <div className="tag">D</div>
                                             <div className="detail">{this.state.activeOptions[3]}</div>
                                         </div>
+                                        <div className={this.state.answer3 === this.props.option3[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option3[4])}>
+                                            <div className="tag">E</div>
+                                            <div className="detail">{this.state.activeOptions[4]}</div>
+                                        </div>
                                     </div>
                                     <div className={this.state.activeIndex === 4 ? "quiz-options slide-in" : 'hide'}>
                                         <div className={this.state.answer4 === this.props.option4[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option4[0])}>
@@ -345,6 +361,10 @@ export class Quiz extends Component {
                                         <div className={this.state.answer4 === this.props.option4[3] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option4[3])}>
                                             <div className="tag">D</div>
                                             <div className="detail">{this.state.activeOptions[3]}</div>
+                                        </div>
+                                        <div className={this.state.answer4 === this.props.option4[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option4[4])}>
+                                            <div className="tag">E</div>
+                                            <div className="detail">{this.state.activeOptions[4]}</div>
                                         </div>
                                     </div>
                                     {
