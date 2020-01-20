@@ -5,6 +5,7 @@ import Footer from './layouts/Footer';
 import { Link } from 'react-router-dom';
 import { fetchQuizData, fetchQuizOptions, finishQuiz } from '../actions/quiz';
 import globals from '../globals';
+import axios from 'axios';
 
 export class Quiz extends Component {
     quizz = {};
@@ -13,18 +14,22 @@ export class Quiz extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            q0: JSON.parse(localStorage.getItem('q0')),
-            q1: JSON.parse(localStorage.getItem('q1')),
-            q2: JSON.parse(localStorage.getItem('q2')),
-            q3: JSON.parse(localStorage.getItem('q3')),
-            q4: JSON.parse(localStorage.getItem('q4')),
+            q0: '',
+            q1: '',
+            q2: '',
+            q3: '',
+            q4: '',
             userDetails: '',
             quizId: localStorage.getItem('quizId'),
-            option0: JSON.parse(localStorage.getItem('option0')),
-            option1: JSON.parse(localStorage.getItem('option1')),
-            option2: JSON.parse(localStorage.getItem('option2')),
-            option3: JSON.parse(localStorage.getItem('option3')),
-            option4: JSON.parse(localStorage.getItem('option4')),
+            option0: '',
+            option1: '',
+            option2: '',
+            option3: '',
+            option4: '',
+            // option1: JSON.parse(localStorage.getItem('option1')),
+            // option2: JSON.parse(localStorage.getItem('option2')),
+            // option3: JSON.parse(localStorage.getItem('option3')),
+            // option4: JSON.parse(localStorage.getItem('option4')),
             activeIndex: 0,
             activeQuestion: '',
             activeOptions: '',
@@ -53,11 +58,106 @@ export class Quiz extends Component {
             })
         }
         let userId = localStorage.getItem('userId');
-        this.props.fetchQuizData(userId);
+        this.fetchQuizData(userId);
         this.activateIndex(0);
-        for(let i = 0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             this.generateRandom(2);
         }
+    }
+
+    fetchQuizData = (userId) => {
+        const userToken = localStorage.getItem('userToken');
+        axios.get(`${globals.base_url}/quiz/start/${userId}`, {
+            headers: {
+                'Authorization': 'Bearer ' + userToken
+            }
+        })
+            .then(response => {
+                if (response.data.status === false) {
+                    const msg = response.data.msg || 'Please reload page.';
+                    globals.createToast(msg, 3000, 'bottom-right');
+                    return console.log(response, 'fetch quiz not successful');
+                }
+                let res = response.data.data;
+                localStorage.setItem('quizId', response.data._id);
+                localStorage.setItem('q0', JSON.stringify(res[0]));
+                localStorage.setItem('q1', JSON.stringify(res[1]));
+                localStorage.setItem('q2', JSON.stringify(res[2]));
+                localStorage.setItem('q3', JSON.stringify(res[3]));
+                localStorage.setItem('q4', JSON.stringify(res[4]));
+                this.setState({
+                    q0: res[0],
+                    q1: res[1],
+                    q2: res[2],
+                    q3: res[3],
+                    q4: res[4],
+                })
+                let q0 = { title: res[0].title };
+                let q1 = { title: res[1].title };
+                let q2 = { title: res[2].title };
+                let q3 = { title: res[3].title };
+                let q4 = { title: res[4].title };
+                this.fetchQuizOptions('q0', q0);
+                this.fetchQuizOptions('q1', q1);
+                this.fetchQuizOptions('q2', q2);
+                this.fetchQuizOptions('q3', q3);
+                this.fetchQuizOptions('q4', q4);
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+
+    fetchQuizOptions = (index, payload) => {
+        const userToken = localStorage.getItem('userToken');
+        axios.post(`${globals.base_url}/quiz/options`, payload, {
+            headers: {
+                'Authorization': 'Bearer ' + userToken
+            }
+        })
+            .then(response => {
+                if (response.data.status === false) {
+                    const msg = response.data.msg || 'Please reload page.';
+                    globals.createToast(msg, 3000, 'bottom-right');
+                    return console.log(response, 'fetch quiz not successful');
+                }
+                let res = response.data;
+                if (index === 'q0') {
+                    this.setState({
+                        option0: res.data
+                    })
+                    localStorage.setItem('option0', JSON.stringify(res.data))
+                };
+                if (index === 'q1') {
+                    this.setState({
+                        option1: res.data
+                    })
+                    localStorage.setItem('option1', JSON.stringify(res.data))
+                };
+                if (index === 'q2') {
+                    this.setState({
+                        option2: res.data
+                    })
+                    localStorage.setItem('option2', JSON.stringify(res.data))
+                };
+                if (index === 'q3') {
+                    this.setState({
+                        option3: res.data
+                    })
+                    localStorage.setItem('option3', JSON.stringify(res.data))
+                };
+                if (index === 'q4') {
+                    this.setState({
+                        option4: res.data
+                    })
+                    localStorage.setItem('option4', JSON.stringify(res.data))
+                };
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
     }
 
     generateRandom = (max) => {
@@ -87,36 +187,36 @@ export class Quiz extends Component {
             if (index === 0) {
                 this.setState({
                     activeIndex: 0,
-                    activeQuestion: this.props.q0,
-                    activeOptions: this.props.option0
+                    activeQuestion: this.state.q0,
+                    activeOptions: this.state.option0
                 })
             }
             if (index === 1) {
                 this.setState({
                     activeIndex: 1,
-                    activeQuestion: this.props.q1,
-                    activeOptions: this.props.option1
+                    activeQuestion: this.state.q1,
+                    activeOptions: this.state.option1
                 })
             }
             if (index === 2) {
                 this.setState({
                     activeIndex: 2,
-                    activeQuestion: this.props.q2,
-                    activeOptions: this.props.option2
+                    activeQuestion: this.state.q2,
+                    activeOptions: this.state.option2
                 })
             }
             if (index === 3) {
                 this.setState({
                     activeIndex: 3,
-                    activeQuestion: this.props.q3,
-                    activeOptions: this.props.option3
+                    activeQuestion: this.state.q3,
+                    activeOptions: this.state.option3
                 })
             }
             if (index === 4) {
                 this.setState({
                     activeIndex: 4,
-                    activeQuestion: this.props.q4,
-                    activeOptions: this.props.option4
+                    activeQuestion: this.state.q4,
+                    activeOptions: this.state.option4
                 })
             }
         }, 200)
@@ -190,19 +290,19 @@ export class Quiz extends Component {
     completeQuiz = () => {
         globals.createToast('Please wait', 3000, 'bottom-right');
         setTimeout(() => {
-            if (this.props.q0.title.toString() === this.state.answer0.toString()) {
+            if (this.state.q0.title.toString() === this.state.answer0.toString()) {
                 this.score = this.score + 1;
             }
-            if (this.props.q1.title.toString() === this.state.answer1.toString()) {
+            if (this.state.q1.title.toString() === this.state.answer1.toString()) {
                 this.score = this.score + 1;
             }
-            if (this.props.q2.title.toString() === this.state.answer2.toString()) {
+            if (this.state.q2.title.toString() === this.state.answer2.toString()) {
                 this.score = this.score + 1;
             }
-            if (this.props.q2.title.toString() === this.state.answer3.toString()) {
+            if (this.state.q3.title.toString() === this.state.answer3.toString()) {
                 this.score = this.score + 1;
             }
-            if (this.props.q4.title.toString() === this.state.answer4.toString()) {
+            if (this.state.q4.title.toString() === this.state.answer4.toString()) {
                 this.score = this.score + 1;
             }
             this.finishQuiz();
@@ -225,7 +325,7 @@ export class Quiz extends Component {
         let payload = {
             score: this.score,
             username: this.state.userDetails.name,
-            _id: this.state.quizId
+            _id: localStorage.getItem('quizId')
         }
         this.props.finishQuiz(payload)
     }
@@ -248,132 +348,165 @@ export class Quiz extends Component {
                     <section className="height-80 mb-max">
                         <div className="container pos-vertical-center">
                             <div className="row justify-content-around">
-                                <div className="col-lg-8">
-                                    <div className={this.randomizeQ[this.state.activeIndex] === 1 ? "quiz-img slide-in" : 'hide'}>
-                                        <img src={this.state.activeQuestion.image} alt={this.state.activeQuestion.image} />
+
+                                <div className={this.state.activeIndex === 0 ? "col-lg-8" : 'hide'}>
+                                    <div className={this.randomizeQ[0] === 1 ? "quiz-img slide-in" : 'hide'}>
+                                        <img src={this.state.q0.image} alt={this.state.q0.image} />
                                     </div>
-                                    <div className={this.randomizeQ[this.state.activeIndex] === 0 ? "quiz-text slide-in" : 'hide'}>
-                                        {this.state.activeQuestion.translation}
+                                    <div className={this.randomizeQ[0] === 0 ? "quiz-text slide-in" : 'hide'}>
+                                        {this.state.q0.translation}
+                                    </div>
+                                </div>
+                                <div className={this.state.activeIndex === 1 ? "col-lg-8" : 'hide'}>
+                                    <div className={this.randomizeQ[1] === 1 ? "quiz-img slide-in" : 'hide'}>
+                                        <img src={this.state.q1.image} alt={this.state.q1.image} />
+                                    </div>
+                                    <div className={this.randomizeQ[1] === 0 ? "quiz-text slide-in" : 'hide'}>
+                                        {this.state.q1.translation}
+                                    </div>
+                                </div>
+                                <div className={this.state.activeIndex === 2 ? "col-lg-8" : 'hide'}>
+                                    <div className={this.randomizeQ[2] === 1 ? "quiz-img slide-in" : 'hide'}>
+                                        <img src={this.state.q2.image} alt={this.state.q2.image} />
+                                    </div>
+                                    <div className={this.randomizeQ[2] === 0 ? "quiz-text slide-in" : 'hide'}>
+                                        {this.state.q2.translation}
+                                    </div>
+                                </div>
+                                <div className={this.state.activeIndex === 3 ? "col-lg-8" : 'hide'}>
+                                    <div className={this.randomizeQ[3] === 1 ? "quiz-img slide-in" : 'hide'}>
+                                        <img src={this.state.q3.image} alt={this.state.q3.image} />
+                                    </div>
+                                    <div className={this.randomizeQ[3] === 0 ? "quiz-text slide-in" : 'hide'}>
+                                        {this.state.q3.translation}
+                                    </div>
+                                </div>
+                                <div className={this.state.activeIndex === 4 ? "col-lg-8" : 'hide'}>
+                                    <div className={this.randomizeQ[4] === 1 ? "quiz-img slide-in" : 'hide'}>
+                                        <img src={this.state.q4.image} alt={this.state.q4.image} />
+                                    </div>
+                                    <div className={this.randomizeQ[4] === 0 ? "quiz-text slide-in" : 'hide'}>
+                                        {this.state.q4.translation}
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
                                     <div className={this.state.activeIndex === 0 ? "quiz-options slide-in" : 'hide'}>
-                                        <div className={this.state.answer0 === this.props.option0[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option0[0])}>
+                                        <div className={this.state.answer0 === this.state.option0[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option0[0])}>
                                             <div className="tag">A</div>
                                             <div className="detail">{this.state.activeOptions[0]}</div>
                                         </div>
-                                        <div className={this.state.answer0 === this.props.option0[1] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option0[1])}>
+                                        <div className={this.state.answer0 === this.state.option0[1] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option0[1])}>
                                             <div className="tag">B</div>
                                             <div className="detail">{this.state.activeOptions[1]}</div>
                                         </div>
-                                        <div className={this.state.answer0 === this.props.option0[2] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option0[2])}>
+                                        <div className={this.state.answer0 === this.state.option0[2] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option0[2])}>
                                             <div className="tag">C</div>
                                             <div className="detail">{this.state.activeOptions[2]}</div>
                                         </div>
-                                        <div className={this.state.answer0 === this.props.option0[3] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option0[3])}>
+                                        <div className={this.state.answer0 === this.state.option0[3] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option0[3])}>
                                             <div className="tag">D</div>
                                             <div className="detail">{this.state.activeOptions[3]}</div>
                                         </div>
-                                        <div className={this.state.answer0 === this.props.option0[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option0[4])}>
+                                        <div className={this.state.answer0 === this.state.option0[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option0[4])}>
                                             <div className="tag">E</div>
                                             <div className="detail">{this.state.activeOptions[4]}</div>
                                         </div>
                                     </div>
                                     <div className={this.state.activeIndex === 1 ? "quiz-options slide-in" : 'hide'}>
-                                        <div className={this.state.answer1 === this.props.option1[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option1[0])}>
+                                        <div className={this.state.answer1 === this.state.option1[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option1[0])}>
                                             <div className="tag">A</div>
                                             <div className="detail">{this.state.activeOptions[0]}</div>
                                         </div>
-                                        <div className={this.state.answer1 === this.props.option1[1] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option1[1])}>
+                                        <div className={this.state.answer1 === this.state.option1[1] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option1[1])}>
                                             <div className="tag">B</div>
                                             <div className="detail">{this.state.activeOptions[1]}</div>
                                         </div>
-                                        <div className={this.state.answer1 === this.props.option1[2] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option1[2])}>
+                                        <div className={this.state.answer1 === this.state.option1[2] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option1[2])}>
                                             <div className="tag">C</div>
                                             <div className="detail">{this.state.activeOptions[2]}</div>
                                         </div>
-                                        <div className={this.state.answer1 === this.props.option1[3] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option1[3])}>
+                                        <div className={this.state.answer1 === this.state.option1[3] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option1[3])}>
                                             <div className="tag">D</div>
                                             <div className="detail">{this.state.activeOptions[3]}</div>
                                         </div>
-                                        <div className={this.state.answer1 === this.props.option1[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option1[4])}>
+                                        <div className={this.state.answer1 === this.state.option1[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option1[4])}>
                                             <div className="tag">E</div>
                                             <div className="detail">{this.state.activeOptions[4]}</div>
                                         </div>
                                     </div>
                                     <div className={this.state.activeIndex === 2 ? "quiz-options slide-in" : 'hide'}>
-                                        <div className={this.state.answer2 === this.props.option2[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option2[0])}>
+                                        <div className={this.state.answer2 === this.state.option2[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option2[0])}>
                                             <div className="tag">A</div>
                                             <div className="detail">{this.state.activeOptions[0]}</div>
                                         </div>
-                                        <div className={this.state.answer2 === this.props.option2[1] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option2[1])}>
+                                        <div className={this.state.answer2 === this.state.option2[1] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option2[1])}>
                                             <div className="tag">B</div>
                                             <div className="detail">{this.state.activeOptions[1]}</div>
                                         </div>
-                                        <div className={this.state.answer2 === this.props.option2[2] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option2[2])}>
+                                        <div className={this.state.answer2 === this.state.option2[2] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option2[2])}>
                                             <div className="tag">C</div>
                                             <div className="detail">{this.state.activeOptions[2]}</div>
                                         </div>
-                                        <div className={this.state.answer2 === this.props.option2[3] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option2[3])}>
+                                        <div className={this.state.answer2 === this.state.option2[3] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option2[3])}>
                                             <div className="tag">D</div>
                                             <div className="detail">{this.state.activeOptions[3]}</div>
                                         </div>
-                                        <div className={this.state.answer2 === this.props.option2[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option2[4])}>
+                                        <div className={this.state.answer2 === this.state.option2[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option2[4])}>
                                             <div className="tag">E</div>
                                             <div className="detail">{this.state.activeOptions[4]}</div>
                                         </div>
                                     </div>
                                     <div className={this.state.activeIndex === 3 ? "quiz-options slide-in" : 'hide'}>
-                                        <div className={this.state.answer3 === this.props.option3[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option3[0])}>
+                                        <div className={this.state.answer3 === this.state.option3[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option3[0])}>
                                             <div className="tag">A</div>
                                             <div className="detail">{this.state.activeOptions[0]}</div>
                                         </div>
-                                        <div className={this.state.answer3 === this.props.option3[1] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option3[1])}>
+                                        <div className={this.state.answer3 === this.state.option3[1] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option3[1])}>
                                             <div className="tag">B</div>
                                             <div className="detail">{this.state.activeOptions[1]}</div>
                                         </div>
-                                        <div className={this.state.answer3 === this.props.option3[2] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option3[2])}>
+                                        <div className={this.state.answer3 === this.state.option3[2] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option3[2])}>
                                             <div className="tag">C</div>
                                             <div className="detail">{this.state.activeOptions[2]}</div>
                                         </div>
-                                        <div className={this.state.answer3 === this.props.option3[3] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option3[3])}>
+                                        <div className={this.state.answer3 === this.state.option3[3] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option3[3])}>
                                             <div className="tag">D</div>
                                             <div className="detail">{this.state.activeOptions[3]}</div>
                                         </div>
-                                        <div className={this.state.answer3 === this.props.option3[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option3[4])}>
+                                        <div className={this.state.answer3 === this.state.option3[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option3[4])}>
                                             <div className="tag">E</div>
                                             <div className="detail">{this.state.activeOptions[4]}</div>
                                         </div>
                                     </div>
                                     <div className={this.state.activeIndex === 4 ? "quiz-options slide-in" : 'hide'}>
-                                        <div className={this.state.answer4 === this.props.option4[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option4[0])}>
+                                        <div className={this.state.answer4 === this.state.option4[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option4[0])}>
                                             <div className="tag">A</div>
                                             <div className="detail">{this.state.activeOptions[0]}</div>
                                         </div>
-                                        <div className={this.state.answer4 === this.props.option4[1] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option4[1])}>
+                                        <div className={this.state.answer4 === this.state.option4[1] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option4[1])}>
                                             <div className="tag">B</div>
                                             <div className="detail">{this.state.activeOptions[1]}</div>
                                         </div>
-                                        <div className={this.state.answer4 === this.props.option4[2] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option4[2])}>
+                                        <div className={this.state.answer4 === this.state.option4[2] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option4[2])}>
                                             <div className="tag">C</div>
                                             <div className="detail">{this.state.activeOptions[2]}</div>
                                         </div>
-                                        <div className={this.state.answer4 === this.props.option4[3] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option4[3])}>
+                                        <div className={this.state.answer4 === this.state.option4[3] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option4[3])}>
                                             <div className="tag">D</div>
                                             <div className="detail">{this.state.activeOptions[3]}</div>
                                         </div>
-                                        <div className={this.state.answer4 === this.props.option4[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.props.option4[4])}>
+                                        <div className={this.state.answer4 === this.state.option4[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option4[4])}>
                                             <div className="tag">E</div>
                                             <div className="detail">{this.state.activeOptions[4]}</div>
                                         </div>
                                     </div>
                                     {
-                                        this.props.option0 && !this.state.activeOptions[0] ?
+                                        this.state.option0 && !this.state.activeOptions[0] ?
                                             <button className="visibility-none" onClick={this.activateIndex(0)}></button> :
                                             ''
                                     }
                                     {
-                                        this.props.q0 && !this.state.activeQuestion.title ?
+                                        this.state.q0 && !this.state.activeQuestion.title ?
                                             <button className="visibility-none" onClick={this.runnit}></button> :
                                             ''
                                     }
