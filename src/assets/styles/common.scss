@@ -563,7 +563,8 @@ button.submit-quiz {
         display: block;
         width: 100%;
         @media(min-width: 768px) {
-          width: 160px;
+          width: 190px;
+          height: auto;
         }
       }
     }
@@ -572,6 +573,10 @@ button.submit-quiz {
       @media(max-width: 767px) {
           margin-top: 1.5rem;
       }
+    }
+    .qtranslation {
+      font-size: 0.875rem;
+      color: #999;
     }
   }
 }

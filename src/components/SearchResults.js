@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { fetchRandomAdvert, clickAdvert } from '../actions/adverts';
 import Header from './layouts/Header';
 import Footer from './layouts/Footer';
+import globals from '../globals';
 
 export class SearchResults extends Component {
     constructor(props) {
@@ -33,7 +34,10 @@ export class SearchResults extends Component {
                         <div className="image">
                             <img src={q.file && q.file.Location ? q.file.Location : require('../assets/images/placeholder.svg')} alt="A" />
                         </div>
-                        <div className="content">{q.title}</div>
+                        <div>
+                            <div className="content">{q.title}</div>
+                            <div className="qtranslation mt-2">{globals.trimSubtitle(q.translation)}</div>
+                        </div>
                     </Link>
                 )
             })
