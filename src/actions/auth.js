@@ -36,9 +36,10 @@ export function login(props, payload) {
                     globals.createToast(msg, 2500, 'top');
                     return console.log(response, 'not successful');
                 }
-                // const msg = 'Authentication successful!';
-                // globals.createToast(msg, 2500, 'bottom-right');
                 let res = response.data;
+                if (res.data.status === false) {
+                    return globals.createToast('This account has been suspended.', 2500, 'top');
+                }
                 localStorage.setItem('userId', res.data.user_id);
                 localStorage.setItem('userToken', res.data.user_token);
                 dispatch(loginUser(res.data));
@@ -51,7 +52,7 @@ export function login(props, payload) {
     }
 }
 
-export function fetchUserDetails(id) {
+export function fetchUserDetails(props, id) {
     const userToken = localStorage.getItem('userToken');
     return dispatch => {
         axios.get(`${globals.base_url}/user/${id}`, {
@@ -61,7 +62,19 @@ export function fetchUserDetails(id) {
         })
             .then(response => {
                 if (response.data.status === false) {
-                    return console.log(response, 'fetch user detsild not successful');
+                    return console.log(response, 'fetch user details not successful');
+                }
+                if (response.data.data.status !== true) {
+                    const msg = 'Your account have been suspended, please contact admin.';
+                    globals.createToast(msg, 5000, 'top');
+                    props.history.push('/');
+                    setTimeout(() => {
+                        localStorage.setItem('userToken', '');
+                        localStorage.setItem('userId', '');
+                        localStorage.setItem('userDetails', '');
+                        window.location.reload();
+                    }, 4000);
+                    return;
                 }
                 let res = response.data;
                 localStorage.setItem('userDetails', JSON.stringify(res.data));

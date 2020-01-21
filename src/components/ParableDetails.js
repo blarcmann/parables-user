@@ -67,6 +67,7 @@ export class ParableDetails extends Component {
                                     <div className="col-md-6 col-lg-5">
                                         <div className="switchable__text">
                                             <q className={this.props.parable ? 'parable' : 'hide'}>{this.props.parable.title}</q>
+                                            <q className={this.props.parable ? 'translation mt-3' : 'hide'}>{this.props.parable.translation}</q>
                                         </div>
                                     </div>
                                 </div>
@@ -85,15 +86,15 @@ export class ParableDetails extends Component {
                                                 </button>
                                             </div>
                                         </div>
-                                        {this.props.parable.sound && this.props.parable.sound.Location ? 
-                                        <div className={this.showAudio ? 'slide-in' : 'hide'}>
-                                            <audio controls>
-                                                <source src={this.props.parable.sound.Location} type="audio/ogg" />
-                                                <source src={this.props.parable.sound.Location} type="audio/mpeg" />
-                                                Your browser does not support the audio element.
+                                        {this.props.parable.sound && this.props.parable.sound.Location ?
+                                            <div className={this.showAudio ? 'slide-in' : 'hide'}>
+                                                <audio controls>
+                                                    <source src={this.props.parable.sound.Location} type="audio/ogg" />
+                                                    <source src={this.props.parable.sound.Location} type="audio/mpeg" />
+                                                    Your browser does not support the audio element.
                                             </audio>
-                                        </div>
-                                        : '' }
+                                            </div>
+                                            : ''}
                                     </div>
                                 </div>
                             </div>

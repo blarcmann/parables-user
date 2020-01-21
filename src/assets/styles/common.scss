@@ -179,6 +179,13 @@ input, button, button:active, button:focus {
         font-weight: 500;
         font-size: 1.75rem;   
     }
+    .translation {
+      font-weight: 400;
+      font-size: 1.25rem;
+      color: #999;
+      display: block;
+      margin-top: 2.5rem;
+    }
 }
 .audio-option {
     display: flex;

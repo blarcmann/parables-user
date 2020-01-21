@@ -27,7 +27,7 @@ export class Header extends Component {
             this.setState({
                 user: true
             })
-            this.props.fetchUserDetails(userId);
+            this.props.fetchUserDetails(this.props, userId);
         }
     }
 
