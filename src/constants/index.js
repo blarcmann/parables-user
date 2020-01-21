@@ -8,3 +8,4 @@ export const FETCH_QUIZ_DATA = 'FETCH_QUIZ_DATA';
 export const FETCH_QUIZ_OPTIONS = 'FETCH_QUIZ_OPTIONS';
 export const Q_PARABLE = 'Q_PARABLE';
 export const LEADERBOARD_SCORES = 'LEADERBOARD_SCORES';
+export const CLEAR = 'CLEAR';

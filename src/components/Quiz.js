@@ -348,7 +348,6 @@ export class Quiz extends Component {
                     <section className="height-80 mb-max">
                         <div className="container pos-vertical-center">
                             <div className="row justify-content-around">
-
                                 <div className={this.state.activeIndex === 0 ? "col-lg-8" : 'hide'}>
                                     <div className={this.randomizeQ[0] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.q0.image} alt={this.state.q0.image} />

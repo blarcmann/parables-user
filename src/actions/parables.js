@@ -1,4 +1,4 @@
-import { RANDOM_PARABLE, FETCH_PARABLE, Q_PARABLE } from '../constants';
+import { RANDOM_PARABLE, FETCH_PARABLE, Q_PARABLE , CLEAR} from '../constants';
 import axios from 'axios';
 import globals from '../globals';
 
@@ -45,8 +45,8 @@ export function fetchParable(id) {
 
 
 export function parableSearch(q) {
-    console.log('searching', q)
     return (dispatch) => {
+        dispatch(clearData(''));
         axios.get(`${globals.base_url}/parable/search`, {
             params: {
                 term: q
@@ -80,6 +80,13 @@ function randomParable(payload) {
     }
 }
 
+
+function clearData(payload) {
+    return {
+        type: CLEAR,
+        payload
+    }
+}
 function qParable(payload) {
     return {
         type: Q_PARABLE,
