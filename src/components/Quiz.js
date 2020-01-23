@@ -546,7 +546,7 @@ export class Quiz extends Component {
                                             <button className="visibility-none" onClick={this.runnit}></button> :
                                             ''
                                     }
-                                    <div className="prev-next">
+                                    <div className="prev-next mb-4">
                                         <div className="action" onClick={this.prev}>
                                             <img src={require('../assets/images/prev.svg')} alt="X"/>
                                             <span>Prev</span>
