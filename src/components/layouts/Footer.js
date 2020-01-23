@@ -63,7 +63,7 @@ export class Footer extends Component {
                             <div className="col-md-12">
                                 {/* <img className="logo logo-dark" alt="logo" src={require('../../assets/images/logo.png')} /> */}
                                 <span className="type--fine-print">&copy;
-                            <span className="update-year"></span> Parablues Inc.</span>
+                            <span className="update-year"></span> Parablues NG</span>
                             </div>
                         </div>
                     </div>
