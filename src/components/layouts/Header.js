@@ -65,6 +65,16 @@ export class Header extends Component {
         }
     }
 
+    doNothing = (e) => {
+        e.preventDefault();
+        return;
+    }
+
+    seeDetails  = (id) => {
+        this.props.history.push(`/parable-details/${id}`);
+        window.location.reload();
+    }
+
     logout = () => {
         localStorage.setItem('userToken', '');
         localStorage.setItem('userId', '');
@@ -81,7 +91,7 @@ export class Header extends Component {
                     //     <Link to={`/parable-details/${q._id}`} dangerouslySetInnerHTML={{ __html: globals.trimSearch(q.translation) }}></Link>
                     // </li>
                     <li className="item" key={i} onClick={this.toggleSearch}>
-                        <Link to={`/parable-details/${q._id}`} className="search-result">
+                        <div onClick={e => this.seeDetails(q._id)} className="search-result">
                             <div className="img">
                                 <img src={q.file.Location} alt="X" />
                             </div>
@@ -89,7 +99,7 @@ export class Header extends Component {
                                 <div className="parable">{q.title}</div>
                                 <div className="translate" dangerouslySetInnerHTML={{ __html: globals.trimSearch(q.translation) }}></div>
                             </div>
-                        </Link>
+                        </div>
                     </li>
                 )
             })
@@ -98,7 +108,7 @@ export class Header extends Component {
             <>
                 <section className="bar bar-3 bar--sm bg--secondary">
                     <div className={this.state.showSearch ? "search-cover slide-in" : 'hide'}>
-                        <form>
+                        <form onSubmit={this.doNothing}>
                             <input type="text" name="search" placeholder="Enter search query and hit enter"
                                 onKeyUp={e => this.handleChange("q", e.target.value)} />
                         </form>
