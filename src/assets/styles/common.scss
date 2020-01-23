@@ -700,6 +700,26 @@ button.submit-quiz {
     }
   }
 }
+.share-score {
+  margin: 0.5rem auto;
+  width: max-content;
+  .each {
+    display: flex;
+    justify-content: flex-start;
+    img {
+      width: 20px;
+      height: 20px;
+      display: block;
+      margin-right: 0.25rem;
+      margin-bottom: 1rem !important;
+    }
+    a {
+      color: #333;
+      font-size: 0.935rem;
+      font-weight: 300;
+    }
+  }
+}
 img.menu-mobile {
     width: 2.25rem;
     position: absolute;
