@@ -293,6 +293,22 @@ export class Quiz extends Component {
         }
     }
 
+    next = () => {
+        if(this.state.activeIndex === 4) {
+            return;
+        } else {
+            this.activateIndex(this.state.activeIndex + 1);
+        }
+    }
+
+    prev = () => {
+        if(this.state.activeIndex === 0) {
+            return;
+        } else {
+            this.activateIndex(this.state.activeIndex - 1);
+        }
+    }
+
     completeQuiz = () => {
         globals.createToast('Please wait', 3000, 'bottom-right');
         setTimeout(() => {
@@ -530,6 +546,16 @@ export class Quiz extends Component {
                                             <button className="visibility-none" onClick={this.runnit}></button> :
                                             ''
                                     }
+                                    <div className="prev-next">
+                                        <div className="action" onClick={this.prev}>
+                                            <img src={require('../assets/images/prev.svg')} alt="X"/>
+                                            <span>Prev</span>
+                                        </div>
+                                        <div className="action" onClick={this.next}>
+                                            <img src={require('../assets/images/next.svg')} alt="X"/>
+                                            <span>Next</span>
+                                        </div>
+                                    </div>
                                     <div className="quest-cover">
                                         <h4 className="">Quiz questions</h4>
                                         <div className="question-tags">
@@ -562,11 +588,11 @@ export class Quiz extends Component {
                         <div className="share-score">
                             <div className="each">
                                 <img src={require('../assets/images/twitter.svg')} alt="X" />
-                                <a href={`https://twitter.com/intent/tweet?text=${this.state.shareDes}&url=${this.state.baseHref}`} target="_blank" rel="noopener noreferrer">Share score on twitter</a>
+                                <a href={`https://twitter.com/intent/tweet?text=${this.state.shareDes}&url=${this.state.baseHref}`} target="_blank" rel="noopener noreferrer">Share your score on twitter</a>
                             </div>
                             <div className="each">
                                 <img src={require('../assets/images/facebook.svg')} alt="X" />
-                                <a href={`https://www.facebook.com/sharer/sharer.php?u=${this.state.baseHref}&quote=lov and ligh`} target="_blank" rel="noopener noreferrer">Share score on facebook</a>
+                                <a href={`https://www.facebook.com/sharer/sharer.php?u=${this.state.baseHref}&quote=${this.state.shareDes}`} target="_blank" rel="noopener noreferrer">Share your score on facebook</a>
                             </div>
                         </div>
                         <div className="modal-action">

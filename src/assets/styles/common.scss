@@ -689,9 +689,32 @@ button.submit-quiz {
 .visibility-none {
   visibility: hidden;
 }
+.prev-next {
+  display: flex;
+  justify-content: flex-start;
+  .action {
+    display: flex;
+    justify-content: flex-start;
+    margin-right: 30%;
+    &:hover {
+      cursor: pointer;
+    }
+    img {
+      width: 20px;
+      display: block;
+      margin-right: 0.125rem;
+      margin-bottom: 0;
+    }
+    span {
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: #333;
+    }
+  }
+}
 .bar__module.smallll {
     position: relative;
-    bottom: 1.5rem;
+    bottom: 1.35rem;
     .menu-horizontal.text-left {
     li.dropdown {
       &.primary{
