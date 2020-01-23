@@ -12,7 +12,8 @@ export class Header extends Component {
             user: false,
             showSearch: false,
             showQuizbtn: true,
-            q: ''
+            q: '',
+            initSearch: false
         }
     }
     componentDidMount() {
@@ -35,6 +36,11 @@ export class Header extends Component {
         this.setState({
             [key]: value
         })
+        let splitted = this.state.q;
+        let qrr = splitted.split('');
+        if(qrr.length > 1) {
+            this.search();
+        }
     };
 
     toggleSearch = () => {
@@ -43,9 +49,11 @@ export class Header extends Component {
         })
     }
 
-    search = (e) => {
-        e.preventDefault();
-        globals.createToast('Please wait', 2500, 'top');
+    search = () => {
+        globals.createToast('Please wait', 1500, 'bottom-right');
+        this.setState({
+            initSearch: true
+        })
         this.props.parableSearch(this.state.q);
     }
 
@@ -69,8 +77,19 @@ export class Header extends Component {
         if (this.props.qResult[0]) {
             this.props.qResult[0].forEach((q, i) => {
                 results.push(
-                    <li className="item" onClick={this.toggleSearch}>
-                        <Link to={`/parable-details/${q._id}`}>{globals.trimSearch(q.translation)}</Link>
+                    // <li className="item" key={i} onClick={this.toggleSearch}>
+                    //     <Link to={`/parable-details/${q._id}`} dangerouslySetInnerHTML={{ __html: globals.trimSearch(q.translation) }}></Link>
+                    // </li>
+                    <li className="item" key={i} onClick={this.toggleSearch}>
+                        <Link to={`/parable-details/${q._id}`} className="search-result">
+                            <div className="img">
+                                <img src={q.file.Location} alt="X" />
+                            </div>
+                            <div className="details">
+                                <div className="parable">{q.title}</div>
+                                <div className="translate" dangerouslySetInnerHTML={{ __html: globals.trimSearch(q.translation) }}></div>
+                            </div>
+                        </Link>
                     </li>
                 )
             })
@@ -79,9 +98,9 @@ export class Header extends Component {
             <>
                 <section className="bar bar-3 bar--sm bg--secondary">
                     <div className={this.state.showSearch ? "search-cover slide-in" : 'hide'}>
-                        <form onSubmit={this.search}>
+                        <form>
                             <input type="text" name="search" placeholder="Enter search query and hit enter"
-                                onChange={e => this.handleChange("q", e.target.value)} />
+                                onKeyUp={e => this.handleChange("q", e.target.value)} />
                         </form>
                         <div className="close" onClick={this.toggleSearch}>
                             <img src={require('../../assets/images/delete-close.svg')} alt="X" />
@@ -93,10 +112,18 @@ export class Header extends Component {
                                 results
                                 :
                                 ''
-                                // <li className="item">
-                                //     <Link to={``}>No search result...</Link>
-                                // </li>
                             }
+                            {/* <li className="item">
+                                <Link to={`/parable-details/`} className="search-result">
+                                    <div className="img">
+                                        <img src={require('../../assets/images/delete-close.svg')} alt="X" />
+                                    </div>
+                                    <div className="details">
+                                        <div className="parable">This is the height of the fall of the decadent of evil</div>
+                                        <div className="translate">To ba wun ee, koo lo si lile baba taju, to ba wun ee, koo ma lo, iwo lo mo.</div>
+                                    </div>
+                                </Link>
+                            </li> */}
                         </ul>
                     </div>
                     <div className="container">

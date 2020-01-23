@@ -561,11 +561,11 @@ button.submit-quiz {
     width: 40%;
     margin: auto;
     @media(max-width: 991px) {
-      width: 70%;
+      width: 100%;
     }
     text-align: center;
     .item {
-      padding: 1rem 0;
+      padding: 0.5rem 0;
       display: block;
       background-color: #FFFFFF;
       box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.05);
@@ -576,6 +576,28 @@ button.submit-quiz {
       }
       a {
         color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: flex-start;
+        padding: 0.5rem;
+        img {
+          width: 50px;
+          height: 50px;
+        }
+        .details {
+          margin-left: 1.5rem;
+          text-align: left;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          .translate {
+            color: rgba(0, 0, 0, 0.5);
+            font-size: 0.935rem;
+          }
+          .parable {
+            color: #000;
+            margin-bottom: 0.25rem;
+          }
+        }
       }
     }
   }

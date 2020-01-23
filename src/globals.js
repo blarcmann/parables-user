@@ -23,10 +23,10 @@ const globals = {
         return `${substr}...`
     },
     trimSearch: function(str) {
-        if(typeof str !== 'string' && str.length > 55) {
+        if(typeof str !== 'string' && str.length > 75) {
             return;
         }
-        let substr = str.substring(0, 55)
+        let substr = str.substring(0, 75)
         return `${substr} ...`
     },
     getFirstChar: function(string) {

@@ -59,6 +59,9 @@ export function parableSearch(q) {
                     return console.log(response, 'not successful');
                 }
                 const searchResults = response.data.data;
+                if(!searchResults.length) {
+                    globals.createToast('Nothing was found', 2000, 'top');
+                }
                 console.log('retrieved parable searched', searchResults);
                 dispatch(qParable(searchResults));
             })
