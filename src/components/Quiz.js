@@ -43,6 +43,7 @@ export class Quiz extends Component {
             answer4: '',
             score: 0,
             startQuiz: true,
+            submitted: false
         }
     }
 
@@ -235,7 +236,10 @@ export class Quiz extends Component {
     }
 
     setAnswer = (answer) => {
-        console.log('activeIndex', this.state.activeIndex)
+        if(this.state.submitted === true) {
+            return;
+        }
+        console.log('activeIndex', this.state.activeIndex);
         if (this.state.activeIndex === 0) {
             let answers = this.state.answers;
             answers[0] = true;
@@ -244,7 +248,7 @@ export class Quiz extends Component {
                 answers: answers
             })
             this.checkAll(this.state.answers);
-            this.activateIndex(1);
+            // this.activateIndex(1);
         }
         if (this.state.activeIndex === 1) {
             let answers = this.state.answers;
@@ -254,7 +258,7 @@ export class Quiz extends Component {
                 answers: answers
             })
             this.checkAll(this.state.answers);
-            this.activateIndex(2);
+            // this.activateIndex(2);
         }
         if (this.state.activeIndex === 2) {
             let answers = this.state.answers;
@@ -264,7 +268,7 @@ export class Quiz extends Component {
                 answers: answers
             })
             this.checkAll(this.state.answers);
-            this.activateIndex(3);
+            // this.activateIndex(3);
         }
         if (this.state.activeIndex === 3) {
             let answers = this.state.answers;
@@ -274,7 +278,7 @@ export class Quiz extends Component {
                 answers: answers
             })
             this.checkAll(this.state.answers);
-            this.activateIndex(4);
+            // this.activateIndex(4);
         }
         if (this.state.activeIndex === 4) {
             let answers = this.state.answers;
@@ -327,7 +331,10 @@ export class Quiz extends Component {
             username: this.state.userDetails.name,
             _id: localStorage.getItem('quizId')
         }
-        this.props.finishQuiz(payload)
+        this.props.finishQuiz(payload);
+        this.setState({
+            submitted: true
+        })
     }
 
     resetState = () => {
@@ -352,41 +359,31 @@ export class Quiz extends Component {
                                     <div className={this.randomizeQ[0] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.q0.image} alt={this.state.q0.image} />
                                     </div>
-                                    <div className={this.randomizeQ[0] === 0 ? "quiz-text slide-in" : 'hide'}>
-                                        {this.state.q0.translation}
-                                    </div>
+                                    <div className={this.randomizeQ[0] === 0 ? "quiz-text slide-in" : 'hide'} dangerouslySetInnerHTML={{__html: this.state.q0.translation}}></div>
                                 </div>
                                 <div className={this.state.activeIndex === 1 ? "col-lg-8" : 'hide'}>
                                     <div className={this.randomizeQ[1] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.q1.image} alt={this.state.q1.image} />
                                     </div>
-                                    <div className={this.randomizeQ[1] === 0 ? "quiz-text slide-in" : 'hide'}>
-                                        {this.state.q1.translation}
-                                    </div>
+                                    <div className={this.randomizeQ[1] === 0 ? "quiz-text slide-in" : 'hide'} dangerouslySetInnerHTML={{__html: this.state.q1.translation}}></div>
                                 </div>
                                 <div className={this.state.activeIndex === 2 ? "col-lg-8" : 'hide'}>
                                     <div className={this.randomizeQ[2] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.q2.image} alt={this.state.q2.image} />
                                     </div>
-                                    <div className={this.randomizeQ[2] === 0 ? "quiz-text slide-in" : 'hide'}>
-                                        {this.state.q2.translation}
-                                    </div>
+                                    <div className={this.randomizeQ[2] === 0 ? "quiz-text slide-in" : 'hide'} dangerouslySetInnerHTML={{__html: this.state.q2.translation}}></div>
                                 </div>
                                 <div className={this.state.activeIndex === 3 ? "col-lg-8" : 'hide'}>
                                     <div className={this.randomizeQ[3] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.q3.image} alt={this.state.q3.image} />
                                     </div>
-                                    <div className={this.randomizeQ[3] === 0 ? "quiz-text slide-in" : 'hide'}>
-                                        {this.state.q3.translation}
-                                    </div>
+                                    <div className={this.randomizeQ[3] === 0 ? "quiz-text slide-in" : 'hide'} dangerouslySetInnerHTML={{__html: this.state.q3.translation}}></div>
                                 </div>
                                 <div className={this.state.activeIndex === 4 ? "col-lg-8" : 'hide'}>
                                     <div className={this.randomizeQ[4] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.q4.image} alt={this.state.q4.image} />
                                     </div>
-                                    <div className={this.randomizeQ[4] === 0 ? "quiz-text slide-in" : 'hide'}>
-                                        {this.state.q4.translation}
-                                    </div>
+                                    <div className={this.randomizeQ[4] === 0 ? "quiz-text slide-in" : 'hide'} dangerouslySetInnerHTML={{__html: this.state.q4.translation}}></div>
                                 </div>
                                 <div className="col-lg-4">
                                     <div className={this.state.activeIndex === 0 ? "quiz-options slide-in" : 'hide'}>
@@ -410,6 +407,11 @@ export class Quiz extends Component {
                                             <div className="tag">E</div>
                                             <div className="detail">{this.state.activeOptions[4]}</div>
                                         </div>
+                                        <div className={this.state.submitted ===  true ? "each answer" : 'hide'}>
+                                            <div className="tag">*</div>
+                                            <div className="detail">{this.state.q0.title}</div>
+                                        </div>
+
                                     </div>
                                     <div className={this.state.activeIndex === 1 ? "quiz-options slide-in" : 'hide'}>
                                         <div className={this.state.answer1 === this.state.option1[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option1[0])}>
@@ -431,6 +433,10 @@ export class Quiz extends Component {
                                         <div className={this.state.answer1 === this.state.option1[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option1[4])}>
                                             <div className="tag">E</div>
                                             <div className="detail">{this.state.activeOptions[4]}</div>
+                                        </div>
+                                        <div className={this.state.submitted ===  true ? "each answer" : 'hide'}>
+                                            <div className="tag">*</div>
+                                            <div className="detail">{this.state.q1.title}</div>
                                         </div>
                                     </div>
                                     <div className={this.state.activeIndex === 2 ? "quiz-options slide-in" : 'hide'}>
@@ -454,6 +460,10 @@ export class Quiz extends Component {
                                             <div className="tag">E</div>
                                             <div className="detail">{this.state.activeOptions[4]}</div>
                                         </div>
+                                        <div className={this.state.submitted ===  true ? "each answer" : 'hide'}>
+                                            <div className="tag">*</div>
+                                            <div className="detail">{this.state.q2.title}</div>
+                                        </div>
                                     </div>
                                     <div className={this.state.activeIndex === 3 ? "quiz-options slide-in" : 'hide'}>
                                         <div className={this.state.answer3 === this.state.option3[0] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option3[0])}>
@@ -475,6 +485,10 @@ export class Quiz extends Component {
                                         <div className={this.state.answer3 === this.state.option3[4] ? "each selected" : 'each'} onClick={() => this.setAnswer(this.state.option3[4])}>
                                             <div className="tag">E</div>
                                             <div className="detail">{this.state.activeOptions[4]}</div>
+                                        </div>
+                                        <div className={this.state.submitted ===  true ? "each answer" : 'hide'}>
+                                            <div className="tag">*</div>
+                                            <div className="detail">{this.state.q3.title}</div>
                                         </div>
                                     </div>
                                     <div className={this.state.activeIndex === 4 ? "quiz-options slide-in" : 'hide'}>
@@ -498,6 +512,10 @@ export class Quiz extends Component {
                                             <div className="tag">E</div>
                                             <div className="detail">{this.state.activeOptions[4]}</div>
                                         </div>
+                                        <div className={this.state.submitted ===  true ? "each answer" : 'hide'}>
+                                            <div className="tag">*</div>
+                                            <div className="detail">{this.state.q4.title}</div>
+                                        </div>
                                     </div>
                                     {
                                         this.state.option0 && !this.state.activeOptions[0] ?
@@ -519,7 +537,7 @@ export class Quiz extends Component {
                                             <span className={this.state.answers[4] === true ? "tag dirty" : "tag"} onClick={() => this.activateIndex(4)}>5</span>
                                         </div>
                                         <div className={this.state.showSubmit ? "submit slide-in" : 'hide'}>
-                                            <button className="submit-quiz" onClick={this.completeQuiz}>Finish quiz</button>
+                                            <button className={this.state.submitted === false ? "submit-quiz" : 'hide'} onClick={this.completeQuiz}>Finish quiz</button>
                                         </div>
                                     </div>
                                 </div>
@@ -550,6 +568,7 @@ export class Quiz extends Component {
                                 {/* </Link> */}
                             </button>
                         </div>
+                        <div className="mt-4 text-center see-answers" onClick={this.dismissAll}>See answers</div>
                     </div>
                 </div>
             </>

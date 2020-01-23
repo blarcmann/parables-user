@@ -43,7 +43,8 @@ export function login(props, payload) {
                     return globals.createToast('This account has been suspended.', 2500, 'top');
                 }
                 if (res.data.verified === false) {
-                    return globals.createToast('This account is not yet verified.', 2500, 'top');
+                    globals.createToast('An email has been sent to you to verify your account.', 2500, 'top');
+                    return props.history.push("/activate-account");
                 }
                 localStorage.setItem('userId', res.data.user_id);
                 localStorage.setItem('userToken', res.data.user_token);
@@ -89,7 +90,7 @@ export function resendToken(payload) {
                     return console.log(response, 'not successful');
                 }
                 let res = response;
-                if(res.data.status === true) {
+                if (res.data.status === true) {
                     const msg = 'Token has been resent to your email';
                     globals.createToast(msg, 2500, 'bottom-right');
                 } else {
