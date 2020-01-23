@@ -12,11 +12,12 @@ export function register(props, payload) {
                     return console.log(response, 'not successful');
                 }
                 const user = response.data;
+                localStorage.setItem('userEmail', user.email);
                 console.log(user);
-                // const msg = 'Account successfully created!';
-                // globals.createToast(msg, 2500, 'bottom-right');
+                const msg = 'Activation code has been sent to your email!';
+                globals.createToast(msg, 2500, 'bottom-right');
                 dispatch(accountCreated(user));
-                props.history.push("/login");
+                props.history.push("/activate-account");
             })
             .catch(error => {
                 const msg = error.data.msg || 'Some error occured, please try later!';
@@ -37,13 +38,65 @@ export function login(props, payload) {
                     return console.log(response, 'not successful');
                 }
                 let res = response.data;
+                localStorage.setItem('userEmail', res.email);
                 if (res.data.status === false) {
                     return globals.createToast('This account has been suspended.', 2500, 'top');
+                }
+                if (res.data.verified === false) {
+                    return globals.createToast('This account is not yet verified.', 2500, 'top');
                 }
                 localStorage.setItem('userId', res.data.user_id);
                 localStorage.setItem('userToken', res.data.user_token);
                 dispatch(loginUser(res.data));
                 props.history.push("/");
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
+export function activateAccount(props, payload) {
+    return dispatch => {
+        axios.put(`${globals.base_url}/user/activate/token`, payload)
+            .then(response => {
+                if (response.data.status === false) {
+                    const msg = response.data.msg || 'Failed, please retry.';
+                    globals.createToast(msg, 2500, 'bottom-right');
+                    return console.log(response, 'not successful');
+                }
+                let res = response;
+                console.log(res);
+                props.history.push("/login");
+            })
+            .catch(error => {
+                const msg = 'Invalid Activation code.';
+                globals.createToast(msg, 2500, 'bottom-right');
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
+export function resendToken(payload) {
+    return dispatch => {
+        axios.put(`${globals.base_url}/user/resend/token`, payload)
+            .then(response => {
+                if (response.data.status === false) {
+                    const msg = response.data.msg || 'Failed, please retry.';
+                    globals.createToast(msg, 2500, 'bottom-right');
+                    return console.log(response, 'not successful');
+                }
+                let res = response;
+                if(res.data.status === true) {
+                    const msg = 'Token has been resent to your email';
+                    globals.createToast(msg, 2500, 'bottom-right');
+                } else {
+                    const msg = 'Failed, please retry.';
+                    globals.createToast(msg, 1500, 'bottom-right');
+                }
+                console.log(res);
             })
             .catch(error => {
                 console.log('catch error register', error);

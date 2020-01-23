@@ -21,8 +21,11 @@ export class Login extends Component {
     };
 
     submitForm = (e) => {
-        globals.createToast('Please wait', 1200, 'bottom-right');
         e.preventDefault();
+        if(this.state.password === '' || this.state.email === '') {
+            return globals.createToast('All fields are compulsory', 3000, 'top');
+        }
+        globals.createToast('Please wait', 1200, 'bottom-right');
         let payload = {
             email: this.state.email,
             password: this.state.password,
@@ -60,8 +63,9 @@ export class Login extends Component {
                                         </div>
                                     </div>
                                 </form>
-                                <div className="auth-meta mt-4">Don't have an account yet? <Link to="/register">Create an account</Link></div>
+                                <div className="auth-meta mt-4">Account not verified? <Link to="/activate-account">Verify account</Link></div>
                                 <div className="auth-meta">Forgotten your password? <Link to="/forgot-password-init">Recover account</Link></div>
+                                <div className="auth-meta">Don't have an account yet? <Link to="/register">Create an account</Link></div>
                             </div>
                         </div>
                     </div>

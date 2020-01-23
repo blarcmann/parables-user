@@ -22,6 +22,13 @@ const globals = {
         let substr = str.substring(0, 136)
         return `${substr}...`
     },
+    trimSearch: function(str) {
+        if(typeof str !== 'string' && str.length > 55) {
+            return;
+        }
+        let substr = str.substring(0, 55)
+        return `${substr} ...`
+    },
     getFirstChar: function(string) {
         if(string && string.length) {
             return string.charAt(0).toUpperCase();

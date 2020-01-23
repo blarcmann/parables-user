@@ -16,10 +16,10 @@ export class Header extends Component {
         }
     }
     componentDidMount() {
-        if(this.props.location.pathname === '/quiz') {
-           this.setState({
-            showQuizbtn: false
-           })
+        if (this.props.location.pathname === '/quiz') {
+            this.setState({
+                showQuizbtn: false
+            })
         }
         const userId = localStorage.getItem('userId');
         console.log(userId, 'userID');
@@ -47,12 +47,6 @@ export class Header extends Component {
         e.preventDefault();
         globals.createToast('Please wait', 2500, 'top');
         this.props.parableSearch(this.state.q);
-        setTimeout(() => {
-            this.setState({
-                showSearch: false
-            })
-            this.props.history.push('/search');
-        }, 2000);
     }
 
     startQuiz = () => {
@@ -71,6 +65,16 @@ export class Header extends Component {
     }
 
     render() {
+        let results = [];
+        if (this.props.qResult[0]) {
+            this.props.qResult[0].forEach((q, i) => {
+                results.push(
+                    <li className="item" onClick={this.toggleSearch}>
+                        <Link to={`/parable-details/${q._id}`}>{globals.trimSearch(q.translation)}</Link>
+                    </li>
+                )
+            })
+        }
         return (
             <>
                 <section className="bar bar-3 bar--sm bg--secondary">
@@ -82,6 +86,18 @@ export class Header extends Component {
                         <div className="close" onClick={this.toggleSearch}>
                             <img src={require('../../assets/images/delete-close.svg')} alt="X" />
                         </div>
+                    </div>
+                    <div className={this.state.showSearch ? "search-results slide-in" : 'hide'}>
+                        <ul className="list-container">
+                            {this.props.qResult[0] ?
+                                results
+                                :
+                                ''
+                                // <li className="item">
+                                //     <Link to={``}>No search result...</Link>
+                                // </li>
+                            }
+                        </ul>
                     </div>
                     <div className="container">
                         <div className="row">
@@ -153,7 +169,7 @@ export class Header extends Component {
                                     <div className="bar__module smallll">
                                         <ul className="menu-horizontal text-left">
                                             <li className="dropdown">
-                                                <Link to="/">About</Link>
+                                                <Link to="/about">About</Link>
                                             </li>
                                             <li className={this.state.showQuizbtn ? "dropdown primary" : 'visibility-none'} onClick={this.startQuiz}>Start Quiz
                                                 {/* <Link to="/quiz">Start Quiz</Link> */}
@@ -172,6 +188,7 @@ export class Header extends Component {
 
 const mapStateToProps = (state) => ({
     userDetails: state.auth.userDetails,
+    qResult: state.parables.qResult,
     user: state.auth.user
 })
 

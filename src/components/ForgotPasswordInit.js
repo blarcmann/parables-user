@@ -20,8 +20,11 @@ export class ForgotPasswordInit extends Component {
     };
 
     submitForm = (e) => {
-        globals.createToast('Please wait', 1200, 'bottom-right');
         e.preventDefault();
+        if(this.state.email === '') {
+            return global.createToast('Enter email', 3000, 'top');
+        }
+        globals.createToast('Please wait', 1200, 'bottom-right');
         localStorage.setItem('tokenEmail', this.state.email);
         let payload = {
             email: this.state.email

@@ -24,11 +24,11 @@ export class Register extends Component {
     };
 
     submitForm = (e) => {
-        globals.createToast('Please wait', 1200, 'bottom-right');
         e.preventDefault();
         if(this.state.name === '' || this.state.tel === '' || this.state.gender === '' || this.state.password === '' || this.state.email === '') {
-            global.createToast('All fields are compulsory', 3000, 'top');
+            return globals.createToast('All fields are compulsory', 3000, 'top');
         }
+        globals.createToast('Please wait', 1200, 'bottom-right');
         let payload = {
             name: this.state.name,
             email: this.state.email,

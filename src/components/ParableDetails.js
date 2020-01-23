@@ -4,6 +4,7 @@ import Header from './layouts/Header';
 import globals from '../globals';
 import Footer from './layouts/Footer';
 import { fetchParable } from '../actions/parables';
+import { parableSearch } from '../actions/parables';
 
 export class ParableDetails extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ export class ParableDetails extends Component {
     componentDidMount() {
         const parableId = this.props.match.params.id;
         this.props.fetchParable(parableId);
+        this.props.parableSearch();
     }
 
     dismissAll = () => {
@@ -79,8 +81,8 @@ export class ParableDetails extends Component {
                                     <div className="col-md-12 text-center">
                                         <div className="audio-option">
                                             <div className="modal-instance">
-                                                <button className={this.props.parable.sound ? "btn type--uppercase modal-trigger mb-0" : 'hide'} onClick={this.listenToAudio}>
-                                                    &#9654; Listen now</button>
+                                                {/* <button className={this.props.parable.sound ? "btn type--uppercase modal-trigger mb-0" : 'hide'} onClick={this.listenToAudio}>
+                                                    &#9654; Listen now</button> */}
                                                 <button className={this.props.parable.youtube ? "ml-3 btn type--uppercase modal-trigger" : 'hide'} onClick={this.watchVideo}>
                                                     &#9654; Watch video
                                                 </button>
@@ -125,4 +127,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, { fetchParable })(ParableDetails)
+export default connect(mapStateToProps, { fetchParable, parableSearch })(ParableDetails)

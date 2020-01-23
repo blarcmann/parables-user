@@ -22,9 +22,12 @@ export class ForgotPasswordComplete extends Component {
     };
 
     submitForm = (e) => {
+        e.preventDefault();
+        if (this.state.code === '' || this.state.confirm_password === '' || this.state.password === '') {
+            return globals.createToast('All fields are compulsory', 3000, 'top');
+        }
         globals.createToast('Please wait', 1200, 'bottom-right');
         let email = localStorage.getItem('tokenEmail');
-        e.preventDefault();
         let payload = {
             email: email,
             password: this.state.password,
@@ -74,4 +77,4 @@ export class ForgotPasswordComplete extends Component {
     }
 }
 
-export default connect(null, {forgotPasswordFinish})(ForgotPasswordComplete)
+export default connect(null, { forgotPasswordFinish })(ForgotPasswordComplete)
