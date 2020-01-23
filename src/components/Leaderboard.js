@@ -47,7 +47,7 @@ export class Leaderboard extends Component {
                 {this.state.show ?
                     <>
                         <section className="table-toppings">
-                            <div className="table-title">This week's leaderboard score</div>
+                            <div className="ml-3 table-title">This week's leaderboard score</div>
                             <div className="tbl-header">
                                 <table cellPadding="0" cellSpacing="0" border="0">
                                     <thead>
