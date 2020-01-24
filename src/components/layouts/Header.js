@@ -212,7 +212,7 @@ export class Header extends Component {
                                             <li className={this.state.user ? "hide" : 'dropdown'}>
                                                 <Link to="/register">Register</Link>
                                             </li>
-                                            <li className="dropdown">
+                                            <li className={this.state.user ? "dropdown" : 'hide'}>
                                                 <Link to="/leaderboard">Leaderboard</Link>
                                             </li>
                                             <li className="dropdown">
