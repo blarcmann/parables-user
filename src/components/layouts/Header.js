@@ -15,7 +15,8 @@ export class Header extends Component {
             q: '',
             resultts: true,
             initSearch: false,
-            showMenu: false
+            showMenu: false,
+            loading: false
         }
     }
     componentDidMount() {
@@ -42,6 +43,9 @@ export class Header extends Component {
         let qrr = splitted.split('');
         if (qrr.length > 1) {
             this.search();
+            this.setState({
+                loading: true
+            })
         }
     };
 
@@ -58,9 +62,12 @@ export class Header extends Component {
     }
 
     search = () => {
-        globals.createToast('Please wait', 1500, 'bottom-right');
+        // globals.createToast('Please wait', 1500, 'bottom-right');
         this.setState({
             initSearch: true
+        })
+        this.setState({
+            loading: false
         })
         this.props.parableSearch(this.state.q);
     }
@@ -116,6 +123,9 @@ export class Header extends Component {
         }
         return (
             <>
+                <div className='data-loading'>
+                    <img src={require("../../assets/images/spinner.svg")} className={this.state.loading && !this.props.qResult[0] ? 'loader-img' : 'hide'} alt="+" />
+                </div>
                 <section className="bar bar-3 bar--sm bg--secondary">
                     <div className={this.state.resultts ? "search-results slide-in" : "hide"}>
                         <ul className="list-container">

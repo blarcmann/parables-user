@@ -855,3 +855,15 @@ img.menu-mobile {
     }
   }
 }
+
+.data-loading {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  z-index: 99999;
+  .loader-img {
+    display: block;
+    width: 120px;
+    height: 120px;
+  }
+}
