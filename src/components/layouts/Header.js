@@ -39,14 +39,10 @@ export class Header extends Component {
         this.setState({
             [key]: value
         })
-        let splitted = this.state.q;
-        let qrr = splitted.split('');
-        if (qrr.length > 1) {
-            this.search();
-            this.setState({
-                loading: true
-            })
-        }
+        this.setState({
+            loading: true
+        })
+        this.search();
     };
 
     toggleSearch = () => {

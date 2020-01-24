@@ -563,6 +563,9 @@ button.submit-quiz {
   z-index: 99;
   background-color: #FFFFFF;
   display: flex;
+  @media(max-width: 767px) {
+    top: 7rem;
+  }
   .imgg {
     padding: 2rem 1.5rem;
     img {
@@ -861,6 +864,10 @@ img.menu-mobile {
   top: 35%;
   left: 50%;
   z-index: 99999;
+  @media(max-width: 767px) {
+    left: 30%;
+    top: 46%;
+  }
   .loader-img {
     display: block;
     width: 120px;
