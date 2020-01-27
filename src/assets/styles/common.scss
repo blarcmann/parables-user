@@ -151,6 +151,16 @@ input, button, button:active, button:focus {
   &:hover {
     cursor: pointer;
   }
+  &.ads {
+    width: 80%;
+    img {
+      width: auto;
+      height: auto;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
   @media(max-width: 991px) {
     margin: 2rem auto;
     max-height: 200px;
@@ -872,5 +882,21 @@ img.menu-mobile {
     display: block;
     width: 120px;
     height: 120px;
+  }
+}
+
+.tagline {
+  text-align: center;
+  font-weight: 300;
+  border: 1px solid #888;
+  padding: 2rem;
+  font-size: 2rem;
+  color: #555;
+  // text-transform: uppercase;
+  @media(min-width: 992px) {
+    font-size: 4rem;
+  }
+  span {
+    color: #333;
   }
 }

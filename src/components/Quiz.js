@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { fetchQuizData, fetchQuizOptions, finishQuiz } from '../actions/quiz';
 import globals from '../globals';
 import axios from 'axios';
+import { fetchRandomAdvert, clickAdvert } from '../actions/adverts';
 
 export class Quiz extends Component {
     quizz = {};
@@ -61,6 +62,7 @@ export class Quiz extends Component {
             })
         }
         let userId = localStorage.getItem('userId');
+        this.props.fetchRandomAdvert();
         this.fetchQuizData(userId);
         this.activateIndex(0);
         for (let i = 0; i < 5; i++) {
@@ -294,7 +296,7 @@ export class Quiz extends Component {
     }
 
     next = () => {
-        if(this.state.activeIndex === 4) {
+        if (this.state.activeIndex === 4) {
             return;
         } else {
             this.activateIndex(this.state.activeIndex + 1);
@@ -302,7 +304,7 @@ export class Quiz extends Component {
     }
 
     prev = () => {
-        if(this.state.activeIndex === 0) {
+        if (this.state.activeIndex === 0) {
             return;
         } else {
             this.activateIndex(this.state.activeIndex - 1);
@@ -364,6 +366,9 @@ export class Quiz extends Component {
 
 
     render() {
+        if (this.props.advert && this.props.advert.image && this.props.advert.image.Location) {
+            this.adImgUrl = this.props.advert.image.Location
+        }
         return (
             <>
                 <Header />
@@ -548,11 +553,11 @@ export class Quiz extends Component {
                                     }
                                     <div className="prev-next mb-4">
                                         <div className="action" onClick={this.prev}>
-                                            <img src={require('../assets/images/prev.svg')} alt="X"/>
+                                            <img src={require('../assets/images/prev.svg')} alt="X" />
                                             <span>Prev</span>
                                         </div>
                                         <div className="action" onClick={this.next}>
-                                            <img src={require('../assets/images/next.svg')} alt="X"/>
+                                            <img src={require('../assets/images/next.svg')} alt="X" />
                                             <span>Next</span>
                                         </div>
                                     </div>
@@ -576,6 +581,22 @@ export class Quiz extends Component {
                     :
                     <div className="search-null"></div>
                 }
+                <section>
+                    <div className="col-lg-12 col-sm-12 pt-5" onClick={this.clickAdvert}>
+                        {this.props.advert ?
+                            <a href={this.props.advert.link} target="_blank" rel="noopener noreferrer">
+                                <div className="ads-img ads">
+                                    <figure className={this.adImgUrl ? "img-cover" : 'hide'}>
+                                        <img alt="alter" src={this.adImgUrl} />
+                                        <figcaption>{this.props.advert.title}</figcaption>
+                                    </figure>
+                                </div>
+                            </a> :
+                            <div></div>
+                        }
+
+                    </div>
+                </section>
                 <Footer />
                 <div className={this.state.showScore ? "s4me-modal" : "hide"}>
                     <div className="s4me-modal-body">
@@ -628,7 +649,8 @@ const mapStateToProps = (state) => ({
     option2: state.quiz.option2,
     option3: state.quiz.option3,
     option4: state.quiz.option4,
+    advert: state.adverts.advert
 })
 
 
-export default connect(mapStateToProps, { fetchQuizData, fetchQuizOptions, finishQuiz })(Quiz)
+export default connect(mapStateToProps, { fetchQuizData, fetchQuizOptions, finishQuiz, fetchRandomAdvert, clickAdvert })(Quiz)

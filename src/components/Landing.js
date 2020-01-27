@@ -25,7 +25,7 @@ export class Landing extends Component {
 
     componentDidMount() {
         this.props.fetchRandomParable();
-        this.props.fetchRandomAdvert()
+        this.props.fetchRandomAdvert();
     }
 
     clickAdvert = () => {
@@ -106,7 +106,7 @@ export class Landing extends Component {
                                     <div className="col-md-12 text-center">
                                         <div className="audio-option">
                                             <div className="modal-instance">
-                                                <button className={ this.props.randomPara.sound ? "btn type--uppercase modal-trigger mb-0" : 'hide'} onClick={this.listenToAudio}>
+                                                <button className={this.props.randomPara.sound ? "btn type--uppercase modal-trigger mb-0" : 'hide'} onClick={this.listenToAudio}>
                                                     &#9654; {this.state.audioText}
                                                 </button>
                                                 <button className={this.props.randomPara.youtube ? "ml-3 btn type--uppercase modal-trigger" : 'hide'} onClick={this.watchVideo}>
@@ -114,45 +114,56 @@ export class Landing extends Component {
                                                 </button>
                                             </div>
                                         </div>
-                                        {this.props.randomPara.sound && this.props.randomPara.sound.Location ? 
-                                        <div className={this.state.showAudio ? 'slide-in' : 'hide'}>
-                                            <audio controls>
-                                                <source src={this.props.randomPara.sound.Location} type="audio/ogg" />
-                                                <source src={this.props.randomPara.sound.Location} type="audio/mpeg" />
-                                                Your browser does not support the audio element.
+                                        {this.props.randomPara.sound && this.props.randomPara.sound.Location ?
+                                            <div className={this.state.showAudio ? 'slide-in' : 'hide'}>
+                                                <audio controls>
+                                                    <source src={this.props.randomPara.sound.Location} type="audio/ogg" />
+                                                    <source src={this.props.randomPara.sound.Location} type="audio/mpeg" />
+                                                    Your browser does not support the audio element.
                                             </audio>
-                                        </div> :
-                                        ''}
+                                            </div> :
+                                            ''}
                                     </div>
                                 </div>
                             </div>
                         </section> :
                         <div></div>
                     }
-                    <section className="height-80">
+                    <section className="height-60">
                         <div className="container pos-vertical-center">
                             <div className="row justify-content-around">
-                                <div className="col-lg-8 col-sm-12 mb-5">
+                                <div className="col-lg-12 col-sm-12 mb-5">
                                     <div className="switchable__text dark">
                                         <h3>Translation</h3>
-                                        <p className="translation"><q dangerouslySetInnerHTML={{__html: this.props.randomPara.translation}}></q></p>
+                                        <p className="translation"><q dangerouslySetInnerHTML={{ __html: this.props.randomPara.translation }}></q></p>
                                     </div>
                                 </div>
-                                <div className="col-lg-4 col-sm-12 pt-5" onClick={this.clickAdvert}>
-                                    {this.props.advert ?
-                                        <a href={this.props.advert.link} target="_blank" rel="noopener noreferrer">
-                                            <div className="ads-img">
-                                                <figure className={this.adImgUrl ? "img-cover" : 'hide'}>
-                                                    <img alt="alter" src={this.adImgUrl} />
-                                                    <figcaption>{this.props.advert.title}</figcaption>
-                                                </figure>
-                                            </div>
-                                        </a> :
-                                        <div></div>
-                                    }
-
+                            </div>
+                        </div>
+                    </section>
+                    <section className="height-40">
+                        <div className="container pos-vertical-center">
+                            <div className="row justify-content-around">
+                                <div className="col-lg-12 col-sm-12 mb-5">
+                                    <h1 className="tagline"><span>Play quiz.</span> win money and prices</h1>
                                 </div>
                             </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div className="col-lg-12 col-sm-12 pt-5" onClick={this.clickAdvert}>
+                            {this.props.advert ?
+                                <a href={this.props.advert.link} target="_blank" rel="noopener noreferrer">
+                                    <div className="ads-img ads">
+                                        <figure className={this.adImgUrl ? "img-cover" : 'hide'}>
+                                            <img alt="alter" src={this.adImgUrl} />
+                                            <figcaption>{this.props.advert.title}</figcaption>
+                                        </figure>
+                                    </div>
+                                </a> :
+                                <div></div>
+                            }
+
                         </div>
                     </section>
                     <section className="text-center bg--secondary">

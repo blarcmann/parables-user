@@ -5,6 +5,7 @@ import globals from '../globals';
 import Footer from './layouts/Footer';
 import { fetchParable } from '../actions/parables';
 import { parableSearch } from '../actions/parables';
+import { fetchRandomAdvert, clickAdvert } from '../actions/adverts';
 
 export class ParableDetails extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ export class ParableDetails extends Component {
         const parableId = this.props.match.params.id;
         this.props.fetchParable(parableId);
         this.props.parableSearch();
+        this.props.fetchRandomAdvert()
     }
 
     dismissAll = () => {
@@ -51,6 +53,9 @@ export class ParableDetails extends Component {
         if (this.props.parable && this.props.parable.youtube) {
             this.showVideo = true;
         }
+        if (this.props.advert && this.props.advert.image && this.props.advert.image.Location) {
+            this.adImgUrl = this.props.advert.image.Location
+        }
         return (
             <>
                 <Header />
@@ -69,7 +74,7 @@ export class ParableDetails extends Component {
                                     <div className="col-md-6 col-lg-5">
                                         <div className="switchable__text">
                                             <q className={this.props.parable ? 'parable' : 'hide'}>{this.props.parable.title}</q>
-                                            <q className={this.props.parable ? 'translation mt-3' : 'hide'} dangerouslySetInnerHTML={{__html: this.props.parable.translation}}></q>
+                                            <q className={this.props.parable ? 'translation mt-3' : 'hide'} dangerouslySetInnerHTML={{ __html: this.props.parable.translation }}></q>
                                         </div>
                                     </div>
                                 </div>
@@ -104,6 +109,22 @@ export class ParableDetails extends Component {
                     </> :
                     <div className="search-null">Please wait...</div>
                 }
+                <section>
+                    <div className="col-lg-12 col-sm-12 pt-5" onClick={this.clickAdvert}>
+                        {this.props.advert ?
+                            <a href={this.props.advert.link} target="_blank" rel="noopener noreferrer">
+                                <div className="ads-img ads">
+                                    <figure className={this.adImgUrl ? "img-cover" : 'hide'}>
+                                        <img alt="alter" src={this.adImgUrl} />
+                                        <figcaption>{this.props.advert.title}</figcaption>
+                                    </figure>
+                                </div>
+                            </a> :
+                            <div></div>
+                        }
+
+                    </div>
+                </section>
                 <Footer />
                 <div className={this.state.showVideo ? "s4me-modal" : "hide"}>
                     <div className="s4me-modal-body large p-0">
@@ -123,8 +144,9 @@ export class ParableDetails extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    parable: state.parables.parable
+    parable: state.parables.parable,
+    advert: state.adverts.advert
 })
 
 
-export default connect(mapStateToProps, { fetchParable, parableSearch })(ParableDetails)
+export default connect(mapStateToProps, { fetchParable, parableSearch, fetchRandomAdvert, clickAdvert })(ParableDetails)

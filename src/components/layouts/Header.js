@@ -58,7 +58,6 @@ export class Header extends Component {
     }
 
     search = () => {
-        // globals.createToast('Please wait', 1500, 'bottom-right');
         this.setState({
             initSearch: true
         })
