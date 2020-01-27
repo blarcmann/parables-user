@@ -80,6 +80,16 @@ export class Landing extends Component {
         return (
             <>
                 <Header />
+                <section className="height-40">
+                        <div className="container pos-vertical-center">
+                            <div className="row justify-content-around">
+                                <div className="col-lg-12 col-sm-12 mb-5">
+                                    <h1 className="tagline"><span className="color1">Play</span> quiz. win money and prices</h1>
+                                    <h2 className="follow-up"><span className="color2">Visual</span> explanations of african parables</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 <div className="main-container">
                     <section className="switchable switchable--switch feature-large pb-5">
                         <div className="container">
@@ -129,7 +139,7 @@ export class Landing extends Component {
                         </section> :
                         <div></div>
                     }
-                    <section className="height-60">
+                    <section className="height-30">
                         <div className="container pos-vertical-center">
                             <div className="row justify-content-around">
                                 <div className="col-lg-12 col-sm-12 mb-5">
@@ -137,15 +147,6 @@ export class Landing extends Component {
                                         <h3>Translation</h3>
                                         <p className="translation"><q dangerouslySetInnerHTML={{ __html: this.props.randomPara.translation }}></q></p>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section className="height-40">
-                        <div className="container pos-vertical-center">
-                            <div className="row justify-content-around">
-                                <div className="col-lg-12 col-sm-12 mb-5">
-                                    <h1 className="tagline"><span>Play quiz.</span> win money and prices</h1>
                                 </div>
                             </div>
                         </div>
@@ -166,12 +167,12 @@ export class Landing extends Component {
 
                         </div>
                     </section>
-                    <section className="text-center bg--secondary">
+                    <section className="text-center bg--secondary height-30">
                         <div className="container">
-                            <div className="row justify-content-around">
+                            <div className="row justify-content-around text-center">
                                 <div className="col-md-10 col-lg-8">
-                                    <h2>What we're about</h2>
-                                    <p className="lead">
+                                    <h2 className="text-center">What we're about</h2>
+                                    <p className="lead text-center">
                                         Insightful proverbs, idioms and word-play from Nigeria.</p>
                                 </div>
                             </div>
