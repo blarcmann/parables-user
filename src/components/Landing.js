@@ -90,7 +90,7 @@ export class Landing extends Component {
                             </div>
                         </div>
                     </section>
-                <div className="main-container">
+                <div className="main-container mb-5">
                     <section className="switchable switchable--switch feature-large pb-5">
                         <div className="container">
                             <div className="row justify-content-around">
