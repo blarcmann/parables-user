@@ -84,7 +84,7 @@ export class Landing extends Component {
                         <div className="container pos-vertical-center">
                             <div className="row justify-content-around">
                                 <div className="col-lg-12 col-sm-12 mb-5">
-                                    <h1 className="tagline"><span className="color1">Multimedia</span> explanation of african parables.</h1>
+                                    <h1 className="tagline"><span className="color1">Multimedia</span> explanation of African parables.</h1>
                                     <h2 className="tagline"><span className="color2">Play </span> quiz, win money and prices.</h2>
                                 </div>
                             </div>
