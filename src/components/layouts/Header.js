@@ -138,7 +138,7 @@ export class Header extends Component {
                         <div className="row">
                             <div className="col-lg-6">
                                 <div className="bar__module">
-                                    <span className="type-- d-block mt-2">Nigeria culture never be gone; parables, quizes...</span>
+                                    <span className="type-- d-block mt-2">Rediscovering the Nigerian heritage</span>
                                 </div>
                             </div>
                             <div className="col-lg-6 text-right text-left-xs text-left-sm">

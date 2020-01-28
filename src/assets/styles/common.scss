@@ -888,29 +888,21 @@ img.menu-mobile {
 
 .tagline {
   text-align: center;
-  font-weight: 500;
-  // border: 1px solid #888;
-  padding: 2rem;
+  font-weight: 400;
+  padding: 0;
   font-size: 2rem;
   color: #333;
   margin-bottom: 0;
-  padding-bottom: 0;
+  &.smaller {
+    font-size: 2.5rem;
+  }
   span {
     color: rgb(19, 121, 255);
+    &.color2 {
+      color: #ea7600;
+    }
   }
   @media(min-width: 992px) {
-    font-size: 4rem;
-  }
-}
-.follow-up {
-  text-align: center;
-  font-weight: 500;
-  font-size: 1.25rem;
-  color: #444;
-  span {
-    color: #ea7600;
-  }
-  @media(min-width: 992px) {
-    font-size: 2.125rem;
+    font-size: 2.75rem;
   }
 }
