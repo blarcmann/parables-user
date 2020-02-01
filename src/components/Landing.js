@@ -167,7 +167,7 @@ export class Landing extends Component {
 
                         </div>
                     </section>
-                    <section className="text-center bg--secondary height-30">
+                    <section className="text-center height-30">
                         <div className="container">
                             <div className="row justify-content-around text-center">
                                 <div className="col-md-10 col-lg-8">
@@ -183,7 +183,7 @@ export class Landing extends Component {
                             <div className="row">
                                 <div className="col-md-12">
                                     <div
-                                        className="cta cta-1 cta--horizontal boxed boxed--border text-center-xs row justify-content-center">
+                                        className="cta cta-1 cta--horizontal boxed bg- boxed--border text-center-xs row justify-content-center">
                                         <div className="col-lg-3 col-md-4">
                                             <h4>Let's get you started</h4>
                                         </div>
