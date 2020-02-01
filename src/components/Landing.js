@@ -80,16 +80,16 @@ export class Landing extends Component {
         return (
             <>
                 <Header />
-                <section className="height-40">
-                        <div className="container pos-vertical-center">
-                            <div className="row justify-content-around">
-                                <div className="col-lg-12 col-sm-12 mb-5">
-                                    <h1 className="tagline"><span className="color1">Multimedia</span> explanation of African parables.</h1>
-                                    <h2 className="tagline"><span className="color2">Play </span> quiz, win money and prices.</h2>
-                                </div>
+                <section className="pb-2">
+                    <div className="container pos-vertical-center">
+                        <div className="row justify-content-around">
+                            <div className="col-lg-12 col-sm-12">
+                                <h1 className="tagline"><span className="color1">Multimedia</span> explanation of African parables.</h1>
+                                <h2 className="tagline"><span className="color2">Play </span> quiz, win money and prices.</h2>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </section>
                 <div className="main-container mb-5">
                     <section className="switchable switchable--switch feature-large pb-5">
                         <div className="container">

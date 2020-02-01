@@ -23,7 +23,7 @@
 
 
 .logoout {
-  color: #ff2f4b;
+  color: #71ff2f;
 }
 
 img.logo-header {
@@ -74,19 +74,23 @@ input, button, button:active, button:focus {
     font-weight: 300;
     margin-bottom: 1.25rem;
     text-align: center;
+    font-family: 'Poppins';
 }
 .auth-title {
     font-size: 2.875rem;
+    font-family: 'Poppins';
 }
 .auth-subtitle {
     font-size: 1.25rem;
     margin-bottom: 2.25rem;
+    font-family: 'Poppins';
 }
 .auth-meta {
     text-align: center;
     margin-top: 0.5rem;
     font-weight: 400;
     font-size: 0.875rem;
+    font-family: 'Poppins';
     a {
         font-weight: 500;
         text-decoration: underline;
@@ -183,6 +187,7 @@ input, button, button:active, button:focus {
 }
 
 .translation {
+    font-family: 'Poppins';
     font-size: 1.25rem;
     font-weight: 400;
     width: 90%;
@@ -196,6 +201,7 @@ input, button, button:active, button:focus {
     .parable {
         font-weight: 500;
         font-size: 1.75rem;   
+        font-family: 'Poppins';
     }
     .translation {
       font-weight: 400;
@@ -203,6 +209,7 @@ input, button, button:active, button:focus {
       color: #999;
       display: block;
       margin-top: 2.5rem;
+      font-family: 'Poppins';
     }
 }
 .audio-option {
@@ -245,7 +252,9 @@ input, button, button:active, button:focus {
 .question-tags {
     display: flex;
     justify-content: flex-start;
+    font-family: 'Poppins';
     .tag {
+        font-family: 'Poppins';
         background-color: #FFF;
         font-weight: 600;
         display: block;
@@ -268,6 +277,7 @@ input, button, button:active, button:focus {
 .quiz-options {
     display: block;
     margin: 1.5rem 0;
+    font-family: 'Poppins';
     .each {
         margin: 1rem 0;
         display: flex;
@@ -275,6 +285,7 @@ input, button, button:active, button:focus {
         color: #000;
         opacity: 0.5;
         font-weight: 300;
+        font-family: 'Poppins';
         &:hover {
             cursor: pointer;
             opacity: 0.7;
@@ -315,6 +326,7 @@ input, button, button:active, button:focus {
 .quiz-text {
     font-size: 1.25rem;
     padding: 1.5rem 0.935rem;
+    font-family: 'Poppins';
     // box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.125);
     border: 1px solid rgba(0, 0, 0, 0.05);
     border-radius: 0.25rem;
@@ -323,6 +335,7 @@ input, button, button:active, button:focus {
     align-items: center;
     p, q, span, h1, h2, h3, h4, h5, a, button {
       word-break: break-all;
+      font-family: 'Poppins';
       span, q, a, button {
         display: block;
       }
@@ -352,8 +365,6 @@ button.submit-quiz {
 }
 
 
-
-
 .s4me-modal {
     position: fixed;
     height: 100%;
@@ -372,10 +383,10 @@ button.submit-quiz {
       padding: 1rem;
       transform: translate(-50%, -50%);
       box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
+      font-family: 'Poppins';
       &.primary {
         left: 37%;
       }
-  
       .close-btn {
         position: absolute;
         right: -1rem;
@@ -402,6 +413,7 @@ button.submit-quiz {
         font-size: 1.125rem;
         position: absolute;
         left: 1.5rem;
+        font-family: 'Poppins';
         top: 1.5rem;
       }
   
@@ -421,7 +433,6 @@ button.submit-quiz {
         padding: 1rem 0;
         height: max-content;
         color: #30313c;
-  
         .lister-data {
           .details {
             display: flex;
@@ -546,6 +557,7 @@ button.submit-quiz {
   z-index: 9;
   top: 0;
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.04);
+  font-family: 'Poppins';
   form {
     width: 50%;
     margin: auto;
@@ -568,6 +580,7 @@ button.submit-quiz {
 
 .search-results {
   position: absolute;
+  font-family: 'Poppins';
   top: 4rem;
   width: 100%;
   z-index: 99;
@@ -615,6 +628,7 @@ button.submit-quiz {
           display: flex;
           flex-direction: column;
           justify-content: center;
+          font-family: 'Poppins';
           .translate {
             color: rgba(0, 0, 0, 0.5);
             font-size: 0.935rem;
@@ -644,6 +658,7 @@ button.submit-quiz {
     text-decoration: none;
     color: #212529;
     font-weight: 400;
+    font-family: 'Poppins';
     &:hover {
       cursor: pointer;
       text-decoration: none;
@@ -678,6 +693,7 @@ button.submit-quiz {
     .qtranslation {
       font-size: 0.935rem;
       color: #999;
+      font-family: 'Poppins';
     }
   }
 }
@@ -697,6 +713,7 @@ button.submit-quiz {
 .component-heading1 {
   font-size: 1.25rem;
   font-weight: bold;
+  font-family: 'Poppins';
 }
 
 .visibility-none {
@@ -727,8 +744,6 @@ button.submit-quiz {
   }
 }
 .bar__module.smallll {
-    position: relative;
-    bottom: 1.35rem;
     .menu-horizontal.text-left {
     li.dropdown {
       &.primary{
@@ -743,6 +758,7 @@ button.submit-quiz {
   .each {
     display: flex;
     justify-content: flex-start;
+    font-family: 'Poppins';
     img {
       width: 20px;
       height: 20px;
@@ -813,6 +829,7 @@ img.menu-mobile {
     width: 50%;
   }
   .table-title {
+    font-family: 'Poppins';
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
     font-weight: 300;
@@ -837,6 +854,7 @@ img.menu-mobile {
     font-size: 0.935rem;
     color: #333;
     text-transform: capitalize;
+    font-family: 'Poppins';
     border-bottom: 1px solid #eaeaea;
   }
 
@@ -846,6 +864,7 @@ img.menu-mobile {
     vertical-align: middle;
     font-weight: 300;
     font-size: 0.935rem;
+    font-family: 'Poppins';
     color: #333;
     img {
       width: 22px;
@@ -893,6 +912,7 @@ img.menu-mobile {
   font-size: 2rem;
   color: #333;
   margin-bottom: 0;
+  font-family: 'Poppins';
   &.smaller {
     font-size: 2.5rem;
   }
@@ -905,4 +925,12 @@ img.menu-mobile {
   @media(min-width: 992px) {
     font-size: 2.75rem;
   }
+}
+
+.new-bg {
+  background-color: rgb(255, 59, 59);
+}
+
+.dropdown.start, .start {
+  color: #FFFFFF;
 }

@@ -121,7 +121,7 @@ export class Header extends Component {
                 <div className='data-loading'>
                     <img src={require("../../assets/images/spinner.svg")} className={this.state.loading && !this.props.qResult[0] ? 'loader-img' : 'hide'} alt="+" />
                 </div>
-                <section className="bar bar-3 bar--sm bg--secondary">
+                <section className="bar bar-3 bar--sm">
                     <div className={this.state.resultts ? "search-results slide-in" : "hide"}>
                         <ul className="list-container">
                             {this.props.qResult[0] ?
@@ -150,7 +150,7 @@ export class Header extends Component {
                         </div>
                     </div>
                 </section>
-                <div className="nav-container">
+                <div className="nav-container new-bg">
                     <nav id="menu1" className="bar bar--sm bar-1">
                         <div className="container">
                             <div className="row">
@@ -161,7 +161,7 @@ export class Header extends Component {
                                         </Link>
                                     </div>
                                 </div>
-                                <div className="col-lg-12 col-md-12 text-right text-left-xs text-left-sm mobile-menu-up">
+                                <div className="col-lg-11 col-md-10 text-right text-left-xs text-left-sm mobile-menu-up">
                                     <div className="bar__module smallll">
                                         <ul className="menu-horizontal text-left">
                                             <li className={this.state.user ? "visibility-none" : 'dropdown'}>
@@ -176,7 +176,7 @@ export class Header extends Component {
                                             <li className="dropdown">
                                                 <Link to="/about">About</Link>
                                             </li>
-                                            <li className="dropdown" onClick={this.startQuiz}>
+                                            <li className="dropdown start" onClick={this.startQuiz}>
                                                 Start Quiz
                                             </li>
                                             {/* <li className={this.state.showQuizbtn ? "dropdown primary" : 'visibility-none'} onClick={this.startQuiz}>Start Quiz
@@ -191,12 +191,12 @@ export class Header extends Component {
                                                 <img className={this.props.userDetails && this.props.userDetails.gender === 'male' ? '' : 'hide'} src={require('../../assets/images/male.svg')} alt="" />
                                             </li> */}
                                             <li>
-                                                <div className={this.state.user ? "small" : 'hide'}>
-                                                    <p className="modal-trigger">Hi, {globals.capitalize(this.props.userDetails.name)}</p>
+                                                <div className={this.state.user ? "small start" : 'hide'}>
+                                                    <p className="start">Hi, {globals.capitalize(this.props.userDetails.name)}</p>
                                                 </div>
                                             </li>
                                             <li className="dropdown">
-                                                <div className={this.state.user ? "small logoout" : 'hide'} onClick={this.logout}>
+                                                <div className={this.state.user ? "small start logoout" : 'hide'} onClick={this.logout}>
                                                     <b>Logout</b>
                                                 </div>
                                             </li>
