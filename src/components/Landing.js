@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactPlayer from 'react-player';
 // import { Link } from 'react-router-dom';
 import globals from '../globals';
 import Header from './layouts/Header';
@@ -60,6 +61,10 @@ export class Landing extends Component {
         } else {
             this.props.history.push('/login');
         }
+    }
+
+    playAudio = (e) => {
+        console.log(e.target);
     }
 
     render() {
@@ -126,11 +131,12 @@ export class Landing extends Component {
                                         </div>
                                         {this.props.randomPara.sound && this.props.randomPara.sound.Location ?
                                             <div className={this.state.showAudio ? 'slide-in' : 'hide'}>
-                                                <audio controls>
+                                                {/* <audio controls>
                                                     <source src={this.props.randomPara.sound.Location} type="audio/ogg" />
                                                     <source src={this.props.randomPara.sound.Location} type="audio/mpeg" />
                                                     Your browser does not support the audio element.
-                                            </audio>
+                                                </audio> */}
+                                                <ReactPlayer url={this.props.randomPara.sound.Location} file="true" forceAudio controls height="60px" width="100%"/>
                                             </div> :
                                             ''}
                                     </div>
@@ -145,7 +151,7 @@ export class Landing extends Component {
                                 <div className="col-lg-12 col-sm-12 mb-5">
                                     <div className="switchable__text dark">
                                         <h3>Translation</h3>
-                                        <p className="translation"><q dangerouslySetInnerHTML={{ __html: this.props.randomPara.translation }}></q></p>
+                                        <p className="translation" dangerouslySetInnerHTML={{ __html: this.props.randomPara.translation }}></p>
                                     </div>
                                 </div>
                             </div>
