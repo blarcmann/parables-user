@@ -171,14 +171,10 @@ export function forgotPasswordFinish(props, payload) {
         axios.put(`${globals.base_url}/user/change_password/token`, payload)
             .then((response) => {
                 if (response.data.status === false) {
-                    // const msg = response.data.msg || 'Account recovery failed, please retry';
-                    // globals.createToast(msg, 2500, 'top');
                     return console.log(response, 'not successful');
                 }
                 const user = response.data;
                 console.log(user);
-                // const msg = 'Success';
-                // globals.createToast(msg, 3500, 'bottom-right');
                 props.history.push("/");
             })
             .catch(error => {

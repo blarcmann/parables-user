@@ -7,7 +7,7 @@ const globals = {
         }
         return str.charAt(0).toUpperCase() + str.slice(1)
     },
-    base_url: 'http://159.89.85.116/v1',
+    base_url: 'https://api.parableus.ng/v1',
     tokens: JSON.parse(localStorage.getItem('activationTokens')),
     createToast: function (text, timeLeft, position) {
         return toaster.notify(text, {
