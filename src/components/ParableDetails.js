@@ -73,8 +73,8 @@ export class ParableDetails extends Component {
                                     </div>
                                     <div className="col-md-6 col-lg-5">
                                         <div className="switchable__text">
-                                            <q className={this.props.parable ? 'parable' : 'hide'}>{this.props.parable.title}</q>
-                                            <q className={this.props.parable ? 'translation mt-3' : 'hide'} dangerouslySetInnerHTML={{ __html: this.props.parable.translation }}></q>
+                                            <p className={this.props.parable ? 'parable' : 'hide'}>{this.props.parable.title}</p>
+                                            <p className={this.props.parable ? 'translation mt-3' : 'hide'} dangerouslySetInnerHTML={{ __html: this.props.parable.translation }}></p>
                                         </div>
                                     </div>
                                 </div>

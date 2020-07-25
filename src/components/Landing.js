@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactPlayer from 'react-player';
-// import { Link } from 'react-router-dom';
 import globals from '../globals';
 import Header from './layouts/Header';
 import Footer from './layouts/Footer';
@@ -64,7 +63,6 @@ export class Landing extends Component {
     }
 
     playAudio = (e) => {
-        console.log(e.target);
     }
 
     render() {
@@ -105,6 +103,14 @@ export class Landing extends Component {
                                             <img alt="alter" src={this.imgUrl} />
                                         </div>
                                     </div>
+                                    <div className="nav-parables">
+                                        <span className="left arrow">
+                                            <img src={require('../assets/images/left-arrow.svg')} alt="<" />
+                                        </span>
+                                        <span className="right arrow">
+                                            <img src={require('../assets/images/right-arrow.svg')} alt=">" />
+                                        </span>
+                                    </div>
                                 </div>
                                 <div className="col-md-6 col-lg-5">
                                     <div className="switchable__text">
@@ -136,7 +142,7 @@ export class Landing extends Component {
                                                     <source src={this.props.randomPara.sound.Location} type="audio/mpeg" />
                                                     Your browser does not support the audio element.
                                                 </audio> */}
-                                                <ReactPlayer url={this.props.randomPara.sound.Location} file="true" forceAudio controls height="60px" width="100%"/>
+                                                <ReactPlayer url={this.props.randomPara.sound.Location} file="true" forceaudio="true" controls height="60px" width="100%" />
                                             </div> :
                                             ''}
                                     </div>
