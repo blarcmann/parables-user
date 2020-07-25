@@ -183,14 +183,6 @@ export class Landing extends Component {
                                             <img alt="alter" src={this.imgUrl} />
                                         </div>
                                     </div>
-                                    <div className="nav-parables">
-                                        <span className={disablePrev ? "left arrow disabled" : "left arrow"} onClick={() => this.prevParable(currentIndex - 1)}>
-                                            <img src={require('../assets/images/left-arrow.svg')} alt="<" />
-                                        </span>
-                                        <span className={disableNext ? "right arrow disabled" : "right arrow"} onClick={() => this.nextParable(currentIndex + 1)}>
-                                            <img src={require('../assets/images/right-arrow.svg')} alt=">" />
-                                        </span>
-                                    </div>
                                 </div>
                                 {curParable && curParable.title ?
                                     <div className="col-md-6 col-lg-5">
@@ -202,6 +194,14 @@ export class Landing extends Component {
                             </div>
                         </div>
                     </section>
+                    <div className="nav-parables">
+                        <span className={disablePrev ? "left arrow disabled" : "left arrow"} onClick={() => this.prevParable(currentIndex - 1)}>
+                            <img src={require('../assets/images/left-arrow.svg')} alt="<" />
+                        </span>
+                        <span className={disableNext ? "right arrow disabled" : "right arrow"} onClick={() => this.nextParable(currentIndex + 1)}>
+                            <img src={require('../assets/images/right-arrow.svg')} alt=">" />
+                        </span>
+                    </div>
                     {curParable ?
                         <>
                             {curParable.sound || curParable.youtube ?
@@ -232,6 +232,7 @@ export class Landing extends Component {
                             }
                         </>
                         : ''}
+                    
                     {curParable && curParable.title ?
                         <section className="height-30">
                             <div className="container pos-vertical-center">
@@ -246,6 +247,7 @@ export class Landing extends Component {
                             </div>
                         </section>
                         : ''}
+                    
                     <section>
                         <div className="col-lg-12 col-sm-12 pt-5" onClick={this.clickAdvert}>
                             {this.props.advert ?
