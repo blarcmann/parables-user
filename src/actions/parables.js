@@ -11,6 +11,7 @@ export function fetchMultipleRandomParable() {
             }
         })
             .then(response => {
+                loadOnce();
                 if (response.data.status === false) {
                     const msg = response.data.msg || 'Please reload page.';
                     globals.createToast(msg, 3000, 'bottom-right');
@@ -120,3 +121,9 @@ function qParable(payload) {
     }
 }
 
+function loadOnce() {
+    if (!localStorage.justOnce) {
+        localStorage.setItem('justOnce', 'true')
+        window.location.reload()
+    }
+}
