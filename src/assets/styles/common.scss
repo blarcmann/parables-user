@@ -159,6 +159,11 @@ button:focus {
     border-radius: 50%;
     box-shadow: 2px 2px 5px #999;
     transition: all 0.25s ease-in-out;
+    &.disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
     &:first-child {
       margin-right: 2rem;
     }

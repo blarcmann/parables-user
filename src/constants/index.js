@@ -1,4 +1,5 @@
-export const RANDOM_PARABLE  = 'RANDOM_PARABLE';
+export const RANDOM_PARABLE = 'RANDOM_PARABLE';
+export const MULTIPLE_RANDOM_PARABLE = 'MULTIPLE_RANDOM_PARABLE';
 export const FETCH_PARABLE  = 'FETCH_PARABLE';
 export const SIGN_UP = 'SIGN_UP';
 export const LOGIN = 'LOGIN';

@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player';
 import globals from '../globals';
 import Header from './layouts/Header';
 import Footer from './layouts/Footer';
-import { fetchRandomParable } from '../actions/parables';
+import { fetchRandomParable, fetchMultipleRandomParable } from '../actions/parables';
 import { fetchRandomAdvert, clickAdvert } from '../actions/adverts';
 
 export class Landing extends Component {
@@ -19,12 +19,17 @@ export class Landing extends Component {
             showAudio: false,
             showVideo: false,
             audioText: 'Listen to audio',
-            videoText: 'Watch video'
+            videoText: 'Watch video',
+            multipleRandomParables: localStorage.getItem('pc') ? JSON.parse(localStorage.getItem('pc')) : [],
+            currentParable: {},
+            currentIndex: 0,
+            disablePrev: true,
+            disableNext: false,
         }
     }
 
     componentDidMount() {
-        this.props.fetchRandomParable();
+        this.props.fetchMultipleRandomParable();
         this.props.fetchRandomAdvert();
     }
 
@@ -65,18 +70,69 @@ export class Landing extends Component {
     playAudio = (e) => {
     }
 
+    checkDisabled = (id) => {
+        const { multipleRandomParables } = this.state;
+        const parablesLength = multipleRandomParables.length;
+        if (id <= 0) {
+            this.setState({
+                disablePrev: true
+            })
+        } else {
+            this.setState({ disablePrev: false })
+        }
+        if (id + 2 > parablesLength) {
+            this.setState({ disableNext: true })
+        } else {
+            this.setState({ disableNext: false })
+        }
+    }
+
+    setCurrentParable = (id) => {
+        const { multipleRandomParables } = this.state;
+        this.setState({ currentParable: multipleRandomParables[id] });
+    }
+
+    prevParable = (id) => {
+        this.checkDisabled(id);
+        if (id <= 0) {
+            this.setState({
+                currentIndex: id,
+            })
+            return;
+        } else {
+            this.setCurrentParable(id);
+            this.setState({currentIndex: id,})
+        }
+    }
+
+    nextParable = (id) => {
+        const { multipleRandomParables } = this.state;
+        const parablesLength = multipleRandomParables.length;
+        this.checkDisabled(id);
+        if (id + 2 >= parablesLength) {
+            this.setState({currentIndex: id})
+            return;
+        } else {
+            this.setCurrentParable(id);
+            this.setState({currentIndex: id})
+        }
+    }
+
     render() {
-        if (this.props.randomPara && this.props.randomPara.file && this.props.randomPara.file.Location) {
-            this.imgUrl = this.props.randomPara.file.Location
+        const { disableNext, disablePrev, currentIndex, multipleRandomParables } = this.state;
+        const curParable = multipleRandomParables[currentIndex];
+
+        if (curParable && curParable.file && curParable.file.Location) {
+            this.imgUrl = curParable.file.Location
         }
         if (this.props.advert && this.props.advert.image && this.props.advert.image.Location) {
             this.adImgUrl = this.props.advert.image.Location
         }
-        if (this.props.randomPara && this.props.randomPara.sound && this.props.randomPara.sound.Location) {
+        if (curParable && curParable.sound && curParable.sound.Location) {
             this.showAudio = true;
         }
 
-        if (this.props.randomPara && this.props.randomPara.youtube) {
+        if (curParable && curParable.youtube) {
             this.showVideo = true;
         }
 
@@ -98,51 +154,46 @@ export class Landing extends Component {
                         <div className="container">
                             <div className="row justify-content-around">
                                 <div className="col-md-6 col-12">
-                                    <div className="banner-img">
+                                    <div className="banner-img slide-in">
                                         <div className={this.imgUrl ? "img-cover" : 'hide'}>
                                             <img alt="alter" src={this.imgUrl} />
                                         </div>
                                     </div>
                                     <div className="nav-parables">
-                                        <span className="left arrow">
+                                        <span className={disablePrev ? "left arrow disabled" : "left arrow"} onClick={() => this.prevParable(currentIndex - 1)}>
                                             <img src={require('../assets/images/left-arrow.svg')} alt="<" />
                                         </span>
-                                        <span className="right arrow">
+                                        <span className={disableNext ? "right arrow disabled" : "right arrow"} onClick={() => this.nextParable(currentIndex + 1)}>
                                             <img src={require('../assets/images/right-arrow.svg')} alt=">" />
                                         </span>
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-lg-5">
                                     <div className="switchable__text">
-                                        <q className={this.props.randomPara ? 'parable' : 'hide'}>{this.props.randomPara.title}</q>
+                                        <q className={curParable ? 'parable' : 'hide'}>{curParable.title}</q>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
-                    {this.props.randomPara.sound || this.props.randomPara.youtube ?
+                    {curParable.sound || curParable.youtube ?
                         <section className="border--bottom space--xxs pb-1">
                             <div className="container">
                                 <div className="row">
                                     <div className="col-md-12 text-center">
                                         <div className="audio-option">
                                             <div className="modal-instance">
-                                                <button className={this.props.randomPara.sound ? "btn type--uppercase modal-trigger mb-0" : 'hide'} onClick={this.listenToAudio}>
+                                                <button className={curParable.sound ? "btn type--uppercase modal-trigger mb-0" : 'hide'} onClick={this.listenToAudio}>
                                                     &#9654; {this.state.audioText}
                                                 </button>
-                                                <button className={this.props.randomPara.youtube ? "ml-3 btn type--uppercase modal-trigger" : 'hide'} onClick={this.watchVideo}>
+                                                <button className={curParable.youtube ? "ml-3 btn type--uppercase modal-trigger" : 'hide'} onClick={this.watchVideo}>
                                                     &#9654; {this.state.videoText}
                                                 </button>
                                             </div>
                                         </div>
-                                        {this.props.randomPara.sound && this.props.randomPara.sound.Location ?
+                                        {curParable.sound && curParable.sound.Location ?
                                             <div className={this.state.showAudio ? 'slide-in' : 'hide'}>
-                                                {/* <audio controls>
-                                                    <source src={this.props.randomPara.sound.Location} type="audio/ogg" />
-                                                    <source src={this.props.randomPara.sound.Location} type="audio/mpeg" />
-                                                    Your browser does not support the audio element.
-                                                </audio> */}
-                                                <ReactPlayer url={this.props.randomPara.sound.Location} file="true" forceaudio="true" controls height="60px" width="100%" />
+                                                <ReactPlayer url={curParable.sound.Location} file="true" forceaudio="true" controls height="60px" width="100%" />
                                             </div> :
                                             ''}
                                     </div>
@@ -157,7 +208,7 @@ export class Landing extends Component {
                                 <div className="col-lg-12 col-sm-12 mb-5">
                                     <div className="switchable__text dark">
                                         <h3>Translation</h3>
-                                        <p className="translation" dangerouslySetInnerHTML={{ __html: this.props.randomPara.translation }}></p>
+                                        <p className="translation" dangerouslySetInnerHTML={{ __html: curParable.translation }}></p>
                                     </div>
                                 </div>
                             </div>
@@ -222,8 +273,8 @@ export class Landing extends Component {
                             <img src={require('../assets/images/close.svg')} alt="X" />
                         </div>
                         <div className="s4me-modal-body-content p-0">
-                            <iframe src={this.state.showVideo ? this.props.randomPara.youtube : ''}
-                                width="400" title={this.props.randomPara.title} height="315" frameBorder="0" allowFullScreen>
+                            <iframe src={this.state.showVideo ? curParable.youtube : ''}
+                                width="400" title={curParable.title} height="315" frameBorder="0" allowFullScreen>
                             </iframe>
                         </div>
                     </div>
@@ -235,8 +286,15 @@ export class Landing extends Component {
 
 const mapStateToProps = (state) => ({
     randomPara: state.parables.randomParable,
+    multipleRandPara: state.parables.multipleRandParables,
     advert: state.adverts.advert
 })
 
+const mapDispatchToProps = {
+    fetchRandomParable,
+    fetchMultipleRandomParable,
+    fetchRandomAdvert,
+    clickAdvert,
+}
 
-export default connect(mapStateToProps, { fetchRandomParable, fetchRandomAdvert, clickAdvert })(Landing)
+export default connect(mapStateToProps, mapDispatchToProps)(Landing)

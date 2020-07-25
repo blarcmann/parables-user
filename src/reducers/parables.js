@@ -1,9 +1,10 @@
-import { RANDOM_PARABLE, FETCH_PARABLE, Q_PARABLE, CLEAR } from '../constants';
+import { RANDOM_PARABLE, MULTIPLE_RANDOM_PARABLE, FETCH_PARABLE, Q_PARABLE, CLEAR } from '../constants';
 
 const initialState = {
     randomParable: {},
     parable: {},
-    qResult: []
+    qResult: [],
+    multipleRandParables: [],
 }
 
 export default function parables(state = initialState, action) {
@@ -14,21 +15,27 @@ export default function parables(state = initialState, action) {
                 ...state,
                 randomParable: randPara
             }
-        case CLEAR:
-        return {
-            ...state,
-            qResult: []
-        }
+        case MULTIPLE_RANDOM_PARABLE:
+            const multipleRandPara = action.payload
+            return {
+                ...state,
+                multipleRandParables: multipleRandPara
+            }
         case FETCH_PARABLE:
             const parable = Object.assign({}, action.payload);
             return {
                 ...state,
                 parable: parable
             }
-            case Q_PARABLE:
+        case Q_PARABLE:
             return {
                 ...state,
                 qResult: [...state.qResult, action.payload]
+            }
+        case CLEAR:
+            return {
+                ...state,
+                qResult: []
             }
         default:
             return state;
