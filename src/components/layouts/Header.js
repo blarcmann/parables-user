@@ -26,7 +26,6 @@ export class Header extends Component {
             })
         }
         const userId = localStorage.getItem('userId');
-        console.log(userId, 'userID');
         if (userId) {
             this.setState({
                 user: true
@@ -173,9 +172,9 @@ export class Header extends Component {
                                             <li className="dropdown">
                                                 <Link to="/leaderboard">Leaderboard</Link>
                                             </li>
-                                            <li className="dropdown">
+                                            {/* <li className="dropdown">
                                                 <Link to="/about">About</Link>
-                                            </li>
+                                            </li> */}
                                             <li className="dropdown start" onClick={this.startQuiz}>
                                                 Start Quiz
                                             </li>
@@ -214,9 +213,9 @@ export class Header extends Component {
                                             <li className={this.state.user ? "dropdown" : 'hide'}>
                                                 <Link to="/leaderboard">Leaderboard</Link>
                                             </li>
-                                            <li className="dropdown">
+                                            {/* <li className="dropdown">
                                                 <Link to="/about">About</Link>
-                                            </li>
+                                            </li> */}
                                             <li className="dropdown" onClick={this.startQuiz}>
                                                 Start Quiz
                                             </li>
