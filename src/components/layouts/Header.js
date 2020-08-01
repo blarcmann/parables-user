@@ -38,10 +38,9 @@ export class Header extends Component {
         this.setState({
             [key]: value
         })
-        this.setState({
-            loading: true
-        })
-        this.search();
+        setTimeout(() => {
+            this.search();
+        }, 20);
     };
 
     toggleSearch = () => {
@@ -63,7 +62,12 @@ export class Header extends Component {
         this.setState({
             loading: false
         })
-        this.props.parableSearch(this.state.q);
+        if (this.state.q.length <= 1) {
+            return false;
+        } else {
+            this.props.parableSearch(this.state.q);
+            this.setState({ q: '' })
+        }
     }
 
     startQuiz = () => {
@@ -137,13 +141,13 @@ export class Header extends Component {
                         <div className="row">
                             <div className="col-lg-6">
                                 <div className="bar__module">
-                                    <span className="type-- d-block mt-2">Rediscovering the Nigerian heritage</span>
+                                    <span className="type-- d-block mt-2">Rediscovering the African Heritage</span>
                                 </div>
                             </div>
                             <div className="col-lg-6 text-right text-left-xs text-left-sm">
                                 <form onSubmit={this.doNothing}>
                                     <input type="text" name="search" placeholder="Enter search query"
-                                        onKeyUp={e => this.handleChange("q", e.target.value)} />
+                                        onChange={e => this.handleChange("q", e.target.value)} />
                                 </form>
                             </div>
                         </div>

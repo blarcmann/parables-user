@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactPlayer from 'react-player';
 import Header from './layouts/Header';
 import Footer from './layouts/Footer';
 import { Link } from 'react-router-dom';
@@ -538,64 +539,86 @@ export class Quiz extends Component {
                         <div className="container pos-vertical-center">
                             <div className="row justify-content-around">
                                 <div className={this.state.activeIndex === 0 ? "col-lg-8" : 'hide'}>
-                                    <div className={this.randomizeQ[0] === 1 ? "quiz-img slide-in" : 'hide'}>
-                                        <img src={this.state.q0.image} alt={this.state.q0.image} />
-                                    </div>
-                                    <div className={this.randomizeQ[0] === 0 ? "quiz-text slide-in" : 'hide'} dangerouslySetInnerHTML={{ __html: this.state.q0.translation }}></div>
+                                    {this.state.q0.image ?
+                                        <div className={this.randomizeQ[0] === 1 ? "quiz-img slide-in" : 'hide'}>
+                                            <img src={this.state.q0.image} alt={this.state.q0.image} />
+                                        </div> : ''}
+                                    {this.state.q0.audio ?
+                                        <div className={this.randomizeQ[0] === 1 ? "quiz-img slide-in mt-5" : 'hide'}>
+                                            <ReactPlayer url={this.state.q0.audio} file="true" forceaudio="true" controls height="60px" width="100%" />
+                                        </div> : ''}
                                 </div>
                                 <div className={this.state.activeIndex === 1 ? "col-lg-8" : 'hide'}>
                                     <div className={this.randomizeQ[1] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.q1.image} alt={this.state.q1.image} />
                                     </div>
-                                    <div className={this.randomizeQ[1] === 0 ? "quiz-text slide-in" : 'hide'} dangerouslySetInnerHTML={{ __html: this.state.q1.translation }}></div>
+                                    <div className={this.randomizeQ[1] === 1 ? "quiz-img slide-in mt-5" : 'hide'}>
+                                        <ReactPlayer url={this.state.q1.audio} file="true" forceaudio="true" controls height="60px" width="100%" />
+                                    </div>
                                 </div>
                                 <div className={this.state.activeIndex === 2 ? "col-lg-8" : 'hide'}>
                                     <div className={this.randomizeQ[2] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.q2.image} alt={this.state.q2.image} />
                                     </div>
-                                    <div className={this.randomizeQ[2] === 0 ? "quiz-text slide-in" : 'hide'} dangerouslySetInnerHTML={{ __html: this.state.q2.translation }}></div>
+                                    <div className={this.randomizeQ[2] === 1 ? "quiz-img slide-in mt-5" : 'hide'}>
+                                        <ReactPlayer url={this.state.q2.audio} file="true" forceaudio="true" controls height="60px" width="100%" />
+                                    </div>
                                 </div>
                                 <div className={this.state.activeIndex === 3 ? "col-lg-8" : 'hide'}>
                                     <div className={this.randomizeQ[3] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.q3.image} alt={this.state.q3.image} />
                                     </div>
-                                    <div className={this.randomizeQ[3] === 0 ? "quiz-text slide-in" : 'hide'} dangerouslySetInnerHTML={{ __html: this.state.q3.translation }}></div>
+                                    <div className={this.randomizeQ[3] === 1 ? "quiz-img slide-in mt-5" : 'hide'}>
+                                        <ReactPlayer url={this.state.q3.audio} file="true" forceaudio="true" controls height="60px" width="100%" />
+                                    </div>
                                 </div>
                                 <div className={this.state.activeIndex === 4 ? "col-lg-8" : 'hide'}>
                                     <div className={this.randomizeQ[4] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.q4.image} alt={this.state.q4.image} />
                                     </div>
-                                    <div className={this.randomizeQ[4] === 0 ? "quiz-text slide-in" : 'hide'} dangerouslySetInnerHTML={{ __html: this.state.q4.translation }}></div>
+                                    <div className={this.randomizeQ[4] === 1 ? "quiz-img slide-in mt-5" : 'hide'}>
+                                        <ReactPlayer url={this.state.q4.audio} file="true" forceaudio="true" controls height="60px" width="100%" />
+                                    </div>
                                 </div>
                                 <div className={this.state.activeIndex === 5 ? "col-lg-8" : 'hide'}>
                                     <div className={this.randomizeQ[5] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.q5.image} alt={this.state.q5.image} />
                                     </div>
-                                    <div className={this.randomizeQ[5] === 0 ? "quiz-text slide-in" : 'hide'} dangerouslySetInnerHTML={{ __html: this.state.q5.translation }}></div>
+                                    <div className={this.randomizeQ[5] === 1 ? "quiz-img slide-in mt-5" : 'hide'}>
+                                        <ReactPlayer url={this.state.q5.audio} file="true" forceaudio="true" controls height="60px" width="100%" />
+                                    </div>
                                 </div>
                                 <div className={this.state.activeIndex === 6 ? "col-lg-8" : 'hide'}>
                                     <div className={this.randomizeQ[6] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.q6.image} alt={this.state.q6.image} />
                                     </div>
-                                    <div className={this.randomizeQ[6] === 0 ? "quiz-text slide-in" : 'hide'} dangerouslySetInnerHTML={{ __html: this.state.q6.translation }}></div>
+                                    <div className={this.randomizeQ[6] === 1 ? "quiz-img slide-in mt-5" : 'hide'}>
+                                        <ReactPlayer url={this.state.q6.audio} file="true" forceaudio="true" controls height="60px" width="100%" />
+                                    </div>
                                 </div>
                                 <div className={this.state.activeIndex === 7 ? "col-lg-8" : 'hide'}>
                                     <div className={this.randomizeQ[7] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.q7.image} alt={this.state.q7.image} />
                                     </div>
-                                    <div className={this.randomizeQ[7] === 0 ? "quiz-text slide-in" : 'hide'} dangerouslySetInnerHTML={{ __html: this.state.q7.translation }}></div>
+                                    <div className={this.randomizeQ[7] === 1 ? "quiz-img slide-in mt-5" : 'hide'}>
+                                        <ReactPlayer url={this.state.q7.audio} file="true" forceaudio="true" controls height="60px" width="100%" />
+                                    </div>
                                 </div>
                                 <div className={this.state.activeIndex === 8 ? "col-lg-8" : 'hide'}>
                                     <div className={this.randomizeQ[8] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.q8.image} alt={this.state.q8.image} />
                                     </div>
-                                    <div className={this.randomizeQ[8] === 0 ? "quiz-text slide-in" : 'hide'} dangerouslySetInnerHTML={{ __html: this.state.q8.translation }}></div>
+                                    <div className={this.randomizeQ[8] === 1 ? "quiz-img slide-in mt-5" : 'hide'}>
+                                        <ReactPlayer url={this.state.q8.audio} file="true" forceaudio="true" controls height="60px" width="100%" />
+                                    </div>
                                 </div>
                                 <div className={this.state.activeIndex === 9 ? "col-lg-8" : 'hide'}>
                                     <div className={this.randomizeQ[9] === 1 ? "quiz-img slide-in" : 'hide'}>
                                         <img src={this.state.q9.image} alt={this.state.q9.image} />
                                     </div>
-                                    <div className={this.randomizeQ[9] === 0 ? "quiz-text slide-in" : 'hide'} dangerouslySetInnerHTML={{ __html: this.state.q9.translation }}></div>
+                                    <div className={this.randomizeQ[9] === 1 ? "quiz-img slide-in mt-5" : 'hide'}>
+                                        <ReactPlayer url={this.state.q9.audio} file="true" forceaudio="true" controls height="60px" width="100%" />
+                                    </div>
                                 </div>
                                 <div className="col-lg-4">
                                     <div className={this.state.activeIndex === 0 ? "quiz-options slide-in" : 'hide'}>
@@ -917,7 +940,6 @@ export class Quiz extends Component {
                             </a> :
                             <div></div>
                         }
-
                     </div>
                 </section>
                 <Footer />
